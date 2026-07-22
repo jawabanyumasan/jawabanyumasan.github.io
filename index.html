@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>085773009666 Laundry Kiloan Di Sokaraja Purwokerto — Kamus Basa Banyumasan</title>
+<meta name="description" content="Kamus kecil Basa Jawa Banyumasan (Ngapak) sekaligus info layanan laundry kiloan &amp; satuan Bandar Deterjen di seluruh Kabupaten Banyumas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --cream:#F5EFDD;
+    --cream-2:#ECE2C4;
+    --ink:#2B2118;
+    --ink-soft:#5A4C3B;
+    --leaf:#3E5B41;
+    --leaf-dark:#2C4230;
+    --clay:#B5502E;
+    --clay-dark:#8F3C21;
+    --gold:#D9A441;
+    --line: rgba(43,33,24,0.14);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:inherit;}
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--clay-dark);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;background:var(--clay-dark);
+  }
+
+  /* batik-ish dot texture */
+  .dots{
+    background-image: radial-gradient(var(--ink) 1px, transparent 1.4px);
+    background-size: 18px 18px;
+    opacity:0.06;
+    position:absolute; inset:0; pointer-events:none;
+  }
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(245,239,221,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px; max-width:1100px; margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;}
+  .brand span.tag{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:0.62rem;letter-spacing:0.08em;color:var(--ink-soft);text-transform:uppercase;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:9px;
+    background:var(--leaf); color:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif; font-weight:900; font-size:1.1rem;
+  }
+  nav.links{display:flex; gap:26px; font-size:0.92rem; font-weight:500;}
+  nav.links a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  nav.links a:hover, nav.links a:focus-visible{color:var(--clay);}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--leaf); color:var(--cream);
+    padding:9px 16px; border-radius:999px; font-weight:600; font-size:0.88rem;
+    text-decoration:none;
+  }
+  .menu-toggle{display:none; background:none;border:none;font-size:1.3rem;color:var(--ink);cursor:pointer;}
+
+  /* HERO */
+  .hero{position:relative; overflow:hidden; padding:86px 0 74px;}
+  .hero-inner{position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center;}
+  .hero h1{font-size:clamp(2.3rem, 5vw, 3.6rem); line-height:1.05; color:var(--ink);}
+  .hero h1 em{font-style:normal; color:var(--clay);}
+  .hero p.lede{font-size:1.08rem; color:var(--ink-soft); max-width:46ch; margin:20px 0 30px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:13px 22px; border-radius:999px; font-weight:600; font-size:0.95rem;
+    text-decoration:none; border:1.5px solid transparent; transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--clay); color:var(--cream);}
+  .btn-outline{border-color:var(--ink); color:var(--ink);}
+  .hero-card{
+    background:var(--ink); color:var(--cream);
+    border-radius:20px; padding:28px;
+    position:relative; overflow:hidden;
+  }
+  .hero-card .dots{opacity:0.14;}
+  .hero-card .word{font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); position:relative;}
+  .hero-card h3{font-size:1.5rem; margin:10px 0 6px; position:relative;}
+  .hero-card p{color:#DCD2BC; font-size:0.94rem; position:relative; margin:0;}
+  .flip-row{display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-top:1px dashed rgba(245,239,221,0.25); position:relative;}
+  .flip-row:first-of-type{border-top:none;}
+
+  section{padding:88px 0;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head h2{font-size:clamp(1.7rem,3.4vw,2.3rem);}
+  .section-head p{color:var(--ink-soft); margin-top:12px; font-size:1.02rem;}
+
+  /* LAYANAN */
+  #layanan{background:var(--cream-2); position:relative;}
+  .feature-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:52px;}
+  .feature{
+    background:var(--cream); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px;
+  }
+  .feature i{font-size:1.3rem; color:var(--leaf); margin-bottom:14px; display:block;}
+  .feature h3{font-size:1.08rem; margin-bottom:8px;}
+  .feature p{color:var(--ink-soft); font-size:0.93rem; margin:0;}
+
+  .contact-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--cream);
+  }
+  .contact-item{
+    padding:22px 20px; border-right:1px solid var(--line);
+    display:flex; flex-direction:column; gap:6px; text-decoration:none; color:var(--ink);
+    transition:background .15s;
+  }
+  .contact-item:last-child{border-right:none;}
+  .contact-item:hover{background:var(--cream-2);}
+  .contact-item .label{font-family:'JetBrains Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft);}
+  .contact-item .value{font-weight:600; font-size:0.98rem;}
+
+  .area-wrap{margin-top:56px;}
+  .area-wrap h3{font-size:1.25rem; margin-bottom:6px;}
+  .area-wrap p.hint{color:var(--ink-soft); font-size:0.92rem; margin:0 0 20px;}
+  .area-pills{display:flex; flex-wrap:wrap; gap:10px;}
+  .pill{
+    display:inline-flex; align-items:center; gap:7px;
+    background:var(--cream); border:1px solid var(--line);
+    padding:9px 16px; border-radius:999px; font-size:0.88rem; font-weight:500;
+    text-decoration:none; color:var(--ink); transition: all .15s;
+  }
+  .pill i{color:var(--leaf); font-size:0.8rem;}
+  .pill:hover{background:var(--leaf); color:var(--cream); border-color:var(--leaf);}
+  .pill:hover i{color:var(--gold);}
+
+  /* KAMUS */
+  #kamus{position:relative;}
+  .search-shell{
+    background:var(--ink); color:var(--cream); border-radius:20px;
+    padding:34px; margin-bottom:48px; position:relative; overflow:hidden;
+  }
+  .search-shell .dots{opacity:0.12;}
+  .search-shell h3{position:relative; font-size:1.3rem; margin-bottom:4px;}
+  .search-shell p{position:relative; color:#D9CFB8; font-size:0.92rem; margin:0 0 20px;}
+  .search-box{position:relative; display:flex; gap:10px; flex-wrap:wrap;}
+  .search-box input{
+    flex:1; min-width:220px; padding:14px 18px; border-radius:12px; border:none;
+    font-family:'Work Sans',sans-serif; font-size:1rem; background:var(--cream); color:var(--ink);
+  }
+  .search-box input:focus-visible{outline:3px solid var(--gold);}
+  .search-box button{
+    padding:14px 22px; border-radius:12px; border:none; background:var(--clay); color:var(--cream);
+    font-weight:600; cursor:pointer; font-size:0.98rem;
+  }
+  #searchResult{
+    position:relative; margin-top:18px; min-height:26px;
+    font-family:'JetBrains Mono',monospace; font-size:0.98rem;
+  }
+  #searchResult .hit{color:var(--gold); font-weight:600;}
+  #searchResult .miss{color:#E7A98F;}
+
+  .az-nav{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:34px;}
+  .az-nav button{
+    width:34px;height:34px; border-radius:8px; border:1px solid var(--line);
+    background:var(--cream); font-family:'JetBrains Mono',monospace; font-weight:600; cursor:pointer; color:var(--ink);
+    transition: all .15s;
+  }
+  .az-nav button:hover, .az-nav button.active{background:var(--leaf); color:var(--cream); border-color:var(--leaf);}
+
+  .az-group{margin-bottom:30px;}
+  .az-group h4{
+    font-family:'Fraunces',serif; font-size:1.6rem; color:var(--clay);
+    border-bottom:2px solid var(--line); padding-bottom:8px; margin-bottom:14px;
+  }
+  .word-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px 24px;}
+  .word-row{
+    display:flex; justify-content:space-between; gap:12px;
+    padding:9px 0; border-bottom:1px dashed var(--line);
+    font-family:'JetBrains Mono',monospace; font-size:0.87rem;
+  }
+  .word-row .id{color:var(--ink-soft);}
+  .word-row .bms{color:var(--leaf-dark); font-weight:600; text-align:right;}
+
+  /* FOOTER */
+  footer{background:var(--ink); color:var(--cream); padding:56px 0 28px;}
+  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px; margin-bottom:40px;}
+  footer h4{font-family:'Fraunces',serif; font-size:1.1rem; margin-bottom:14px; color:var(--gold);}
+  footer p{color:#D9CFB8; font-size:0.92rem; margin:0 0 8px;}
+  footer a{color:#D9CFB8; text-decoration:none; font-size:0.92rem;}
+  footer a:hover{color:var(--gold);}
+  .foot-links{display:flex; flex-direction:column; gap:9px;}
+  .foot-social{display:flex; gap:12px; margin-top:6px;}
+  .foot-social a{
+    width:36px;height:36px;border-radius:50%; border:1px solid rgba(245,239,221,0.25);
+    display:flex; align-items:center;justify-content:center;
+  }
+  .foot-social a:hover{background:var(--clay); border-color:var(--clay); color:var(--cream);}
+  .foot-bottom{border-top:1px solid rgba(245,239,221,0.15); padding-top:22px; text-align:center; font-size:0.82rem; color:#B2A88F;}
+
+  /* WA floating */
+  .wa-float{
+    position:fixed; bottom:22px; right:22px; z-index:60;
+    width:58px;height:58px;border-radius:50%;
+    background:var(--leaf); color:var(--cream);
+    display:flex;align-items:center;justify-content:center; font-size:1.5rem;
+    text-decoration:none; box-shadow:0 8px 22px rgba(43,33,24,0.28);
+    transition: transform .15s;
+  }
+  .wa-float:hover{transform:scale(1.06);}
+
+  @media (max-width: 880px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+    .hero-inner{grid-template-columns:1fr;}
+    .feature-grid{grid-template-columns:1fr;}
+    .contact-strip{grid-template-columns:1fr 1fr;}
+    .contact-item:nth-child(2){border-right:none;}
+    .word-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr; gap:28px;}
+  }
+  @media (max-width: 520px){
+    .contact-strip{grid-template-columns:1fr;}
+    .contact-item{border-right:none !important; border-bottom:1px solid var(--line);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-mark">B</div>
+      <div>
+        Ngapak Banyumas
+        <div class="tag">Kamus &amp; Laundry</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#beranda">Beranda</a>
+      <a href="#layanan">Layanan Laundry</a>
+      <a href="#wilayah">Wilayah</a>
+      <a href="#kamus">Kamus Ngapak</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+    <a class="nav-cta" href="https://api.whatsapp.com/send?phone=6285773009666&text=Halo%20kak%2C%20saya%20mau%20laundry" target="_blank" rel="noopener">
+      <i class="fab fa-whatsapp"></i> WA Kami
+    </a>
+  </div>
+</header>
+
+<section class="hero" id="beranda">
+  <div class="dots"></div>
+  <div class="container hero-inner">
+    <div>
+      <div class="eyebrow">Basa Ngapak · Laundry Banyumas</div>
+      <h1>Ora Ngapak, <em>Ora Kepenak.</em></h1>
+      <p class="lede">Satu laman untuk dua hal khas Banyumas: kamus kecil Basa Jawa Banyumasan (Ngapak) yang bisa kamu cari langsung, dan layanan laundry kiloan &amp; satuan Bandar Deterjen yang antar-jemputnya gratis ke 23 kecamatan.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#kamus"><i class="fas fa-book"></i> Buka Kamus Ngapak</a>
+        <a class="btn btn-outline" href="#layanan"><i class="fas fa-shirt"></i> Pesan Laundry</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="dots"></div>
+      <div class="flip-row">
+        <div>
+          <span class="word">Indonesia</span>
+          <h3 style="margin-top:2px;">Enyong</h3>
+        </div>
+        <div style="text-align:right;">
+          <span class="word">Ngapak</span>
+          <h3 style="margin-top:2px;">= Saya</h3>
+        </div>
+      </div>
+      <div class="flip-row">
+        <div>
+          <span class="word">Layanan</span>
+          <p style="color:var(--cream); font-weight:600;">Kiloan &amp; Satuan</p>
+        </div>
+        <div style="text-align:right;">
+          <span class="word">Antar Jemput</span>
+          <p style="color:var(--gold); font-weight:600;">Gratis</p>
+        </div>
+      </div>
+      <div class="flip-row">
+        <div>
+          <span class="word">Jam Buka</span>
+          <p>Senin – Sabtu</p>
+        </div>
+        <div style="text-align:right;">
+          <span class="word">Pukul</span>
+          <p>08.00 – 17.00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="layanan">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Layanan</div>
+      <h2>Laundry kiloan &amp; satuan, dijemput dari rumahmu.</h2>
+      <p>Bandar Deterjen melayani cucian sehari-hari sampai barang yang butuh perlakuan khusus, dengan deterjen dan parfum kualitas premium.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <i class="fas fa-scale-balanced"></i>
+        <h3>Kiloan &amp; Satuan</h3>
+        <p>Pilih kiloan untuk cucian banyak, atau satuan untuk jaket, jas, dan pakaian yang butuh perhatian ekstra.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-truck-fast"></i>
+        <h3>Antar-Jemput Gratis</h3>
+        <p>Tinggal hubungi via WhatsApp, tim kami jemput cucianmu dan antar kembali setelah selesai.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-couch"></i>
+        <h3>Karpet, Kasur &amp; Sepatu</h3>
+        <p>Selain pakaian, kami juga menerima cuci karpet, springbed, sepatu, dan boneka dengan teknik khusus.</p>
+      </div>
+    </div>
+
+    <div class="contact-strip">
+      <a class="contact-item" href="https://api.whatsapp.com/send?phone=6285773009666&text=Halo%20kak%2C%20saya%20mau%20laundry" target="_blank" rel="noopener">
+        <span class="label"><i class="fab fa-whatsapp"></i> WhatsApp</span>
+        <span class="value">0857-7300-9666</span>
+      </a>
+      <a class="contact-item" href="mailto:bandardeterjen@gmail.com">
+        <span class="label"><i class="fas fa-envelope"></i> Email</span>
+        <span class="value">bandardeterjen@gmail.com</span>
+      </a>
+      <a class="contact-item" href="https://www.bandardeterjen.com" target="_blank" rel="noopener">
+        <span class="label"><i class="fas fa-globe"></i> Website</span>
+        <span class="value">bandardeterjen.com</span>
+      </a>
+      <div class="contact-item">
+        <span class="label"><i class="fas fa-clock"></i> Jam Operasional</span>
+        <span class="value">Senin–Sabtu, 08.00–17.00</span>
+      </div>
+    </div>
+
+    <div class="area-wrap" id="wilayah">
+      <h3>Wilayah layanan</h3>
+      <p class="hint">Ketuk kecamatanmu untuk langsung chat WhatsApp dengan pesan yang sudah terisi otomatis.</p>
+      <div class="area-pills" id="areaPills"></div>
+    </div>
+  </div>
+</section>
+
+<section id="kamus">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Kamus Ngapak</div>
+      <h2>Kamus kecil Basa Indonesia – Jawa Banyumasan</h2>
+      <p>Istilah <em>ora ngapak ora kepenak</em> menggambarkan betapa cintanya warga Banyumas pada bahasanya — bahasa yang menyatukan warga dari empat kabupaten Eks Karesidenan Banyumas, alias "Republik Ngapak."</p>
+    </div>
+
+    <div class="search-shell">
+      <div class="dots"></div>
+      <h3>Cari kata</h3>
+      <p>Ketik kata Bahasa Indonesia, kami carikan padanan Ngapak-nya.</p>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Contoh: rumah, makan, cantik…" autocomplete="off">
+        <button id="searchButton" type="button">Cari <i class="fas fa-magnifying-glass"></i></button>
+      </div>
+      <div id="searchResult"></div>
+    </div>
+
+    <div class="az-nav" id="azNav"></div>
+    <div id="azList"></div>
+  </div>
+</section>
+
+<footer id="kontak">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Ngapak Banyumas</h4>
+        <p>Satu laman merawat dua hal: bahasa Ngapak yang khas, dan layanan laundry yang memudahkan keseharian warga Banyumas.</p>
+        <div class="foot-social">
+          <a href="https://www.facebook.com/bandardeterjen" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/bandardeterjen" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/bandardeterjen" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Tautan</h4>
+        <div class="foot-links">
+          <a href="#layanan">Layanan Laundry</a>
+          <a href="#wilayah">Wilayah Layanan</a>
+          <a href="#kamus">Kamus Ngapak</a>
+        </div>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <div class="foot-links">
+          <a href="https://api.whatsapp.com/send?phone=6285773009666&text=Halo%20kak%2C%20saya%20mau%20laundry" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> 0857-7300-9666</a>
+          <a href="mailto:bandardeterjen@gmail.com"><i class="fas fa-envelope"></i> bandardeterjen@gmail.com</a>
+          <a href="https://www.bandardeterjen.com" target="_blank" rel="noopener"><i class="fas fa-globe"></i> www.bandardeterjen.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">© Jasa Pembuatan Website di Sokaraja &amp; Purwokerto · 0857-7300-9666</div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://api.whatsapp.com/send?phone=6285773009666&text=Halo%20kak%2C%20saya%20mau%20laundry" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+// ---------- Dictionary data (Indonesia -> Banyumasan) ----------
+const dictionary = {
+"abang":"kakang","abu":"awu","ada":"ana","adik":"adi","air":"banyu","air mata":"iluh","air minum matang":"wedang",
+"akan":"arep","akar":"oyot","aku":"aku/enyong/inyong","alasan":"alesan","alis":"alis","almari":"lemari","aman":"aman",
+"ambil":"njiot/njukut","anak":"bocah","angsa":"banyak","anjing":"asu","anting-anting":"suweng","apa":"apa",
+"apa adanya":"apa anane","apabila":"nek","api":"geni","asam":"kecut","asap":"kukus","asin":"asin","asli":"asli",
+"atap rumah":"payon","awan":"lamuk","ayah":"bapak/rama","ayam":"pitik","ayam betina":"babon","ayam jantan":"jago",
+"baca":"waca","bagaimana":"kepriwe/kepriben/keprimen","bahagia":"bungah","bahasa":"basa","baik":"apik","baikan":"wawuh",
+"baju":"klambi","bakar":"obong","bambu":"pring","bangun tidur":"tangi turu","bantu":"mbantu","banyak":"akeh",
+"baris":"baris","baru":"anyar/gres","basah":"teles","batu":"watu","batu bata":"bata","batu kecil":"kerikil/krikil",
+"batu sedang":"gragal","bau":"mambu","bau harum":"mambu wangi","bawah":"ngisor/ngingsor","bawang":"brambang",
+"bayam":"bayem","bayar":"mbayar","bebas":"bebas","begadang":"lek-lekan","bekal":"sangu","belajar":"sinau",
+"belakang":"mburi","belakang rumah":"mburitan","beli":"tuku","belok":"menggok","belum":"durung/urung","belut":"welut",
+"benang jahit":"bolah","benar":"bener","benci":"sengit","beneran":"temenan","bengkok":"mbengkong","bentar":"dela",
+"sebentar":"sedela","berani":"wani/kendel","berapa":"pira","beras":"beras","berat":"abot","berbuah":"woh",
+"berdiri":"ngadeg/ngadek","beri":"aweh","berkelahi":"gelut/tukaran","berkurang":"kalong","bersandar":"lendehan",
+"bersih":"resik","bertambah banyak":"ngakeih","berudu":"kecebong","beruntung":"beja","besar":"gede","besi":"wesi",
+"besok":"ngesuk","betis":"kempol","betul":"bener","bh":"kotang","biar":"men","biarkan":"jorna","biasa":"biasa",
+"bibi":"bulik/lilik","bintang":"lintang","biru":"biru","bisa (racun ular)":"upas","bisa":"bisa","bohong":"nglombo",
+"bola":"bal","boleh":"ulih/entuk","bosan":"bosen","buah":"buah","berak":"eeh/ngising","kencing":"nguyuh/pipis",
+"buat":"gawe","buaya":"baya","buka":"bukak","buka n":"udu","buku":"buku","bulan":"wulan","bulat besar":"mblondo",
+"bulat":"bunder","bulat kecil":"mblindi","bunga":"kembang","bunglon":"blungon","bunyi":"moni","buruk":"elek",
+"burung":"manuk","burung hantu":"horhuk","bus":"bis","busuk":"bacin/mambu","buta":"picek","butuh":"butuh",
+"cabai":"lombok","cabut":"jabud/jabut","cacar":"tanggalen","cacing":"cacing","cambuk":"pecut","cangkul":"pacul",
+"cantik":"ayu","capai":"kesel/sayah","caping":"tudung","capung":"kinjeng","celana":"katok","pakai celana":"katokan",
+"celana dalam":"cawet","cepat":"cepet/banter","cerai":"pegatan","cerdas":"cerdas","cerewet":"crewet","cerita":"crita",
+"ceriwis":"criwis","cermat":"cermat","cicak":"cecek","cicak terbang":"celeret","cicit":"buyut","cincin":"ali-ali",
+"cinta":"seneng/demen","cium":"ambung","coba":"njajal","contoh":"conto","cubit":"ciwit","cucu":"putu","cukup":"cukup",
+"dahulu":"gemien/mbiyen/ndisit/disit","dulu":"gemien/mbiyen/ndisit/disit","dalam":"njero/jero","dan":"karo",
+"dangkal":"cetek","dapur":"pedangan/pawon","darah":"getih","darimana":"kanngendi","datar":"rata","daun":"godong",
+"dekat":"perek","delapan":"wolu","dengar":"krungu","mendengarkan":"ngrungokna","depan":"ngarep","desa":"desa",
+"di":"nang","di mana":"nang ngendi","diam":"meneng","diare":"mencret","dihapus":"dibusek","dikasih":"diwei",
+"diberi":"diwei","dikeluarkan":"ditokna","dikit":"titik","sedikit":"setitik/saipet","dilempar":"dibalang",
+"dilepas":"diculna","dimasuki":"dileboni","dimasukkan":"dilebokna","dingin":"adem","doa":"donga/dunga",
+"dorong":"surung","dua":"loro","dua kali":"pindo/ping pindo","duduk":"njagong","dukuh":"dukuh","dunia":"dunya",
+"durian":"duren","ejek":"mada","empat":"papat","empat kali":"ping papat","enak":"enak","enam":"enem","fungsi":"guna",
+"gajah":"gajah","galak":"galak","ganjil":"ganjil","garam":"uyah","gatal":"gatel","gelang":"gelang","gelap":"peteng",
+"gelas":"gelas","gelisah":"sedih","gempa bumi":"lindu","gemuk":"lemu/gendut","genap":"genep","genteng/genting":"gendeng",
+"gerak":"obah","gerimis":"grimis","gigi":"untu","gigit":"cokot","gila":"gemblung","guna":"kanggo","gunung":"gunung",
+"habis":"entek","hadang":"adang","haid":"men","haji":"kaji","halaman":"ngarepan/latar","halangan":"alangan",
+"halus":"alus","hamil":"meteng","hampa":"ampang","hancur":"ajur/remuk","handuk":"anduk","hangat":"anget",
+"hangus":"geseng","hanya":"mung","hapus":"busek","harga":"rega","hari":"dina",
+"hari raya idul adha":"lebaran kaji/badan kaji/badan besar","hari raya idul fitri":"lebaran/badan",
+"harimau":"macan","harum":"wangi","harus":"kudu","hasil":"kasil","hati":"ati","haus":"ngelak","hebat":"hebat",
+"hemat":"irit","henti":"mandeg","heran":"gumun","hidung":"irung","hidup":"urip","hijau":"ijo","hina":"nista",
+"hisap":"serot","hitam":"ireng","hujan":"udan","hutan":"alas","hutang":"utang","ibu":"biyung/simbok/mamak",
+"ikan":"iwak","ikat/tali":"jiret","ikut":"melu","ikut-ikutan":"tiru-tiru","ilalang":"alang-alang","inap":"inep",
+"indah":"indah","ingat":"emut/eling","teringat":"kemutan/kelingan","ingin":"kepengin","ingus":"umbel",
+"ini":"kie/kye/kiye","injak":"pidek","iris":"rajang","itik":"bebek","itu":"kue/kuwe","jadi":"dadi",
+"jahat":"nakal/jahat/nyengiti","jalan":"dalan","jalan kaki/berjalan":"mlaku","jambu":"jambu",
+"jambu biji":"jambu klutuk","jangan":"aja","jangkrik":"jangkrik","jarang":"jarang","jarum":"dom","jatuh":"tiba",
+"jauh":"adoh","jelas":"genah","jelek":"elek","jembatan":"powotan","jemur":"pe","menjemur":"meme/mepe",
+"jendela":"jendela","jernih":"bening","jeruk":"jeruk","jilbab":"cidung","jinak":"manutan","jongkok":"ndodok",
+"jorok":"jorok","jual":"adol","jumat":"jemuah","kadal":"kadal","kain":"gombal","kakak":"kakang",
+"kakak perempuan":"mbakyu/mbekayu","kakek":"kaki/mbah kakung","kaki":"sikil","kaku":"kaku","kalender":"tanggalan",
+"kali":"ping","kalung":"kalung","kamar":"sentong/kamar","kambing":"wedus","kamis":"kemis","kamu":"kowe/sampeyan",
+"kanan":"tengen","kancing":"benik","kangkung":"kangkung","kapas":"kapuk","kasar":"kasar","kasihan":"melasi",
+"kasti":"kasti","kasur":"kasur","kata":"omong","katak":"kodok","kaya":"sugih","kayu":"kayu","kebanyakan":"kakehen",
+"kebetulan":"ndilalah/sakligane","kecil":"cilik","kecoa":"kecoro","kedondong":"gedondong","kejar":"buru",
+"kelamaan":"kesuwen","kelapa":"kerambil","kelapa muda":"degan","kelelawar":"kampret","kelereng":"dir",
+"kelinci":"trewelu","keluar":"metu","keluarga":"keluarga","kemalaman":"kewengen","kemari/kesini":"mengeneh",
+"kemarin":"wingi","kemasukkan":"kelebon","kencang":"banter/cepet","kentang":"kentang","kentut":"entut",
+"kenyang":"wareg","kepala":"endas","keras":"atos","kerbau":"kebo","kereta api":"sepur","kering":"garing",
+"kerja":"nyambet gawe","kertas":"kertas","keruh":"butek","ketapang":"ketapang","ketela":"budin",
+"ketela rambat":"muntul","singkong":"budin","keterlaluan":"kebangeten","ketuk":"ndodog","khawatir":"melang-melang",
+"khitan":"sepit","kijang":"kidang","kipas":"tipas","kiri":"kiwe","kompor":"kompor","kondisi":"kahanan",
+"korek":"rek","kotor":"kotor","kotoran dalam hidung":"upil","kotoran dalam telinga":"kopok","kuat":"kuat/rosa",
+"kubis":"kobis","kucing":"kucing","kuda":"jaran","kue":"roti","kulit":"kulit","kumis":"kumis","kunci":"sosi",
+"kuning":"kuning","kupu-kupu":"kupu","kurang":"kurang","kursi":"kursi","kurus":"gering","kutu":"tuma",
+"laba-laba":"nggaranggati","lagi":"maning / sedang","lahir":"lair","lain":"lia","laki-laki":"lanang",
+"lalat":"laler","lama":"sue/suwe","lama sekali":"sue banget","lambat":"alon","langit":"langit","lap":"serbed",
+"lapar":"kencot","lari":"mlayu","latihan":"latian","laut":"laut","layang-layang":"layangan","lebah":"tawon",
+"lebar":"amba","lebih":"lewih","leher":"gulu","leher bagian belakang":"gitok","lemas":"lemes","lempar":"balang",
+"lepas":"ucul","lepaskan":"sotna/culna","lidah":"ilat","lidi":"giting","lihat":"deleng","lima":"lima",
+"lincah":"lincah","lingkaran":"bunderan","luar":"njaba","luas":"amba/omber","lubang":"bolongan",
+"luber":"mbludak/mbludag","lucu":"lucu","ludah":"idu","lupa":"kelalen","lurus":"lurus/lempeng","maaf":"ngapura",
+"macam":"macem","magnet":"wesi brani","mahal":"larang","main":"dolan","mainan":"dolanan","maju":"maju",
+"makan":"mangan","makan makanan ringan":"mangan/ngemil","makan nasi":"maem/madang","makannya":"mangane",
+"makanya":"mulane","maklum":"lumrah","malam":"wengi","malas":"bebeh","malu":"isin","mandi":"adus","mangga":"pelem",
+"mangga muda":"pakel","manis":"legi","manja":"aleman","marah":"kesuh","mari":"ayuh","masak":"masak",
+"masak air":"nggodog","masak nasi/beras":"ngliwet","masjid":"mesjid","masuk":"mlebu","mata":"mripat",
+"mata terbuka":"melek","mata terpejam":"merem","matahari":"srengenge","matang":"mateng","meja":"meja",
+"melakukan":"nglakoni","melempar":"mbalang","melihat/menonton":"ndeleng","melotot":"mendelik",
+"memalukan":"ngisin-ngisina","memandikan kerbau":"ngguyang kebo","memarahi":"ngomaih","membaca":"maca",
+"membayar hutang":"mbayar utang/nyaur utang","membelikan":"nukokna","membohongi":"nglomboni","membuat":"gawe",
+"menangis":"nangis","menanti":"nunggoni/ngenteni","menantu":"mantu","menari":"nari",
+"menaruh/meletakkan":"nggletakna","mencabut":"njabud","mencangkul":"macul","mencuci pakaian":"ngumbaih/nyuci",
+"mencuci tangan/kaki":"wisuh/wijik","mendung":"teduh","mengaji":"ngaji","mengapa/kenapa":"nangapa",
+"mengejar":"mburu","mengejek":"madani","mengeluarkan":"ngetokna","menggigit":"nyokot","menggosok":"nggosok",
+"menghampiri":"marani","menghina":"ngina","mengigau":"nglindur","menginap":"nginep","menginjak":"midek",
+"mengiris":"ngrajang","mengkilap":"meling","mengulangi":"mbaleni","menikah":"mbojo","meninggal":"mati",
+"menteskan air mata":"mrebes mili","mentok":"entog","menulis":"nulis","menyebalkan":"nyebeli","menyesal":"getun",
+"menyetrika":"nggosok","merah":"abang","merayakan":"ngrayakna","merpati":"dara","mertua":"mertua","mimpi":"ngimpi",
+"minggu":"minggu/ahad","minta":"njaluk","minum":"ngumbe","minyak":"lenga","misal":"umpama","miskin":"kere",
+"mobil":"montor","muda":"enom","mudah":"gampang/mayar","mudah-mudahan":"moga-moga","semoga":"mog-moga",
+"mulut":"lambe","mundur":"mundur","murah":"murah","musholla":"langgar","musyawarah":"rembugan","naik":"munggah",
+"nakal":"nakal","nama":"jeneng","nanas":"nanas","nangka":"ketewel","nanti":"mengko/engko","nasi":"sega",
+"nenek":"nini/mbah putri","nyala":"murub","nyamuk":"lemut/lemud","nyanyi":"nembang","oleh":"nang",
+"oleh-oleh":"jajan","orang":"wong","padam":"mati","padi":"pari","pagi":"esuk","paha":"pupu","pahit":"pait",
+"pajak":"pajeg","pakde":"tuwa/wa","palsu":"palsu","paman":"paklik/lilik","panas":"panas","panci":"panci",
+"pandai":"pinter","panjang":"dawa","pasir":"wedi","payung":"payung","pecah":"pecah","peci":"kupluk",
+"pegal":"pegel","pegang":"cekel","pekarangan":"karangan","peluk":"rangkul","pembagian":"bagi-bagian",
+"pendam":"pendem","pendek":"cendek","penghapus":"busekan","pengurangan":"kurang-kurangan",
+"penjumlahan":"tambah-tambahan","pepaya":"gandul","perahu":"prau","perempatan":"parapatan","perempuan":"wedon",
+"pergi":"lunga","perintah":"prentah","perkalian":"ping-pingan","pertigaan":"pertelon","perut":"weteng",
+"pesawat terbang":"kapal mabur","pesta":"mayoran","pijat":"pijet","pinjam":"nyelang/nyilih","pintu":"lawang",
+"piring":"piring","pisang":"gedang","pisau":"peso","plastik":"atum","pohon":"wit","pompa air":"sanyo",
+"potong":"ketok","potong rambut":"cukur","pukul":"antem","pulang":"bali/balik","pura-pura":"etok-etok",
+"pusar":"wudel","pusing":"mumet","putih":"putih","rabu":"rebo","ragu-ragu":"manda-mundu","rajin":"sregep",
+"ramah":"ramah","ramai":"rame","rambut":"rambut","rapat":"rapet","rembulan":"wulan","renang":"nglangi",
+"rendah":"endep","rindu":"kangen","ringan":"enteng","roda":"glindingan","ruang tamu":"mbale/bale","rugi":"rugi",
+"rumah":"umah","rumah tikus":"rong","rumput":"suket","rusak":"rusak","sabit":"arit","sabtu":"setu","sabuk":"ban",
+"saja":"bae/tok","sakit":"lara/mriyang","salah":"salah","salak":"salak","saluran irigasi":"kalen",
+"sama/serupa":"pada","sambung":"sambung/sembung","sampah":"sampah","sandal":"srandal/sendal","sapi":"lembu/sapi",
+"satu":"siji","satu kali":"sepisan","saudara":"sedulur/dulur","sawah":"sawah","sayang":"eman","sayur":"jangan",
+"sebab":"sebab","sebal":"sebel","sedang":"lagi","sedih":"sedih","sedikit lagi":"setitik","segar":"seger",
+"seharusnya":"kudune","sejuk":"anyes","sekali":"banget","sekarang":"siki","selamat":"slamet","selasa":"slasa",
+"selesai":"rampung","semangat":"semangat","semangka":"semangka","sembilan":"sanga","sembuh":"mari",
+"sembunyi":"umpetan","semen":"semen","sempat":"kober","sempit":"ciut","semua":"kabeh","semut":"semut",
+"sendiri":"dewek","sendirian":"dewekan","sendok":"sendok","senin":"senen","senjata":"gaman","sentuh":"senggol",
+"sepak bola":"bal-balan","sepeda":"pit","seperempat":"seprapat","sepertiga":"sepertelon","sepi":"sepi",
+"sepuluh":"sepuluh","seratus":"satus","seribu":"sewu","sesat":"sasar","setengah":"separo","siang":"awan",
+"siap":"siap","siapa":"sapa","siram":"grujug","sisa minyak goreng":"jelantah","sombong":"sombong",
+"sopan":"sopan","sore":"sore","soto":"soto/sroto","stasiun":"tapsiun","sudah":"wis/uwis","sudut":"pojok",
+"suka":"demen/seneng","sulit":"angel","sumur":"sumur","sungai":"kali","surat":"layang","tahi":"tai",
+"tahi lalat":"andeng-andeng","tahu":"tahu","tahun":"taun","tajam":"landep","takut":"wedi","tamasya":"plesir",
+"tambah":"tambah","tampan":"gagah","tanah":"lemah","tanah liat":"lempung","tangan":"tangan","tangkap":"cekel",
+"tarik":"gered","taruh":"sog","menaruh":"ngesogna","tebal":"kandel","tega":"tegel","telepon":"tilpun/tlepon",
+"televisi":"tivi","telinga":"kuping","telur":"endog","tempat":"nggon/panggonan","tempe":"tempe",
+"tenang":"ayem/tenang","tengah":"tengah","tenggelam":"kemelem","tengkurap":"kemureb","tepi":"pinggir",
+"terang":"padang","terapung":"kemambang","terbang":"mabur","tergesa-gesa":"gugup","tergigit":"kecokot",
+"teriak":"njerit","teriak keras":"nggembor","terima kasih":"kesewun","tetap":"ajeg","tidak":"ora",
+"tidur":"turu","tiga":"telu","tikar":"klasa","tikus":"tikus/condol","tinggi":"duwur","tipis":"tipis",
+"toko":"warung","tolong":"tulung","truk":"trek","tua":"tua","tubuh":"awak","tujuh":"pitu","tukar":"ijol",
+"tuli":"budeg/budong","tulis":"tulis","tumpah":"wutah","tumpul":"kodol","tunggu":"enteni","tupai":"bajing",
+"turun":"mudun","tutup":"tutup","uang":"duwit/duit","uang saku":"sangu","uban":"uwan","udang":"urang",
+"ular":"ula","ulat":"uler","untuk":"nggo","untung":"bati","utuh":"wutuh","wajah":"rai","waktu":"wektu",
+"warna":"warna","yaitu":"yakue","yang":"sing","zaman":"jaman"
+};
+
+// ---------- Search ----------
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+const searchResult = document.getElementById('searchResult');
+
+function doSearch(){
+  const q = searchInput.value.trim().toLowerCase();
+  if(!q){ searchResult.innerHTML = 'Ketik satu kata dulu, ya.'; return; }
+  const hit = dictionary[q];
+  if(hit){
+    searchResult.innerHTML = '"' + q + '" dalam Ngapak: <span class="hit">' + hit + '</span>';
+  } else {
+    searchResult.innerHTML = 'Kata "' + q + '" durung ana nang kamus. <span class="miss">Coba kata lain.</span>';
+  }
+}
+searchButton.addEventListener('click', doSearch);
+searchInput.addEventListener('keypress', e => { if(e.key === 'Enter') doSearch(); });
+
+// ---------- A-Z browsable list ----------
+const azNav = document.getElementById('azNav');
+const azList = document.getElementById('azList');
+const groups = {};
+Object.keys(dictionary).sort().forEach(key => {
+  const letter = key[0].toUpperCase();
+  if(!groups[letter]) groups[letter] = [];
+  groups[letter].push(key);
+});
+const letters = Object.keys(groups).sort();
+
+letters.forEach(letter => {
+  const btn = document.createElement('button');
+  btn.textContent = letter;
+  btn.addEventListener('click', () => {
+    document.getElementById('grp-' + letter).scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  azNav.appendChild(btn);
+
+  const groupDiv = document.createElement('div');
+  groupDiv.className = 'az-group';
+  groupDiv.id = 'grp-' + letter;
+  const h4 = document.createElement('h4');
+  h4.textContent = letter;
+  groupDiv.appendChild(h4);
+
+  const grid = document.createElement('div');
+  grid.className = 'word-grid';
+  groups[letter].forEach(word => {
+    const row = document.createElement('div');
+    row.className = 'word-row';
+    row.innerHTML = '<span class="id">' + word + '</span><span class="bms">' + dictionary[word] + '</span>';
+    grid.appendChild(row);
+  });
+  groupDiv.appendChild(grid);
+  azList.appendChild(groupDiv);
+});
+
+// ---------- Service area pills (WA click-to-chat, prefilled per location) ----------
+const areas = ["Sokaraja","Banyumas","Purwokerto","Ajibarang","Baturaden","Cilongok","Gumelar","Kalibagor",
+"Karanglewas","Kebasen","Kedung Banteng","Kembaran","Kemrinjen","Jatilawang","Lumbir","Patikraja","Pekuncen",
+"Purwojati","Rawalo","Somagede","Sumbang","Sumpiuh","Tambak","Wangon"];
+const areaPills = document.getElementById('areaPills');
+areas.forEach(area => {
+  const a = document.createElement('a');
+  a.className = 'pill';
+  const msg = encodeURIComponent('Halo kak, saya mau laundry di ' + area);
+  a.href = 'https://api.whatsapp.com/send?phone=6285773009666&text=' + msg;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.innerHTML = '<i class="fas fa-location-dot"></i> ' + area;
+  areaPills.appendChild(a);
+});
+</script>
+</body>
+</html>
