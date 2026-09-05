@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title id="page-title">Laundry Listing – Direktori &amp; Layanan Laundry Kiloan Express Se-Indonesia</title>
-  <meta name="description" id="page-desc" content="Laundry Listing: Temukan jasa laundry kiloan dan express terpercaya di seluruh provinsi, kabupaten/kota, dan kecamatan di Indonesia. Bersih, wangi, rapi, dan antar jemput.">
+  <title id="page-title">Laundry Kiloan – Direktori &amp; Layanan Laundry Kiloan Express Se-Indonesia</title>
+  <meta name="description" id="page-desc" content="Laundry Kiloan: Temukan jasa laundry kiloan dan express terpercaya di seluruh provinsi, kabupaten/kota, dan kecamatan di Indonesia. Bersih, wangi, rapi, dan antar jemput.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" id="page-canonical" href="">
 
   <!-- Open Graph Meta -->
   <meta property="og:type" content="website">
-  <meta property="og:title" id="og-title" content="Laundry Listing – Direktori Laundry Terpercaya Se-Indonesia">
+  <meta property="og:title" id="og-title" content="Laundry Kiloan – Direktori Laundry Terpercaya Se-Indonesia">
   <meta property="og:description" id="og-desc" content="Temukan jasa laundry kiloan dan express terdekat di provinsi, kabupaten/kota, dan kecamatan Anda.">
   <meta property="og:url" id="og-url" content="">
   <meta property="og:locale" content="id_ID">
@@ -21,7 +21,7 @@
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Laundry Listing",
+    "name": "Laundry Kiloan",
     "telephone": "+6285773009666",
     "priceRange": "Rp 7.000 - Rp 12.000/kg"
   }
@@ -207,7 +207,7 @@
     <div class="container">
       <div class="header-inner">
         <a class="logo" href="#" id="brand-logo" onclick="navigate(event, '')">
-          <div class="logo-icon">🧺</div> <span>Laundry Listing</span>
+          <div class="logo-icon">🧺</div> <span>Laundry Kiloan</span>
         </a>
         <a class="header-cta" href="" id="header-wa-btn" rel="noopener" target="_blank">
           💬 Pesan via WhatsApp
@@ -230,7 +230,7 @@
     <div class="container">
       <div class="footer-inner">
         <div>
-          <div class="logo" style="color:#fff; margin-bottom: 12px;"><div class="logo-icon">🧺</div> <span>Laundry Listing</span></div>
+          <div class="logo" style="color:#fff; margin-bottom: 12px;"><div class="logo-icon">🧺</div> <span>Laundry Kiloan</span></div>
           <p style="font-size: .88rem; line-height: 1.6;">Portal direktori dan layanan laundry kiloan &amp; express terpercaya, menjangkau seluruh provinsi, kabupaten/kota, dan kecamatan di Indonesia. Antar jemput harian cepat, wangi, rapi, dan bergaransi.</p>
         </div>
         <div>
@@ -253,7 +253,7 @@
         </div>
       </div>
       <div class="footer-copy">
-        <p>&copy; 2026 <span>Laundry Listing</span>. Hubungi kami: <a href="" id="footer-phone-link" style="color:#fff; text-decoration:underline;"></a></p>
+        <p>&copy; 2026 <span>Laundry Kiloan</span>. Hubungi kami: <a href="" id="footer-phone-link" style="color:#fff; text-decoration:underline;"></a></p>
       </div>
     </div>
   </footer>
@@ -498,8 +498,8 @@
         showLoading('Memuat daftar provinsi…');
         await loadRegencies();
         updateSEO(
-          "Laundry Listing – Direktori & Layanan Laundry Kiloan Express Se-Indonesia",
-          "Laundry Listing: Layanan laundry kiloan dan express terpercaya di seluruh Indonesia. Mulai " + PRICING.defaultPricePerKg + "/kg, hasil bersih, wangi, rapi, dan antar jemput.",
+          "Laundry Kiloan – Direktori & Layanan Laundry Kiloan Express Se-Indonesia",
+          "Laundry Kiloan: Layanan laundry kiloan dan express terpercaya di seluruh Indonesia. Mulai " + PRICING.defaultPricePerKg + "/kg, hasil bersih, wangi, rapi, dan antar jemput.",
           ""
         );
         app.innerHTML = renderHomePage();
@@ -514,7 +514,7 @@
         showLoading('Memuat kabupaten/kota di ' + province.name + '…');
         await loadRegencies();
         updateSEO(
-          "Laundry Listing " + province.name + " – Direktori Laundry Kiloan Per Kabupaten/Kota",
+          "Laundry Kiloan " + province.name + " – Direktori Laundry Kiloan Per Kabupaten/Kota",
           "Layanan laundry kiloan terpercaya di seluruh provinsi " + province.name + ". Mulai " + PRICING.defaultPricePerKg + "/kg, melayani semua kabupaten dan kota.",
           province.slug
         );
@@ -531,7 +531,7 @@
         showLoading('Memuat kecamatan di ' + regency.name + '…');
         await loadDistricts();
         updateSEO(
-          "Laundry Listing " + regency.name + ", " + province.name + " – Direktori Laundry Kiloan | Antar Jemput",
+          "Laundry Kiloan " + regency.name + ", " + province.name + " – Direktori Laundry Kiloan | Antar Jemput",
           "Layanan laundry kiloan terpercaya di seluruh " + regency.name + ", " + province.name + ". Mulai " + PRICING.defaultPricePerKg + "/kg, express 6 jam, melayani seluruh kecamatan.",
           province.slug + '/' + regency.slug
         );
@@ -548,8 +548,8 @@
       await loadVillages();
       const desaList = WILAYAH.villagesByDistrict.get(district.id) || [];
 
-      // Title: [nomor telepon] Laundry Kiloan [kecamatan], [kabupaten], [provinsi] – Laundry Listing
-      const titleBase = "Laundry Kiloan " + district.name + ", " + regency.name + ", " + province.name + " – Laundry Listing";
+      // Title: [nomor telepon] Laundry Kiloan [kecamatan], [kabupaten], [provinsi] – Laundry Kiloan
+      const titleBase = "Laundry Kiloan " + district.name + ", " + regency.name + ", " + province.name + " – Laundry Kiloan";
       
       updateSEO(
         titleBase,
@@ -594,7 +594,7 @@
             '<div class="hero-grid">' +
               '<div>' +
                 '<div class="badge badge-orange">🧼 Direktori & Layanan Laundry Se-Indonesia</div>' +
-                '<h1 class="hero-title">Jasa Laundry Kiloan &amp; Express <span class="hl-orange">Laundry Listing</span></h1>' +
+                '<h1 class="hero-title">Jasa Laundry Kiloan &amp; Express <span class="hl-orange">Laundry Kiloan</span></h1>' +
                 '<p class="hero-sub">Layanan laundry profesional dengan standar higienis tinggi, detergen premium, pemisahan warna ketat, dan gratis antar-jemput di seluruh provinsi Indonesia.</p>' +
                 '<div class="hero-cta-group">' +
                   '<a href="https://wa.me/' + phone + '?text=Halo%20Laundry%20Listing%2C%20saya%20mau%20order" target="_blank" class="btn btn-wa btn-lg">💬 Pesan Sekarang</a>' +
@@ -638,7 +638,7 @@
           '<div class="container">' +
             '<div class="section-head">' +
               '<div class="badge badge-orange">🏆 Keunggulan</div>' +
-              '<h2>Mengapa Memilih Laundry Listing?</h2>' +
+              '<h2>Mengapa Memilih Laundry Kiloan?</h2>' +
               '<p>Standar layanan terbaik yang kami jaga di setiap kilogram pakaian Anda.</p>' +
             '</div>' +
             '<div class="services-grid">' +
@@ -650,7 +650,7 @@
         '</section>' +
 
         renderFAQSection() +
-        renderCTASection("Cucian Menumpuk di Rumah?", "Serahkan pada Laundry Listing, beres tanpa repot. Mulai " + PRICING.defaultPricePerKg + "/kg.")
+        renderCTASection("Cucian Menumpuk di Rumah?", "Serahkan pada Laundry Kiloan, beres tanpa repot. Mulai " + PRICING.defaultPricePerKg + "/kg.")
       );
     }
 
@@ -680,7 +680,7 @@
         '<section id="hero">' +
           '<div class="container" style="text-align: center;">' +
             '<div class="badge badge-orange">📍 Provinsi ' + province.name + '</div>' +
-            '<h1 class="hero-title" style="max-width: 750px; margin: 0 auto 16px;">Laundry Listing <span class="hl-orange">' + province.name + '</span> – Antar Jemput Gratis</h1>' +
+            '<h1 class="hero-title" style="max-width: 750px; margin: 0 auto 16px;">Laundry Kiloan <span class="hl-orange">' + province.name + '</span> – Antar Jemput Gratis</h1>' +
             '<p class="hero-sub" style="margin: 0 auto 28px;">Melayani ' + regList.length + ' kabupaten/kota di provinsi ' + province.name + '. Bersih, harum, rapi, mulai ' + PRICING.defaultPricePerKg + '/kg.</p>' +
             '<a href="https://wa.me/' + phone + '?text=Halo%20Laundry%20Listing%2C%20saya%20mau%20order%20di%20' + encodeURIComponent(province.name) + '" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>' +
           '</div>' +
@@ -740,7 +740,7 @@
         '<section id="hero">' +
           '<div class="container" style="text-align: center;">' +
             '<div class="badge badge-orange">📍 Area ' + regency.name + ', ' + province.name + '</div>' +
-            '<h1 class="hero-title" style="max-width: 750px; margin: 0 auto 16px;">Laundry Listing <span class="hl-orange">' + regency.name + '</span> – Antar Jemput Gratis</h1>' +
+            '<h1 class="hero-title" style="max-width: 750px; margin: 0 auto 16px;">Laundry Kiloan <span class="hl-orange">' + regency.name + '</span> – Antar Jemput Gratis</h1>' +
             '<p class="hero-sub" style="margin: 0 auto 28px;">Melayani ' + distList.length + ' kecamatan di ' + regency.name + ', ' + province.name + '. Bersih, harum, rapi, mulai ' + PRICING.defaultPricePerKg + '/kg.</p>' +
             '<a href="https://wa.me/' + phone + '?text=Halo%20Laundry%20Listing%2C%20saya%20mau%20order%20di%20' + encodeURIComponent(regency.name) + '" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>' +
           '</div>' +
@@ -832,8 +832,8 @@
         '<section class="section section-alt">' +
           '<div class="container">' +
             '<div class="unique-intro-wrap">' +
-              '<h2 class="unique-intro-title">Laundry Listing: Solusi Praktis untuk Warga ' + district.name + '</h2>' +
-              '<p class="unique-intro-text">Bagi Anda yang beraktivitas padat di wilayah ' + district.name + ', ' + regency.name + ' dan sekitarnya, meluangkan 3-5 jam setiap minggu untuk mencuci dan menyetrika pakaian sering kali melelahkan. Laundry Listing hadir memberikan kemudahan dengan tarif terjangkau mulai ' + PRICING.defaultPricePerKg + '/kg.</p>' +
+              '<h2 class="unique-intro-title">Laundry Kiloan: Solusi Praktis untuk Warga ' + district.name + '</h2>' +
+              '<p class="unique-intro-text">Bagi Anda yang beraktivitas padat di wilayah ' + district.name + ', ' + regency.name + ' dan sekitarnya, meluangkan 3-5 jam setiap minggu untuk mencuci dan menyetrika pakaian sering kali melelahkan. Laundry Kiloan hadir memberikan kemudahan dengan tarif terjangkau mulai ' + PRICING.defaultPricePerKg + '/kg.</p>' +
               '<p class="unique-intro-text">Dengan kurir antar-jemput yang siap datang ke lokasi Anda di ' + district.name + ', Anda tidak perlu lagi repot mengantar pakaian kotor ke konter.</p>' +
               '<p class="unique-intro-text"><strong>Hubungi kami segera di ' + phoneDisplay + ' untuk order pertama Anda!</strong></p>' +
             '</div>' +
@@ -936,7 +936,7 @@
         '</section>' +
 
         renderFAQSection() +
-        renderCTASection("Cucian Menumpuk di " + district.name + "?", "Pesan sekarang ke Laundry Listing, tim kurir kami jemput ke depan pintu Anda.")
+        renderCTASection("Cucian Menumpuk di " + district.name + "?", "Pesan sekarang ke Laundry Kiloan, tim kurir kami jemput ke depan pintu Anda.")
       );
     }
 
