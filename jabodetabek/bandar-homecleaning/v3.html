@@ -88,6 +88,12 @@
       display: none;
     }
     .cart-overlay.show { display: block; }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   </style>
 </head>
 
@@ -163,7 +169,14 @@
     </div>
   </nav>
 
-  <main id="app-root" class="flex-grow"></main>
+  <main id="app-root" class="flex-grow">
+    <div class="flex items-center justify-center min-h-[400px]">
+      <div class="text-center">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-royal-500 border-t-transparent"></div>
+        <p class="mt-4 text-slate-500 text-sm">Memuat data wilayah...</p>
+      </div>
+    </div>
+  </main>
 
   <!-- Cart Drawer -->
   <div id="cart-drawer" class="cart-drawer">
@@ -308,7 +321,7 @@
       </div>
 
       <div class="mt-12 pt-8 border-t border-slate-900">
-        <h5 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Area Distribusi Wilayah:</h5>
+        <h5 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Wilayah Layanan:</h5>
         <div id="footer-districts-cloud" class="flex flex-wrap gap-x-2.5 gap-y-1.5 text-xs text-slate-500"></div>
       </div>
 
@@ -331,8 +344,12 @@
     const SITE_NAME = 'Bandar Homecleaning';
     const CONFIG_PHONE = "085773009666";
 
+    // CSV Eksternal untuk data wilayah
+    const CSV_DISTRICTS_URL = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/districts.csv";
+    const CSV_VILLAGES_URL = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/villages.csv";
+
     // ==========================================================================
-    // 2. DATA PRODUK (16 LAYANAN)
+    // 2. DATA PRODUK (16 LAYANAN) - Hardcoded
     // ==========================================================================
     const SERVICES = [
       { id: 1, slug: 'bersihkan-kamar-mandi', name: 'Bersihkan Kamar Mandi', icon: '🚿', price: 150000, desc: 'Pembersihan menyeluruh kamar mandi termasuk saluran air, keramik, wastafel, dan kloset. Bebas noda & ampas sabun.' },
@@ -354,144 +371,61 @@
     ];
 
     // ==========================================================================
-    // 3. DATA WILAYAH (JABODETABEK + CILEUNGSI/CIBUBUR)
+    // 3. STATE & DATA WILAYAH (Dari CSV)
     // ==========================================================================
-    const WILAYAH_DATA = [
-      { 
-        slug: 'kabupaten-bogor', 
-        nama: 'Kabupaten Bogor',
-        kecamatan: [
-          { 
-            nama: 'Cileungsi',
-            desa: ['Cileungsi', 'Cileungsi Kidul', 'Cipenjo', 'Cibuntu', 'Pasir Angin', 'Cimanggis', 'Cibinong']
-          },
-          { 
-            nama: 'Cibubur',
-            desa: ['Cibubur', 'Cibubur Indah', 'Cibubur Permai', 'Cibubur Jaya', 'Cibubur Raya']
-          },
-          { 
-            nama: 'Bojong Gede',
-            desa: ['Bojong Gede', 'Bojong Gede Indah', 'Bojong Gede Permai']
-          },
-          { 
-            nama: 'Ciawi',
-            desa: ['Ciawi', 'Ciawi Indah', 'Ciawi Permai']
-          },
-          { 
-            nama: 'Cisarua',
-            desa: ['Cisarua', 'Cisarua Indah', 'Cisarua Permai']
-          }
-        ]
-      },
-      { 
-        slug: 'kota-bogor', 
-        nama: 'Kota Bogor',
-        kecamatan: [
-          { 
-            nama: 'Bogor Selatan',
-            desa: ['Bogor Selatan', 'Bogor Selatan Indah', 'Bogor Selatan Permai']
-          },
-          { 
-            nama: 'Bogor Timur',
-            desa: ['Bogor Timur', 'Bogor Timur Indah', 'Bogor Timur Permai']
-          },
-          { 
-            nama: 'Bogor Utara',
-            desa: ['Bogor Utara', 'Bogor Utara Indah', 'Bogor Utara Permai']
-          }
-        ]
-      },
-      { 
-        slug: 'kota-depok', 
-        nama: 'Kota Depok',
-        kecamatan: [
-          { 
-            nama: 'Beji',
-            desa: ['Beji', 'Beji Indah', 'Beji Permai']
-          },
-          { 
-            nama: 'Cilodong',
-            desa: ['Cilodong', 'Cilodong Indah', 'Cilodong Permai']
-          },
-          { 
-            nama: 'Pancoran Mas',
-            desa: ['Pancoran Mas', 'Pancoran Mas Indah', 'Pancoran Mas Permai']
-          }
-        ]
-      },
-      { 
-        slug: 'kota-tangerang-selatan', 
-        nama: 'Kota Tangerang Selatan',
-        kecamatan: [
-          { 
-            nama: 'Ciputat',
-            desa: ['Ciputat', 'Ciputat Indah', 'Ciputat Permai']
-          },
-          { 
-            nama: 'Pamulang',
-            desa: ['Pamulang', 'Pamulang Indah', 'Pamulang Permai']
-          },
-          { 
-            nama: 'Serpong',
-            desa: ['Serpong', 'Serpong Indah', 'Serpong Permai']
-          }
-        ]
-      },
-      { 
-        slug: 'kota-bekasi', 
-        nama: 'Kota Bekasi',
-        kecamatan: [
-          { 
-            nama: 'Bekasi Selatan',
-            desa: ['Bekasi Selatan', 'Bekasi Selatan Indah', 'Bekasi Selatan Permai']
-          },
-          { 
-            nama: 'Bekasi Timur',
-            desa: ['Bekasi Timur', 'Bekasi Timur Indah', 'Bekasi Timur Permai']
-          },
-          { 
-            nama: 'Bekasi Utara',
-            desa: ['Bekasi Utara', 'Bekasi Utara Indah', 'Bekasi Utara Permai']
-          }
-        ]
-      },
-      { 
-        slug: 'jakarta-selatan', 
-        nama: 'Jakarta Selatan',
-        kecamatan: [
-          { 
-            nama: 'Kebayoran Baru',
-            desa: ['Kebayoran Baru', 'Kebayoran Baru Indah', 'Kebayoran Baru Permai']
-          },
-          { 
-            nama: 'Mampang Prapatan',
-            desa: ['Mampang Prapatan', 'Mampang Prapatan Indah', 'Mampang Prapatan Permai']
-          },
-          { 
-            nama: 'Pasar Minggu',
-            desa: ['Pasar Minggu', 'Pasar Minggu Indah', 'Pasar Minggu Permai']
-          }
-        ]
-      },
-      { 
-        slug: 'jakarta-timur', 
-        nama: 'Jakarta Timur',
-        kecamatan: [
-          { 
-            nama: 'Cakung',
-            desa: ['Cakung', 'Cakung Indah', 'Cakung Permai']
-          },
-          { 
-            nama: 'Duren Sawit',
-            desa: ['Duren Sawit', 'Duren Sawit Indah', 'Duren Sawit Permai']
-          },
-          { 
-            nama: 'Kramat Jati',
-            desa: ['Kramat Jati', 'Kramat Jati Indah', 'Kramat Jati Permai']
-          }
-        ]
-      }
+    let WILAYAH_DATA = []; // Akan diisi dari CSV
+    let DATA_LOADED = false;
+
+    // Target wilayah Jabodetabek (kode regency)
+    const TARGET_REGIONS = [
+      "3171", // Jakarta Selatan
+      "3172", // Jakarta Timur
+      "3173", // Jakarta Pusat
+      "3174", // Jakarta Barat
+      "3175", // Jakarta Utara
+      "3201", // Kabupaten Bogor
+      "3271", // Kota Bogor
+      "3276", // Kota Depok
+      "3671", // Kota Tangerang
+      "3674", // Kota Tangerang Selatan
+      "3603", // Kabupaten Tangerang
+      "3275", // Kota Bekasi
+      "3216"  // Kabupaten Bekasi
     ];
+
+    // Nama wilayah untuk mapping
+    const REGION_NAMES = {
+      "3171": "Jakarta Selatan",
+      "3172": "Jakarta Timur",
+      "3173": "Jakarta Pusat",
+      "3174": "Jakarta Barat",
+      "3175": "Jakarta Utara",
+      "3201": "Kabupaten Bogor",
+      "3271": "Kota Bogor",
+      "3276": "Kota Depok",
+      "3671": "Kota Tangerang",
+      "3674": "Kota Tangerang Selatan",
+      "3603": "Kabupaten Tangerang",
+      "3275": "Kota Bekasi",
+      "3216": "Kabupaten Bekasi"
+    };
+
+    // Slug untuk wilayah
+    const REGION_SLUGS = {
+      "3171": "jakarta-selatan",
+      "3172": "jakarta-timur",
+      "3173": "jakarta-pusat",
+      "3174": "jakarta-barat",
+      "3175": "jakarta-utara",
+      "3201": "kabupaten-bogor",
+      "3271": "kota-bogor",
+      "3276": "kota-depok",
+      "3671": "kota-tangerang",
+      "3674": "kota-tangerang-selatan",
+      "3603": "kabupaten-tangerang",
+      "3275": "kota-bekasi",
+      "3216": "kabupaten-bekasi"
+    };
 
     // ==========================================================================
     // 4. CART STATE
@@ -553,8 +487,106 @@
       return 'https://wa.me/' + target + '?text=' + encodeURIComponent(text);
     }
 
+    function parseCsvLine(line) {
+      const first = line.indexOf(',');
+      if (first === -1) return null;
+      const second = line.indexOf(',', first + 1);
+      if (second === -1) {
+        return [line.slice(0, first).trim(), line.slice(first + 1).trim()];
+      }
+      return [line.slice(0, first).trim(), line.slice(first + 1, second).trim(), line.slice(second + 1).trim()];
+    }
+
+    function toTitleCase(str) {
+      return String(str).toLowerCase().split(' ').filter(Boolean).map(function (w) {
+        return w.charAt(0).toUpperCase() + w.slice(1);
+      }).join(' ');
+    }
+
     // ==========================================================================
-    // 6. CART FUNCTIONS
+    // 6. LOAD DATA WILAYAH DARI CSV
+    // ==========================================================================
+    async function loadWilayahData() {
+      try {
+        // Load districts
+        const distRes = await fetch(CSV_DISTRICTS_URL);
+        const distText = await distRes.text();
+        const distLines = distText.split('\n').filter(l => l.trim());
+
+        // Load villages
+        const villRes = await fetch(CSV_VILLAGES_URL);
+        const villText = await villRes.text();
+        const villLines = villText.split('\n').filter(l => l.trim());
+
+        // Parse districts
+        const districts = {};
+        const targetSet = new Set(TARGET_REGIONS);
+
+        distLines.forEach(line => {
+          const parts = parseCsvLine(line);
+          if (!parts || !targetSet.has(parts[1])) return;
+          const id = parts[0];
+          const regencyId = parts[1];
+          const name = toTitleCase(parts[2]);
+          const slug = slugify(name);
+          
+          if (!districts[regencyId]) {
+            districts[regencyId] = [];
+          }
+          districts[regencyId].push({ id, name, slug, regencyId });
+        });
+
+        // Parse villages
+        const villages = {};
+        const districtIds = new Set();
+        Object.values(districts).forEach(arr => {
+          arr.forEach(d => districtIds.add(d.id));
+        });
+
+        villLines.forEach(line => {
+          const parts = parseCsvLine(line);
+          if (!parts || !districtIds.has(parts[1])) return;
+          const districtId = parts[1];
+          const name = toTitleCase(parts[2]);
+          
+          if (!villages[districtId]) {
+            villages[districtId] = [];
+          }
+          villages[districtId].push(name);
+        });
+
+        // Build WILAYAH_DATA
+        WILAYAH_DATA = [];
+        for (const regencyId of TARGET_REGIONS) {
+          const regionName = REGION_NAMES[regencyId] || regencyId;
+          const regionSlug = REGION_SLUGS[regencyId] || slugify(regionName);
+          
+          const kecList = districts[regencyId] || [];
+          const kecamatan = kecList.map(k => ({
+            nama: k.name,
+            slug: k.slug,
+            id: k.id,
+            desa: villages[k.id] || []
+          }));
+
+          WILAYAH_DATA.push({
+            id: regencyId,
+            slug: regionSlug,
+            nama: regionName,
+            kecamatan: kecamatan
+          });
+        }
+
+        DATA_LOADED = true;
+        return true;
+      } catch (err) {
+        console.error("Gagal memuat data wilayah:", err);
+        return false;
+      }
+    }
+
+    // ==========================================================================
+    // 7. CART FUNCTIONS
     // ==========================================================================
     function toggleCartDrawer(show) {
       const drawer = document.getElementById('cart-drawer');
@@ -697,9 +729,21 @@
     }
 
     // ==========================================================================
-    // 7. ROUTER & VIEWS
+    // 8. ROUTER & VIEWS
     // ==========================================================================
     function renderApp() {
+      if (!DATA_LOADED) {
+        document.getElementById('app-root').innerHTML = `
+          <div class="flex items-center justify-center min-h-[400px]">
+            <div class="text-center">
+              <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-royal-500 border-t-transparent"></div>
+              <p class="mt-4 text-slate-500 text-sm">Memuat data wilayah...</p>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
       const hash = window.location.hash.replace(/^#\/?/, '');
       const parts = hash.split('/').filter(Boolean);
 
@@ -723,7 +767,7 @@
             if (regionSlug) {
               region = WILAYAH_DATA.find(r => r.slug === regionSlug);
               if (region && kecSlug) {
-                kecamatan = region.kecamatan.find(k => slugify(k.nama) === kecSlug);
+                kecamatan = region.kecamatan.find(k => k.slug === kecSlug);
               }
             }
             
@@ -745,7 +789,7 @@
         if (slugParts.length === 2) {
           const region = WILAYAH_DATA.find(r => r.slug === slugParts[0]);
           if (region) {
-            const kec = region.kecamatan.find(k => slugify(k.nama) === slugParts[1]);
+            const kec = region.kecamatan.find(k => k.slug === slugParts[1]);
             if (kec) {
               renderKecamatanView(region, kec);
               return;
@@ -757,7 +801,7 @@
         if (slugParts.length === 3) {
           const region = WILAYAH_DATA.find(r => r.slug === slugParts[0]);
           if (region) {
-            const kec = region.kecamatan.find(k => slugify(k.nama) === slugParts[1]);
+            const kec = region.kecamatan.find(k => k.slug === slugParts[1]);
             if (kec) {
               const desaName = decodeURIComponent(slugParts[2]);
               if (kec.desa.includes(desaName)) {
@@ -1034,7 +1078,7 @@
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             ${region.kecamatan.map(kec => `
-              <a href="#${MODULE}/${region.slug}/${slugify(kec.nama)}" onclick="navigate('${MODULE}/${region.slug}/${slugify(kec.nama)}'); return false;" class="p-4 rounded-xl border border-slate-200 hover:border-royal-500 bg-white hover:bg-royal-50 transition text-center">
+              <a href="#${MODULE}/${region.slug}/${kec.slug}" onclick="navigate('${MODULE}/${region.slug}/${kec.slug}'); return false;" class="p-4 rounded-xl border border-slate-200 hover:border-royal-500 bg-white hover:bg-royal-50 transition text-center">
                 <div class="text-2xl mb-2">📍</div>
                 <div class="font-bold text-sm text-slate-800">${kec.nama}</div>
                 <div class="text-xs text-slate-500">${kec.desa.length} Desa/Kelurahan</div>
@@ -1094,7 +1138,7 @@
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             ${kecamatan.desa.map(desa => `
-              <a href="#${MODULE}/${region.slug}/${slugify(kecamatan.nama)}/${encodeURIComponent(desa)}" onclick="navigate('${MODULE}/${region.slug}/${slugify(kecamatan.nama)}/${encodeURIComponent(desa)}'); return false;" class="p-3 rounded-xl border border-slate-200 hover:border-royal-500 bg-white hover:bg-royal-50 transition text-center">
+              <a href="#${MODULE}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(desa)}" onclick="navigate('${MODULE}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(desa)}'); return false;" class="p-3 rounded-xl border border-slate-200 hover:border-royal-500 bg-white hover:bg-royal-50 transition text-center">
                 <div class="text-xs font-semibold text-slate-800">${desa}</div>
               </a>
             `).join('')}
@@ -1104,7 +1148,7 @@
             <h2 class="text-xl font-bold text-royal-900 mb-4">Layanan Tersedia di ${kecamatan.nama}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               ${SERVICES.map(s => `
-                <a href="#${MODULE}/${s.slug}/${region.slug}/${slugify(kecamatan.nama)}" onclick="navigate('${MODULE}/${s.slug}/${region.slug}/${slugify(kecamatan.nama)}'); return false;" class="p-3 rounded-xl border border-slate-200 bg-white hover:border-royal-500 hover:shadow-md transition flex items-center gap-3">
+                <a href="#${MODULE}/${s.slug}/${region.slug}/${kecamatan.slug}" onclick="navigate('${MODULE}/${s.slug}/${region.slug}/${kecamatan.slug}'); return false;" class="p-3 rounded-xl border border-slate-200 bg-white hover:border-royal-500 hover:shadow-md transition flex items-center gap-3">
                   <span class="text-2xl">${s.icon}</span>
                   <div>
                     <div class="font-bold text-xs text-slate-800">${s.name}</div>
@@ -1139,7 +1183,7 @@
               <li><span class="mx-2 text-slate-400">/</span></li>
               <li><a href="#${MODULE}/${region.slug}" onclick="navigate('${MODULE}/${region.slug}'); return false;" class="hover:text-royal-600">${region.nama}</a></li>
               <li><span class="mx-2 text-slate-400">/</span></li>
-              <li><a href="#${MODULE}/${region.slug}/${slugify(kecamatan.nama)}" onclick="navigate('${MODULE}/${region.slug}/${slugify(kecamatan.nama)}'); return false;" class="hover:text-royal-600">${kecamatan.nama}</a></li>
+              <li><a href="#${MODULE}/${region.slug}/${kecamatan.slug}" onclick="navigate('${MODULE}/${region.slug}/${kecamatan.slug}'); return false;" class="hover:text-royal-600">${kecamatan.nama}</a></li>
               <li><span class="mx-2 text-slate-400">/</span></li>
               <li class="text-royal-700 font-bold">${desaName}</li>
             </ol>
@@ -1171,7 +1215,7 @@
                   </div>
 
                   <div class="space-y-2 pt-3 border-t border-slate-100">
-                    <a href="#${MODULE}/${s.slug}/${region.slug}/${slugify(kecamatan.nama)}/${encodeURIComponent(desaName)}" onclick="navigate('${MODULE}/${s.slug}/${region.slug}/${slugify(kecamatan.nama)}/${encodeURIComponent(desaName)}'); return false;" class="w-full block text-center bg-royal-50 hover:bg-royal-100 text-royal-700 font-bold text-xs py-2 rounded-xl transition">
+                    <a href="#${MODULE}/${s.slug}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(desaName)}" onclick="navigate('${MODULE}/${s.slug}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(desaName)}'); return false;" class="w-full block text-center bg-royal-50 hover:bg-royal-100 text-royal-700 font-bold text-xs py-2 rounded-xl transition">
                       <i class="fa-solid fa-circle-info mr-1"></i> Detail Layanan
                     </a>
                     <button onclick="addToCart(${s.id})" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">
@@ -1187,7 +1231,7 @@
             <h2 class="text-xl font-bold text-royal-900 mb-4">Desa Lain di ${kecamatan.nama}</h2>
             <div class="flex flex-wrap gap-2">
               ${kecamatan.desa.filter(d => d !== desaName).map(d => `
-                <a href="#${MODULE}/${region.slug}/${slugify(kecamatan.nama)}/${encodeURIComponent(d)}" onclick="navigate('${MODULE}/${region.slug}/${slugify(kecamatan.nama)}/${encodeURIComponent(d)}'); return false;" class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:border-royal-500 hover:bg-royal-50 text-xs font-medium text-slate-700 transition">
+                <a href="#${MODULE}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(d)}" onclick="navigate('${MODULE}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(d)}'); return false;" class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:border-royal-500 hover:bg-royal-50 text-xs font-medium text-slate-700 transition">
                   ${d}
                 </a>
               `).join('')}
@@ -1242,7 +1286,7 @@
         if (kecamatan) {
           breadcrumbHtml += `
             <li><span class="mx-2 text-slate-400">/</span></li>
-            <li><a href="#${MODULE}/${region.slug}/${slugify(kecamatan.nama)}" onclick="navigate('${MODULE}/${region.slug}/${slugify(kecamatan.nama)}'); return false;" class="hover:text-royal-600">${kecamatan.nama}</a></li>
+            <li><a href="#${MODULE}/${region.slug}/${kecamatan.slug}" onclick="navigate('${MODULE}/${region.slug}/${kecamatan.slug}'); return false;" class="hover:text-royal-600">${kecamatan.nama}</a></li>
           `;
           if (desaName) {
             breadcrumbHtml += `
@@ -1276,7 +1320,7 @@
           locationLinksHtml += `
             <div class="mt-3 flex flex-wrap gap-2">
               ${region.kecamatan.map(k => `
-                <a href="#${MODULE}/${product.slug}/${region.slug}/${slugify(k.nama)}" onclick="navigate('${MODULE}/${product.slug}/${region.slug}/${slugify(k.nama)}'); return false;" class="px-3 py-1.5 rounded-lg border ${k.nama === kecamatan.nama ? 'border-royal-500 bg-royal-50 text-royal-700' : 'border-slate-200 bg-white hover:border-royal-500'} text-xs font-medium transition">
+                <a href="#${MODULE}/${product.slug}/${region.slug}/${k.slug}" onclick="navigate('${MODULE}/${product.slug}/${region.slug}/${k.slug}'); return false;" class="px-3 py-1.5 rounded-lg border ${k.slug === kecamatan.slug ? 'border-royal-500 bg-royal-50 text-royal-700' : 'border-slate-200 bg-white hover:border-royal-500'} text-xs font-medium transition">
                   ${k.nama}
                 </a>
               `).join('')}
@@ -1288,7 +1332,7 @@
           locationLinksHtml += `
             <div class="mt-3 flex flex-wrap gap-2">
               ${kecamatan.desa.map(d => `
-                <a href="#${MODULE}/${product.slug}/${region.slug}/${slugify(kecamatan.nama)}/${encodeURIComponent(d)}" onclick="navigate('${MODULE}/${product.slug}/${region.slug}/${slugify(kecamatan.nama)}/${encodeURIComponent(d)}'); return false;" class="px-3 py-1.5 rounded-lg border ${d === desaName ? 'border-royal-500 bg-royal-50 text-royal-700' : 'border-slate-200 bg-white hover:border-royal-500'} text-xs font-medium transition">
+                <a href="#${MODULE}/${product.slug}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(d)}" onclick="navigate('${MODULE}/${product.slug}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(d)}'); return false;" class="px-3 py-1.5 rounded-lg border ${d === desaName ? 'border-royal-500 bg-royal-50 text-royal-700' : 'border-slate-200 bg-white hover:border-royal-500'} text-xs font-medium transition">
                   ${d}
                 </a>
               `).join('')}
@@ -1364,7 +1408,7 @@
                 <h4 class="font-bold text-sm text-slate-900 mb-3">Layanan Lainnya</h4>
                 <div class="space-y-2">
                   ${SERVICES.filter(s => s.slug !== product.slug).slice(0, 5).map(other => `
-                    <a href="#${MODULE}/${other.slug}${region ? '/' + region.slug + (kecamatan ? '/' + slugify(kecamatan.nama) + (desaName ? '/' + encodeURIComponent(desaName) : '') : '') : ''}" onclick="navigate('${MODULE}/${other.slug}${region ? '/' + region.slug + (kecamatan ? '/' + slugify(kecamatan.nama) + (desaName ? '/' + encodeURIComponent(desaName) : '') : '') : ''}'); return false;" class="block p-2 rounded-lg hover:bg-white text-xs text-slate-700 hover:text-royal-600 font-semibold transition border border-transparent hover:border-slate-200">
+                    <a href="#${MODULE}/${other.slug}${region ? '/' + region.slug + (kecamatan ? '/' + kecamatan.slug + (desaName ? '/' + encodeURIComponent(desaName) : '') : '') : ''}" onclick="navigate('${MODULE}/${other.slug}${region ? '/' + region.slug + (kecamatan ? '/' + kecamatan.slug + (desaName ? '/' + encodeURIComponent(desaName) : '') : '') : ''}'); return false;" class="block p-2 rounded-lg hover:bg-white text-xs text-slate-700 hover:text-royal-600 font-semibold transition border border-transparent hover:border-slate-200">
                       ${other.icon} ${other.name} - <span class="text-brandOrange-600">${formatRupiah(other.price)}</span>
                     </a>
                   `).join('')}
@@ -1379,7 +1423,7 @@
     }
 
     // ==========================================================================
-    // 8. INITIALIZATION
+    // 9. INITIALIZATION
     // ==========================================================================
     function syncFooterAndUI() {
       const phone = CONFIG_PHONE;
@@ -1417,8 +1461,11 @@
       }
     }
 
-    function initApp() {
+    async function initApp() {
       document.getElementById('auto-copyright-year').innerText = new Date().getFullYear();
+      
+      // Load data wilayah dari CSV
+      await loadWilayahData();
       
       syncFooterAndUI();
       renderCartUI();
