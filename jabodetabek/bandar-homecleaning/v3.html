@@ -63,43 +63,53 @@
     }
     .custom-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-    
-    .cart-drawer {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 100%;
-      max-width: 480px;
-      height: 100vh;
-      background: #ffffff;
-      box-shadow: -10px 0 35px rgba(0,0,0,0.25);
-      z-index: 99999;
-      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      flex-direction: column;
-    }
-    .cart-drawer.open { right: 0; }
-    .cart-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(3px);
-      z-index: 99998;
-      display: none;
-    }
-    .cart-overlay.show { display: block; }
     .line-clamp-2 {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+    .wa-floater-container { 
+      position: fixed;
+      bottom: 16px; 
+      right: 16px; 
+      z-index: 999999 !important; 
+    }
+    .wa-panel-box { 
+      width: 330px; 
+      max-width: calc(100vw - 32px); 
+      background: #ffffff; 
+      border-radius: 18px; 
+      box-shadow: 0 20px 35px -5px rgba(0,0,0,0.25); 
+      overflow: hidden; 
+      display: none; 
+      margin-bottom: 12px; 
+      border: 1px solid #e2e8f0; 
+    }
+    .wa-btn-click { 
+      background: #22c55e; 
+      color: #fff; 
+      border-radius: 50%; 
+      width: 56px; 
+      height: 56px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4); 
+      cursor: pointer; 
+      float: right; 
+      transition: all 0.25s ease; 
+    }
+    .wa-btn-click:hover { 
+      transform: scale(1.06); 
+      background: #16a34a; 
+    }
   </style>
 </head>
 
 <body class="bg-slate-50 text-slate-800 antialiased font-sans flex flex-col min-h-screen">
 
-  <!-- Top Bar -->
+  <!-- TOP BAR -->
   <div class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
       <div class="flex items-center gap-6">
@@ -124,7 +134,7 @@
     </div>
   </div>
 
-  <!-- Navbar -->
+  <!-- NAVBAR -->
   <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 lg:py-0">
       <div class="flex justify-between items-center lg:h-20">
@@ -146,13 +156,11 @@
           <a href="#kontak" class="hover:text-royal-600 transition py-1">Kontak</a>
         </div>
 
-        <div class="flex items-center gap-3">
-          <button onclick="toggleCartDrawer(true)" class="relative bg-royal-50 hover:bg-royal-100 text-royal-800 p-2.5 sm:px-4 sm:py-2.5 rounded-xl border border-royal-200 shadow-sm transition flex items-center gap-2 font-bold text-sm">
-            <i class="fa-solid fa-cart-shopping text-base text-brandOrange-500"></i>
-            <span class="hidden sm:inline">Keranjang</span>
-            <span id="nav-cart-badge" class="bg-brandOrange-500 text-white text-[11px] font-black px-2 py-0.5 rounded-full">0</span>
+        <div class="flex items-center gap-2">
+          <button onclick="toggleWaWidget()" class="hidden lg:flex bg-brandOrange-500 hover:bg-brandOrange-600 text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow-lg hover:shadow-orange-500/30 transition items-center gap-2">
+            <i class="fa-brands fa-whatsapp text-base"></i>
+            <span>Pesan Sekarang</span>
           </button>
-          
           <button id="mobile-menu-btn" onclick="toggleMobileNav()" class="p-2 rounded-lg text-slate-700 hover:text-royal-900 hover:bg-slate-100 lg:hidden">
             <i class="fa-solid fa-bars text-xl"></i>
           </button>
@@ -169,6 +177,7 @@
     </div>
   </nav>
 
+  <!-- MAIN CONTENT -->
   <main id="app-root" class="flex-grow">
     <div class="flex items-center justify-center min-h-[400px]">
       <div class="text-center">
@@ -178,81 +187,7 @@
     </div>
   </main>
 
-  <!-- Cart Drawer -->
-  <div id="cart-drawer" class="cart-drawer">
-    <div class="bg-royal-900 text-white p-4 flex justify-between items-center border-b border-royal-800 shrink-0">
-      <div class="flex items-center gap-2.5">
-        <i class="fa-solid fa-bag-shopping text-brandOrange-400 text-lg"></i>
-        <h3 class="font-bold text-base">Keranjang Belanja</h3>
-      </div>
-      <button onclick="toggleCartDrawer(false)" class="text-slate-300 hover:text-white text-xl p-1">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-
-    <div class="flex-1 overflow-y-auto p-4 space-y-5 custom-scroll">
-      <div>
-        <div class="flex justify-between items-center mb-3">
-          <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Produk Terpilih</span>
-          <span id="cart-item-count-label" class="text-xs text-slate-500 font-medium">0 item</span>
-        </div>
-        <div id="cart-items-container" class="space-y-2.5"></div>
-      </div>
-
-      <div id="cart-checkout-wrapper" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-4 shadow-sm">
-        <div class="flex justify-between items-center pb-3 border-b border-slate-200">
-          <span class="text-xs font-bold text-slate-700 uppercase">Subtotal Belanja:</span>
-          <span id="cart-total-price" class="text-xl font-black text-brandOrange-600">Rp 0</span>
-        </div>
-
-        <form id="cart-checkout-form" class="space-y-3 text-xs">
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Nama Pemesan <span class="text-rose-500">*</span></label>
-            <input type="text" id="co-nama" required placeholder="Nama lengkap Anda" class="w-full px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-royal-500 outline-none bg-white">
-          </div>
-
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Nomor WhatsApp <span class="text-slate-400 font-normal">(Opsional)</span></label>
-            <input type="tel" id="co-wa" placeholder="Contoh: 08123456789" class="w-full px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-royal-500 outline-none bg-white">
-          </div>
-
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <label class="block font-semibold text-slate-700 mb-1">Kota / Kabupaten</label>
-              <select id="co-kecamatan" class="w-full px-2.5 py-2.5 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-royal-500 outline-none">
-                <option value="">Pilih Wilayah</option>
-              </select>
-            </div>
-            <div>
-              <label class="block font-semibold text-slate-700 mb-1">Kecamatan / Desa</label>
-              <select id="co-desa" class="w-full px-2.5 py-2.5 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-royal-500 outline-none">
-                <option value="">Pilih Area</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Alamat Lengkap <span class="text-rose-500">*</span></label>
-            <textarea id="co-alamat" rows="2" required placeholder="Nama jalan, nomor rumah, RT/RW, patokan..." class="w-full px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-royal-500 outline-none bg-white"></textarea>
-          </div>
-
-          <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-[11px] text-amber-900 leading-relaxed">
-            <i class="fa-solid fa-circle-info text-amber-600 mr-1"></i>
-            <strong>Catatan:</strong> Tim kami akan menghubungi Anda untuk konfirmasi jadwal dan biaya layanan.
-          </div>
-
-          <button type="submit" id="btn-submit-cart" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm mt-2">
-            <i class="fa-brands fa-whatsapp text-lg"></i>
-            Checkout via WhatsApp
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="cart-overlay" onclick="toggleCartDrawer(false)" class="cart-overlay"></div>
-
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer id="kontak" class="bg-slate-950 text-slate-400 text-sm mt-20 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -334,6 +269,61 @@
     </div>
   </footer>
 
+  <!-- FLOATING WHATSAPP WIDGET -->
+  <div class="wa-floater-container">
+    <div id="wa-panel" class="wa-panel-box">
+      <div class="bg-royal-900 p-4 text-white flex justify-between items-center border-b border-royal-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm leading-tight">Pesan Layanan</h3>
+            <p class="text-[11px] text-emerald-300 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping"></span> CS Online Siap Bantu</p>
+          </div>
+        </div>
+        <button onclick="toggleWaWidget()" class="text-slate-300 hover:text-white text-lg p-1 outline-none"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="blogger-form-wa" class="p-4 space-y-3 text-xs text-slate-700 bg-white">
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap</label>
+          <input type="text" id="blg-nama" required placeholder="Contoh: Budi Santoso" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-royal-500 outline-none text-xs">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+          <input type="tel" id="blg-wa" placeholder="Contoh: 08123456789" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-royal-500 outline-none text-xs">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Pilih Layanan</label>
+          <select id="blg-layanan-select" class="w-full px-3 py-2 border rounded-lg bg-white focus:ring-2 focus:ring-royal-500 outline-none text-xs"></select>
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Wilayah</label>
+          <select id="blg-lokasi" required class="w-full px-3 py-2 border rounded-lg bg-white focus:ring-2 focus:ring-royal-500 outline-none text-xs">
+            <option value="">Memuat Wilayah...</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Alamat / Catatan</label>
+          <textarea id="blg-alamat" rows="2" required placeholder="Nama jalan, RT/RW, patokan..." class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-royal-500 outline-none text-xs"></textarea>
+        </div>
+
+        <button type="submit" id="blg-btn-kirim" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 text-xs">
+          <i class="fa-solid fa-paper-plane"></i> Kirim Pesanan via WA
+        </button>
+
+        <div class="text-center pt-2 border-t mt-2 text-[10px] text-slate-400">
+          <span>Layanan CS Resmi: <span id="form-cs-phone">085773009666</span></span>
+        </div>
+      </form>
+    </div>
+
+    <div onclick="toggleWaWidget()" id="wa-click-button" class="wa-btn-click">
+      <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </div>
+  </div>
+
   <div id="blg-toast" style="position:fixed; top:20px; right:20px; z-index:999999999; padding:12px 24px; color:#fff; border-radius:8px; display:none; font-weight:bold;" class="shadow-xl text-xs"></div>
 
   <script>
@@ -344,12 +334,12 @@
     const SITE_NAME = 'Bandar Homecleaning';
     const CONFIG_PHONE = "085773009666";
 
-    // CSV Eksternal untuk data wilayah
+    // CSV Eksternal
     const CSV_DISTRICTS_URL = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/districts.csv";
     const CSV_VILLAGES_URL = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/villages.csv";
 
     // ==========================================================================
-    // 2. DATA PRODUK (16 LAYANAN) - Hardcoded
+    // 2. DATA PRODUK (16 LAYANAN)
     // ==========================================================================
     const SERVICES = [
       { id: 1, slug: 'bersihkan-kamar-mandi', name: 'Bersihkan Kamar Mandi', icon: '🚿', price: 150000, desc: 'Pembersihan menyeluruh kamar mandi termasuk saluran air, keramik, wastafel, dan kloset. Bebas noda & ampas sabun.' },
@@ -371,69 +361,41 @@
     ];
 
     // ==========================================================================
-    // 3. STATE & DATA WILAYAH (Dari CSV)
+    // 3. STATE
     // ==========================================================================
-    let WILAYAH_DATA = []; // Akan diisi dari CSV
+    let WILAYAH_DATA = [];
     let DATA_LOADED = false;
+    let PersistentLocation = { districtSlug: null, villageName: null };
 
     // Target wilayah Jabodetabek (kode regency)
     const TARGET_REGIONS = [
-      "3171", // Jakarta Selatan
-      "3172", // Jakarta Timur
-      "3173", // Jakarta Pusat
-      "3174", // Jakarta Barat
-      "3175", // Jakarta Utara
-      "3201", // Kabupaten Bogor
-      "3271", // Kota Bogor
-      "3276", // Kota Depok
-      "3671", // Kota Tangerang
-      "3674", // Kota Tangerang Selatan
-      "3603", // Kabupaten Tangerang
-      "3275", // Kota Bekasi
-      "3216"  // Kabupaten Bekasi
+      "3171", "3172", "3173", "3174", "3175", // Jakarta
+      "3201", "3271",                         // Bogor
+      "3276",                                 // Depok
+      "3671", "3674", "3603",                 // Tangerang
+      "3275", "3216"                          // Bekasi
     ];
 
-    // Nama wilayah untuk mapping
     const REGION_NAMES = {
-      "3171": "Jakarta Selatan",
-      "3172": "Jakarta Timur",
-      "3173": "Jakarta Pusat",
-      "3174": "Jakarta Barat",
-      "3175": "Jakarta Utara",
-      "3201": "Kabupaten Bogor",
-      "3271": "Kota Bogor",
+      "3171": "Jakarta Selatan", "3172": "Jakarta Timur", "3173": "Jakarta Pusat",
+      "3174": "Jakarta Barat", "3175": "Jakarta Utara",
+      "3201": "Kabupaten Bogor", "3271": "Kota Bogor",
       "3276": "Kota Depok",
-      "3671": "Kota Tangerang",
-      "3674": "Kota Tangerang Selatan",
-      "3603": "Kabupaten Tangerang",
-      "3275": "Kota Bekasi",
-      "3216": "Kabupaten Bekasi"
+      "3671": "Kota Tangerang", "3674": "Kota Tangerang Selatan", "3603": "Kabupaten Tangerang",
+      "3275": "Kota Bekasi", "3216": "Kabupaten Bekasi"
     };
 
-    // Slug untuk wilayah
     const REGION_SLUGS = {
-      "3171": "jakarta-selatan",
-      "3172": "jakarta-timur",
-      "3173": "jakarta-pusat",
-      "3174": "jakarta-barat",
-      "3175": "jakarta-utara",
-      "3201": "kabupaten-bogor",
-      "3271": "kota-bogor",
+      "3171": "jakarta-selatan", "3172": "jakarta-timur", "3173": "jakarta-pusat",
+      "3174": "jakarta-barat", "3175": "jakarta-utara",
+      "3201": "kabupaten-bogor", "3271": "kota-bogor",
       "3276": "kota-depok",
-      "3671": "kota-tangerang",
-      "3674": "kota-tangerang-selatan",
-      "3603": "kabupaten-tangerang",
-      "3275": "kota-bekasi",
-      "3216": "kabupaten-bekasi"
+      "3671": "kota-tangerang", "3674": "kota-tangerang-selatan", "3603": "kabupaten-tangerang",
+      "3275": "kota-bekasi", "3216": "kabupaten-bekasi"
     };
 
     // ==========================================================================
-    // 4. CART STATE
-    // ==========================================================================
-    let CartState = JSON.parse(localStorage.getItem('bandarhomecleaning_cart')) || [];
-
-    // ==========================================================================
-    // 5. HELPER FUNCTIONS
+    // 4. HELPER FUNCTIONS
     // ==========================================================================
     function slugify(text) {
       return (text || '').toString().toLowerCase().trim()
@@ -450,12 +412,10 @@
       document.title = title;
       const pt = document.getElementById('page-title'); if (pt) pt.innerText = title;
       const pd = document.getElementById('page-desc'); if (pd) pd.setAttribute("content", desc);
-      
       const ot = document.getElementById('og-title'); if (ot) ot.setAttribute("content", title);
       const od = document.getElementById('og-desc'); if (od) od.setAttribute("content", desc);
       const ou = document.getElementById('og-url'); if (ou) ou.setAttribute("content", window.location.href);
       const oi = document.getElementById('og-image'); if (oi && image) oi.setAttribute("content", image);
-      
       const tt = document.getElementById('tw-title'); if (tt) tt.setAttribute("content", title);
       const td = document.getElementById('tw-desc'); if (td) td.setAttribute("content", desc);
       const ti = document.getElementById('tw-image'); if (ti && image) ti.setAttribute("content", image);
@@ -472,13 +432,18 @@
       if (el) el.classList.toggle('hidden');
     }
 
+    function toggleWaWidget() {
+      const panel = document.getElementById('wa-panel');
+      if (panel) panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+    }
+
     function showBlgToast(msg, isSuccess = true) {
       const toast = document.getElementById('blg-toast');
       if (!toast) return;
       toast.style.backgroundColor = isSuccess ? '#10b981' : '#f43f5e';
       toast.innerHTML = msg;
       toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 3500);
+      setTimeout(() => { toast.style.display = 'none'; }, 4000);
     }
 
     function buildWaHref(text) {
@@ -504,7 +469,7 @@
     }
 
     // ==========================================================================
-    // 6. LOAD DATA WILAYAH DARI CSV
+    // 5. LOAD DATA WILAYAH DARI CSV
     // ==========================================================================
     async function loadWilayahData() {
       try {
@@ -586,150 +551,7 @@
     }
 
     // ==========================================================================
-    // 7. CART FUNCTIONS
-    // ==========================================================================
-    function toggleCartDrawer(show) {
-      const drawer = document.getElementById('cart-drawer');
-      const overlay = document.getElementById('cart-overlay');
-      if (show) {
-        syncCartFormLocation();
-        drawer.classList.add('open');
-        overlay.classList.add('show');
-      } else {
-        drawer.classList.remove('open');
-        overlay.classList.remove('show');
-      }
-    }
-
-    function saveCart() {
-      localStorage.setItem('bandarhomecleaning_cart', JSON.stringify(CartState));
-      renderCartUI();
-    }
-
-    function addToCart(productId, openDrawer = true) {
-      const prod = SERVICES.find(p => p.id === productId);
-      if (!prod) return;
-
-      const existing = CartState.find(item => item.id === productId);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        CartState.push({
-          id: prod.id,
-          title: prod.name,
-          price: prod.price,
-          icon: prod.icon,
-          qty: 1
-        });
-      }
-      saveCart();
-      showBlgToast(`✓ ${prod.name} ditambahkan ke keranjang`);
-      if (openDrawer) {
-        toggleCartDrawer(true);
-      }
-    }
-
-    function updateCartQty(productId, delta) {
-      const item = CartState.find(i => i.id === productId);
-      if (!item) return;
-      item.qty += delta;
-      if (item.qty <= 0) {
-        CartState = CartState.filter(i => i.id !== productId);
-      }
-      saveCart();
-    }
-
-    function renderCartUI() {
-      const container = document.getElementById('cart-items-container');
-      const badge = document.getElementById('nav-cart-badge');
-      const totalEl = document.getElementById('cart-total-price');
-      const countLabel = document.getElementById('cart-item-count-label');
-      const checkoutWrapper = document.getElementById('cart-checkout-wrapper');
-
-      const totalQty = CartState.reduce((sum, item) => sum + item.qty, 0);
-      const grandTotal = CartState.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-      if (badge) badge.innerText = totalQty;
-      if (countLabel) countLabel.innerText = `${totalQty} item`;
-      if (totalEl) totalEl.innerText = formatRupiah(grandTotal);
-
-      if (!container) return;
-
-      if (CartState.length === 0) {
-        container.innerHTML = `
-          <div class="text-center py-10 text-slate-400 space-y-2 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-            <i class="fa-solid fa-cart-arrow-down text-4xl text-slate-300"></i>
-            <p class="text-xs font-semibold">Keranjang belanja Anda masih kosong.</p>
-            <p class="text-[11px] text-slate-400">Silakan pilih layanan dari katalog kami.</p>
-          </div>
-        `;
-        if (checkoutWrapper) checkoutWrapper.style.opacity = '0.5';
-        return;
-      }
-
-      if (checkoutWrapper) checkoutWrapper.style.opacity = '1';
-
-      container.innerHTML = CartState.map(item => `
-        <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
-          <div class="w-14 h-14 rounded-xl bg-royal-50 flex items-center justify-center text-3xl shrink-0">${item.icon || '🧹'}</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-bold text-xs text-slate-900 truncate">${item.title}</h4>
-            <div class="text-brandOrange-600 font-extrabold text-xs mt-0.5">${formatRupiah(item.price)}</div>
-            <div class="text-[10px] text-slate-400 font-semibold">Subtotal: ${formatRupiah(item.price * item.qty)}</div>
-          </div>
-          <div class="flex items-center gap-1.5 shrink-0 bg-slate-100 p-1 rounded-lg border border-slate-200">
-            <button onclick="updateCartQty(${item.id}, -1)" class="w-6 h-6 rounded bg-white hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-xs shadow-sm">-</button>
-            <span class="text-xs font-bold px-1.5 text-slate-800">${item.qty}</span>
-            <button onclick="updateCartQty(${item.id}, 1)" class="w-6 h-6 rounded bg-white hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-xs shadow-sm">+</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function syncCartFormLocation() {
-      const kecSelect = document.getElementById('co-kecamatan');
-      const desaSelect = document.getElementById('co-desa');
-      if (!kecSelect) return;
-
-      // Flatten all kecamatan from all regions
-      const allKec = [];
-      WILAYAH_DATA.forEach(region => {
-        region.kecamatan.forEach(kec => {
-          allKec.push({ nama: kec.nama, region: region.nama, desa: kec.desa });
-        });
-      });
-
-      kecSelect.innerHTML = '<option value="">Pilih Wilayah/Kecamatan</option>' + 
-        allKec.map(k => `<option value="${k.nama}" data-region="${k.region}">${k.nama} (${k.region})</option>`).join('');
-
-      kecSelect.onchange = function() {
-        updateCartDesaOptions(this.value);
-      };
-    }
-
-    function updateCartDesaOptions(kecName) {
-      const desaSelect = document.getElementById('co-desa');
-      if (!desaSelect) return;
-
-      let desaList = [];
-      WILAYAH_DATA.forEach(region => {
-        region.kecamatan.forEach(kec => {
-          if (kec.nama === kecName) {
-            desaList = kec.desa;
-          }
-        });
-      });
-
-      if (desaList.length > 0) {
-        desaSelect.innerHTML = '<option value="">Pilih Desa/Kelurahan</option>' + 
-          desaList.map(ds => `<option value="${ds}">${ds}</option>`).join('');
-      } else {
-        desaSelect.innerHTML = '<option value="">Pilih Desa/Kelurahan</option>';
-      }
-    }
-
-    // ==========================================================================
-    // 8. ROUTER & VIEWS
+    // 6. ROUTER & VIEWS
     // ==========================================================================
     function renderApp() {
       if (!DATA_LOADED) {
@@ -818,7 +640,7 @@
     }
 
     // ==========================================================================
-    // VIEW: HOME
+    // VIEW: HOME (Tampilkan Daftar Kecamatan)
     // ==========================================================================
     function renderHomeView() {
       const phone = CONFIG_PHONE;
@@ -827,6 +649,21 @@
         "Bandar Homecleaning: Jasa pembersihan rumah profesional di Cileungsi, Cibubur, dan seluruh Jabodetabek. 16 layanan pembersihan dengan garansi kepuasan 100%.",
         "https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=800&q=80"
       );
+
+      // Kumpulkan semua kecamatan dari semua wilayah
+      const allKecamatan = [];
+      WILAYAH_DATA.forEach(region => {
+        region.kecamatan.forEach(kec => {
+          allKecamatan.push({
+            ...kec,
+            regionSlug: region.slug,
+            regionName: region.nama
+          });
+        });
+      });
+
+      // Urutkan berdasarkan nama
+      allKecamatan.sort((a, b) => a.nama.localeCompare(b.nama));
 
       const html = `
         <section class="relative bg-royal-gradient text-white overflow-hidden py-16 md:py-24">
@@ -848,22 +685,13 @@
                     <i class="fa-solid fa-broom"></i> Lihat Layanan
                   </a>
                   <a href="#wilayah" class="bg-white/15 hover:bg-white/25 text-white font-bold text-sm px-6 py-3.5 rounded-xl backdrop-blur-sm border border-white/20 transition">
-                    Pilih Wilayah ↓
+                    Pilih Kecamatan ↓
                   </a>
                 </div>
                 <div class="grid grid-cols-3 gap-3 pt-6 border-t border-white/15 text-left">
-                  <div>
-                    <div class="text-xl md:text-2xl font-black text-amber-400">16</div>
-                    <div class="text-[11px] text-blue-200">Layanan Tersedia</div>
-                  </div>
-                  <div>
-                    <div class="text-xl md:text-2xl font-black text-amber-400">100%</div>
-                    <div class="text-[11px] text-blue-200">Garansi Kepuasan</div>
-                  </div>
-                  <div>
-                    <div class="text-xl md:text-2xl font-black text-amber-400">5+</div>
-                    <div class="text-[11px] text-blue-200">Tahun Pengalaman</div>
-                  </div>
+                  <div><div class="text-xl md:text-2xl font-black text-amber-400">16</div><div class="text-[11px] text-blue-200">Layanan Tersedia</div></div>
+                  <div><div class="text-xl md:text-2xl font-black text-amber-400">100%</div><div class="text-[11px] text-blue-200">Garansi Kepuasan</div></div>
+                  <div><div class="text-xl md:text-2xl font-black text-amber-400">${WILAYAH_DATA.reduce((sum, r) => sum + r.kecamatan.length, 0)}+</div><div class="text-[11px] text-blue-200">Kecamatan Tercover</div></div>
                 </div>
               </div>
 
@@ -957,8 +785,8 @@
                       <a href="#${MODULE}/${s.slug}" onclick="navigate('${MODULE}/${s.slug}'); return false;" class="w-full block text-center bg-royal-50 hover:bg-royal-100 text-royal-700 font-bold text-xs py-2 rounded-xl transition">
                         <i class="fa-solid fa-circle-info mr-1"></i> Detail Layanan
                       </a>
-                      <button onclick="addToCart(${s.id})" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-cart-plus text-sm"></i> + Keranjang
+                      <button onclick="orderProductDirect('${s.name}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Pesan via WA
                       </button>
                     </div>
                   </div>
@@ -972,22 +800,24 @@
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-12">
               <span class="text-xs font-bold uppercase tracking-wider text-brandOrange-500">Jangkauan Layanan</span>
-              <h2 class="text-2xl md:text-3xl font-extrabold text-royal-900 mt-1">Wilayah Layanan Kami</h2>
+              <h2 class="text-2xl md:text-3xl font-extrabold text-royal-900 mt-1">Daftar Kecamatan yang Dilayani</h2>
               <p class="text-xs md:text-sm text-slate-600 mt-2">
-                Pilih wilayah Anda untuk melihat layanan yang tersedia.
+                Klik kecamatan untuk melihat layanan yang tersedia dan pilih produk sesuai kebutuhan Anda.
               </p>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
-              ${WILAYAH_DATA.map(region => `
-                <a href="#${MODULE}/${region.slug}" onclick="navigate('${MODULE}/${region.slug}'); return false;" class="p-3.5 rounded-xl border border-slate-200 hover:border-royal-500 bg-slate-50/70 hover:bg-royal-50 hover:shadow-md transition text-left group flex flex-col justify-between">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5">
+              ${allKecamatan.map(kec => `
+                <a href="#${MODULE}/${kec.regionSlug}/${kec.slug}" onclick="navigate('${MODULE}/${kec.regionSlug}/${kec.slug}'); return false;" class="p-3.5 rounded-xl border border-slate-200 hover:border-royal-500 bg-slate-50/70 hover:bg-royal-50 hover:shadow-md transition text-left group flex flex-col justify-between">
                   <div>
                     <div class="text-xs font-extrabold text-slate-900 group-hover:text-royal-700 flex items-center justify-between">
-                      <span>${region.nama}</span>
+                      <span>${kec.nama}</span>
                       <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-royal-600 transition"></i>
                     </div>
-                    <span class="text-[10px] text-slate-500 mt-1 block">${region.kecamatan.length} Kecamatan</span>
+                    <span class="text-[10px] text-slate-500 mt-1 block">${kec.regionName}</span>
+                    <span class="text-[9px] text-slate-400">${kec.desa.length} Desa/Kel</span>
                   </div>
+                  <span class="text-[9px] font-semibold text-emerald-600 mt-2">Layanan Tersedia</span>
                 </a>
               `).join('')}
             </div>
@@ -1007,7 +837,7 @@
                   <i class="fa-solid fa-circle-question text-royal-600"></i> Bagaimana cara memesan layanan?
                 </h4>
                 <p class="text-xs text-slate-600 leading-relaxed pl-6">
-                  Klik <strong>+ Keranjang</strong> pada layanan yang Anda inginkan. Buka keranjang belanja, isi nama dan alamat lengkap Anda, lalu klik <strong>Checkout via WhatsApp</strong>.
+                  Pilih kecamatan Anda, lalu pilih layanan yang diinginkan. Klik tombol <strong>Pesan via WA</strong> untuk langsung terhubung dengan CS kami.
                 </p>
               </div>
 
@@ -1025,7 +855,7 @@
                   <i class="fa-solid fa-circle-question text-royal-600"></i> Apakah melayani area Cileungsi dan Cibubur?
                 </h4>
                 <p class="text-xs text-slate-600 leading-relaxed pl-6">
-                  Ya! Kami melayani seluruh wilayah Cileungsi, Cibubur, dan Jabodetabek. Pilih wilayah Anda di menu Wilayah.
+                  Ya! Kami melayani seluruh wilayah Cileungsi, Cibubur, dan Jabodetabek. Pilih kecamatan Anda di menu Wilayah.
                 </p>
               </div>
             </div>
@@ -1133,7 +963,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div class="mb-8">
             <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-royal-900">Home Cleaning di ${kecamatan.nama}</h1>
-            <p class="text-sm text-slate-600 mt-2">Pilih desa/kelurahan di bawah ini untuk melihat layanan yang tersedia:</p>
+            <p class="text-sm text-slate-600 mt-2">Pilih desa/kelurahan atau langsung pilih layanan di bawah ini:</p>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -1218,8 +1048,8 @@
                     <a href="#${MODULE}/${s.slug}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(desaName)}" onclick="navigate('${MODULE}/${s.slug}/${region.slug}/${kecamatan.slug}/${encodeURIComponent(desaName)}'); return false;" class="w-full block text-center bg-royal-50 hover:bg-royal-100 text-royal-700 font-bold text-xs py-2 rounded-xl transition">
                       <i class="fa-solid fa-circle-info mr-1"></i> Detail Layanan
                     </a>
-                    <button onclick="addToCart(${s.id})" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">
-                      <i class="fa-solid fa-cart-plus text-sm"></i> + Keranjang
+                    <button onclick="orderProductDirect('${s.name}', '${desaName}', '${kecamatan.nama}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">
+                      <i class="fa-brands fa-whatsapp text-sm"></i> Pesan via WA
                     </button>
                   </div>
                 </div>
@@ -1297,7 +1127,7 @@
         }
       }
 
-      // Build link to change location
+      // Build location switcher
       let locationLinksHtml = '';
       if (region) {
         locationLinksHtml = `
@@ -1388,14 +1218,9 @@
                   </div>
                 </div>
 
-                <button onclick="addToCart(${product.id})" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
-                  <i class="fa-solid fa-cart-plus text-lg"></i>
-                  + Tambah ke Keranjang
+                <button onclick="orderProductDirect('${product.name}', '${desaName || ''}', '${kecamatan ? kecamatan.nama : ''}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                  <i class="fa-brands fa-whatsapp text-lg"></i> Pesan via WhatsApp
                 </button>
-
-                <a href="${buildWaHref('Halo Bandar Homecleaning, saya mau order ' + product.name + locationText)}" target="_blank" class="w-full block text-center bg-royal-600 hover:bg-royal-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition text-sm">
-                  <i class="fa-brands fa-whatsapp mr-2"></i> Pesan via WhatsApp
-                </a>
 
                 <div class="text-center pt-2">
                   <a href="tel:${CONFIG_PHONE}" class="text-xs text-slate-500 hover:text-royal-600 font-semibold">
@@ -1423,7 +1248,23 @@
     }
 
     // ==========================================================================
-    // 9. INITIALIZATION
+    // 7. ORDER FUNCTIONS
+    // ==========================================================================
+    function orderProductDirect(productName, villageName = "", districtName = "") {
+      let locText = "";
+      if (villageName && districtName) {
+        locText = `di ${villageName}, Kec. ${districtName}`;
+      } else if (districtName) {
+        locText = `di Kec. ${districtName}`;
+      }
+
+      const msg = `Halo Bandar Homecleaning, saya mau order layanan:\n\n*${productName}*\n${locText ? '\nLokasi: ' + locText : ''}\n\nMohon info ketersediaan jadwal dan estimasi biaya. Terima kasih.`;
+      const waUrl = buildWaHref(msg);
+      window.open(waUrl, '_blank');
+    }
+
+    // ==========================================================================
+    // 8. FOOTER & UI SYNC
     // ==========================================================================
     function syncFooterAndUI() {
       const phone = CONFIG_PHONE;
@@ -1440,6 +1281,9 @@
         footerPhoneLink.href = `https://wa.me/${phone.replace(/^0/, '62')}`;
       }
 
+      const formCsPhone = document.getElementById('form-cs-phone');
+      if (formCsPhone) formCsPhone.innerText = phone;
+
       const footerServiceEl = document.getElementById('footer-service-links');
       if (footerServiceEl) {
         footerServiceEl.innerHTML = SERVICES.slice(0, 8).map(s => `
@@ -1453,75 +1297,84 @@
 
       const footerDistCloud = document.getElementById('footer-districts-cloud');
       if (footerDistCloud) {
-        footerDistCloud.innerHTML = WILAYAH_DATA.map(r => `
-          <a href="#${MODULE}/${r.slug}" onclick="navigate('${MODULE}/${r.slug}'); return false;" class="hover:text-amber-400 hover:underline transition">
-            ${r.nama} •
+        // Show all kecamatan names from all regions
+        const allKecNames = [];
+        WILAYAH_DATA.forEach(region => {
+          region.kecamatan.forEach(kec => {
+            allKecNames.push({ nama: kec.nama, regionSlug: region.slug, kecSlug: kec.slug });
+          });
+        });
+        allKecNames.sort((a, b) => a.nama.localeCompare(b.nama));
+        
+        footerDistCloud.innerHTML = allKecNames.map(k => `
+          <a href="#${MODULE}/${k.regionSlug}/${k.kecSlug}" onclick="navigate('${MODULE}/${k.regionSlug}/${k.kecSlug}'); return false;" class="hover:text-amber-400 hover:underline transition">
+            ${k.nama} •
           </a>
         `).join(' ');
       }
+
+      // Dropdown layanan di form WA
+      const dropdownLayanan = document.getElementById('blg-layanan-select');
+      if (dropdownLayanan) {
+        dropdownLayanan.innerHTML = SERVICES.map(s => `<option value="${s.name}">${s.name} (${formatRupiah(s.price)})</option>`).join('');
+      }
+
+      // Dropdown wilayah di form WA
+      const dropdownLokasi = document.getElementById('blg-lokasi');
+      if (dropdownLokasi) {
+        const allKec = [];
+        WILAYAH_DATA.forEach(region => {
+          region.kecamatan.forEach(kec => {
+            allKec.push({ nama: kec.nama, region: region.nama });
+          });
+        });
+        allKec.sort((a, b) => a.nama.localeCompare(b.nama));
+        dropdownLokasi.innerHTML = '<option value="">-- Pilih Kecamatan --</option>' + 
+          allKec.map(k => `<option value="${k.nama}">${k.nama} (${k.region})</option>`).join('');
+      }
     }
 
+    // ==========================================================================
+    // 9. INIT
+    // ==========================================================================
     async function initApp() {
       document.getElementById('auto-copyright-year').innerText = new Date().getFullYear();
       
-      // Load data wilayah dari CSV
       await loadWilayahData();
       
       syncFooterAndUI();
-      renderCartUI();
       renderApp();
 
       window.addEventListener('hashchange', renderApp);
 
-      // Checkout form
-      const checkoutForm = document.getElementById('cart-checkout-form');
-      if (checkoutForm) {
-        checkoutForm.addEventListener('submit', function(e) {
+      // Form WA handler
+      const waForm = document.getElementById('blogger-form-wa');
+      if (waForm) {
+        waForm.addEventListener('submit', function(e) {
           e.preventDefault();
+          const btn = document.getElementById('blg-btn-kirim');
+          btn.disabled = true;
+          btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Memproses...`;
 
-          if (CartState.length === 0) {
-            alert('Keranjang belanja Anda masih kosong!');
-            return;
-          }
+          const payload = {
+            nama: document.getElementById('blg-nama').value,
+            wa: document.getElementById('blg-wa').value,
+            produk: document.getElementById('blg-layanan-select').value,
+            lokasi: document.getElementById('blg-lokasi').value,
+            alamat: document.getElementById('blg-alamat').value
+          };
 
-          const nama = document.getElementById('co-nama').value.trim();
-          const wa = document.getElementById('co-wa').value.trim();
-          const kec = document.getElementById('co-kecamatan').value;
-          const desa = document.getElementById('co-desa').value;
-          const alamat = document.getElementById('co-alamat').value.trim();
-
-          const grandTotal = CartState.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-          let locTujuan = '';
-          if (desa && kec) {
-            locTujuan = `${desa}, ${kec}`;
-          } else if (kec) {
-            locTujuan = `${kec}`;
-          } else {
-            locTujuan = 'Jabodetabek';
-          }
-
-          let msg = `Halo Bandar Homecleaning, saya ingin memesan layanan berikut:\n\n`;
-          msg += `*DAFTAR PESANAN:*\n`;
-          CartState.forEach((item, idx) => {
-            const subtotal = item.price * item.qty;
-            msg += `${idx + 1}. ${item.title}\n   Jumlah: ${item.qty} x ${formatRupiah(item.price)} = ${formatRupiah(subtotal)}\n`;
-          });
-          msg += `\n*TOTAL HARGA:* ${formatRupiah(grandTotal)}\n\n`;
-          msg += `*DATA PEMESAN:*\n`;
-          msg += `• Nama: ${nama}\n`;
-          if (wa) msg += `• No. WA: ${wa}\n`;
-          msg += `• Wilayah: ${locTujuan}\n`;
-          msg += `• Alamat: ${alamat}\n\n`;
-          msg += `_*Mohon konfirmasi jadwal dan biaya layanan.* Terima kasih!_`;
-
-          const waTarget = CONFIG_PHONE.startsWith('0') ? '62' + CONFIG_PHONE.slice(1) : CONFIG_PHONE;
-          const urlWA = `https://api.whatsapp.com/send?phone=${waTarget}&text=${encodeURIComponent(msg)}`;
+          const msg = `Halo Bandar Homecleaning, saya mau order:\n\n*Nama:* ${payload.nama}\n*No WA:* ${payload.wa}\n*Layanan:* ${payload.produk}\n*Kecamatan:* ${payload.lokasi}\n*Alamat:* ${payload.alamat}`;
+          const waUrl = buildWaHref(msg);
 
           showBlgToast("Membuka WhatsApp...");
           setTimeout(() => {
-            window.open(urlWA, '_blank');
-          }, 300);
+            window.open(waUrl, '_blank');
+            waForm.reset();
+            toggleWaWidget();
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Kirim Pesanan via WA`;
+          }, 400);
         });
       }
     }
