@@ -37,7 +37,7 @@
     html { scroll-behavior: smooth; }
     body { font-family: "Plus Jakarta Sans", sans-serif; background: var(--bg); color: var(--dark); line-height: 1.7; }
     h1,h2,h3 { font-family: "Bricolage Grotesque", sans-serif; line-height: 1.25; }
-    a { color: var(--primary); text-decoration: none; }
+    a { color: var(--primary); text-decoration: none; cursor: pointer; }
     .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
     .section { padding: 60px 0; }
     .section-alt { background: var(--white); }
@@ -111,6 +111,17 @@
     .region-card .icon { font-size: 2rem; display: block; margin-bottom: 8px; }
     .region-card h4 { font-size: 1rem; }
 
+    .listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 16px; margin-top: 24px; }
+    .listing-card {
+      display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+      background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius);
+      transition: .2s; color: var(--dark);
+    }
+    .listing-card:hover { border-color: var(--primary); background: var(--primary-lt); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .listing-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--primary-lt); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size:1.2rem; flex-shrink:0; }
+    .listing-name { font-weight: 700; font-size:.95rem; }
+    .listing-sub { font-size:.75rem; color: var(--gray); }
+
     .steps-wrap { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-top: 30px; }
     .step-item { background: var(--white); padding: 20px 16px; border-radius: var(--radius); border: 1px solid var(--border); text-align: center; }
     .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--primary); color:#fff; font-weight:800; display: flex; align-items:center; justify-content:center; margin:0 auto 12px; }
@@ -141,6 +152,14 @@
     .product-card .wa-link { display: inline-block; background: var(--wa); color: #fff; padding: 8px 20px; border-radius: 99px; font-weight: 700; font-size: .85rem; transition:.2s; }
     .product-card .wa-link:hover { transform: scale(1.05); }
 
+    .coverage-box { background: var(--primary-lt); border: 2px solid var(--primary); border-radius: var(--radius-lg); padding: 24px; }
+    .desa-tag { background: var(--white); border: 1.5px solid var(--primary); color: var(--primary); padding: 6px 16px; border-radius: 99px; font-size:.8rem; font-weight:700; display:inline-block; margin:4px; }
+
+    .breadcrumb-wrap { background: #fff; border-bottom: 1px solid var(--border); padding: 10px 0; font-size:.84rem; }
+    .breadcrumb a { font-weight:600; }
+    .breadcrumb .sep { margin:0 8px; color:var(--lgray); }
+    .phone-badge { background: var(--orange-lt); color: var(--orange); padding: 2px 12px; border-radius: 99px; font-weight:700; margin-left:10px; font-size:.75rem; }
+
     #final-cta { background: linear-gradient(135deg, var(--dark), var(--primary)); color:#fff; padding: 70px 0; text-align:center; }
     #final-cta h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight:800; margin-bottom:12px; }
 
@@ -155,6 +174,10 @@
     .footer-inner ul a { color: rgba(255,255,255,.7); font-size:.86rem; }
     .footer-inner ul a:hover { color:#fff; text-decoration:underline; }
     .footer-copy { text-align:center; border-top:1px solid rgba(255,255,255,.1); padding-top:20px; font-size:.8rem; }
+
+    .loading-wrap { text-align:center; padding:100px 24px; }
+    .spinner { width:40px; height:40px; border:4px solid var(--border); border-top-color:var(--primary); border-radius:50%; margin:0 auto 18px; animation:spin .8s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
 
     @media (max-width:768px) {
       .hero-grid, .pricing-grid, .steps-wrap, .footer-inner { grid-template-columns:1fr; }
@@ -173,7 +196,7 @@
 <header id="site-header">
   <div class="container">
     <div class="header-inner">
-      <a class="logo" href="#">
+      <a class="logo" href="#" onclick="navigate(event, '')">
         <div class="logo-icon">🌐</div> <span>Bandar Situs</span>
       </a>
       <a class="header-cta" href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20mau%20konsultasi%20pembuatan%20website%20listing" target="_blank">💬 Konsultasi</a>
@@ -181,246 +204,8 @@
   </div>
 </header>
 
-<main>
-  <!-- HERO -->
-  <section id="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div>
-          <div class="badge badge-orange">🚀 Jasa Pembuatan Website Listing</div>
-          <h1 class="hero-title">Bikin Website Direktori <span class="hl-orange">Untuk Bisnis Anda</span></h1>
-          <p class="hero-sub">Platform listing/direktori untuk produk, jasa, atau layanan. Fleksibel: <strong>nasional</strong>, <strong>Banyumas</strong>, atau <strong>Jabodetabek</strong>. Mulai Rp 3.500.000.</p>
-          <div class="hero-cta-group">
-            <a href="#produk" class="btn btn-wa btn-lg">💬 Lihat Produk & Pesan</a>
-            <a href="#wilayah" class="btn btn-outline">Pilih Wilayah ↓</a>
-          </div>
-        </div>
-        <div>
-          <div class="hero-card">
-            <div style="font-size:3rem;">📋</div>
-            <h3 style="color:#fff; margin:8px 0;">Mulai Rp 3.500.000</h3>
-            <p style="color:rgba(255,255,255,.8); font-size:.9rem;">Termasuk hosting 1 tahun + domain</p>
-            <p style="color:rgba(255,255,255,.6); font-size:.8rem; margin-top:10px;">0857-7300-9666</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <section id="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">Website Selesai</div></div>
-        <div class="stat-item"><div class="stat-num">34</div><div class="stat-label">Provinsi Tercover</div></div>
-        <div class="stat-item"><div class="stat-num">Rp 3,5Jt</div><div class="stat-label">Harga Mulai</div></div>
-        <div class="stat-item"><div class="stat-num">4.9⭐</div><div class="stat-label">Rating Klien</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WILAYAH FLEKSIBEL -->
-  <section class="section section-alt" id="wilayah">
-    <div class="container">
-      <div class="section-head">
-        <div class="badge">🗺️ Pilih Cakupan Wilayah</div>
-        <h2>Sesuaikan dengan Kebutuhan Bisnis Anda</h2>
-        <p>Website listing bisa diatur untuk seluruh Indonesia, satu kabupaten/kota, atau beberapa wilayah sekaligus.</p>
-      </div>
-      <div class="region-grid">
-        <div class="region-card"><span class="icon">🇮🇩</span><h4>Nasional</h4><p style="font-size:.85rem;color:var(--gray);">Seluruh provinsi di Indonesia</p></div>
-        <div class="region-card"><span class="icon">📍</span><h4>Lokal (Banyumas)</h4><p style="font-size:.85rem;color:var(--gray);">Kabupaten Banyumas + sekitarnya</p></div>
-        <div class="region-card"><span class="icon">🏙️</span><h4>Jabodetabek</h4><p style="font-size:.85rem;color:var(--gray);">Jakarta, Bogor, Depok, Tangerang, Bekasi</p></div>
-        <div class="region-card"><span class="icon">🎯</span><h4>Kustom</h4><p style="font-size:.85rem;color:var(--gray);">Pilih provinsi/kabupaten sesuai target</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- KENAPA KAMI -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <div class="badge badge-orange">⭐ Keunggulan</div>
-        <h2>Kenapa Pilih Bandar Situs?</h2>
-        <p>Solusi website direktori yang lengkap dan profesional untuk bisnis Anda.</p>
-      </div>
-      <div class="services-grid">
-        <div class="service-card"><div class="service-icon">⚡</div><h3>SEO Siap Pakai</h3><p>Struktur URL bersih, meta otomatis, dan judul halaman mengandung nomor telepon untuk optimasi pencarian.</p></div>
-        <div class="service-card"><div class="service-icon">📱</div><h3>Responsif & Cepat</h3><p>Tampilan optimal di desktop, tablet, dan smartphone. Loading cepat dengan cache bawaan.</p></div>
-        <div class="service-card"><div class="service-icon">🔧</div><h3>Fleksibel & Mudah</h3><p>Pilih cakupan wilayah nasional, lokal, atau kustom. Sistem siap pakai tanpa ribet.</p></div>
-        <div class="service-card"><div class="service-icon">📊</div><h3>Data Wilayah Lengkap</h3><p>Integrasi data provinsi, kabupaten, kecamatan, dan desa dari database resmi Indonesia.</p></div>
-        <div class="service-card"><div class="service-icon">💬</div><h3>Integrasi WhatsApp</h3><p>Setiap produk/layanan bisa langsung dipesan via WhatsApp dengan pesan otomatis.</p></div>
-        <div class="service-card"><div class="service-icon">🛡️</div><h3>Garansi & Support</h3><p>Garansi kepuasan 30 hari dan dukungan teknis selama 3 bulan setelah website live.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUK / LAYANAN -->
-  <section class="section section-alt" id="produk">
-    <div class="container">
-      <div class="section-head">
-        <div class="badge">📋 Produk & Layanan</div>
-        <h2>Pilih Paket Website Listing</h2>
-        <p>Klik tombol WhatsApp untuk pemesanan. Pesan otomatis terisi dengan detail produk.</p>
-      </div>
-      <div class="product-grid">
-        <!-- Produk 1 -->
-        <div class="product-card">
-          <span class="product-icon">📄</span>
-          <h3>Landingpage Direktori</h3>
-          <div class="price">Rp 3.500.000</div>
-          <div class="desc">1 halaman landingpage + 5 listing produk. Cocok untuk bisnis baru.</div>
-          <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20dengan%20paket%20%3A%20Landingpage%20Direktori%20(Rp%203.500.000)%20-%20saya%20mau%20konsultasi%20lebih%20lanjut" target="_blank" class="wa-link">💬 Pesan via WA</a>
-        </div>
-        <!-- Produk 2 -->
-        <div class="product-card">
-          <span class="product-icon">🏘️</span>
-          <h3>Profil Bisnis + Listing</h3>
-          <div class="price">Rp 5.500.000</div>
-          <div class="desc">5 halaman profil + 20 listing produk/jasa. SEO & form kontak.</div>
-          <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20dengan%20paket%20%3A%20Profil%20Bisnis%20%2B%20Listing%20(Rp%205.500.000)%20-%20saya%20mau%20konsultasi%20lebih%20lanjut" target="_blank" class="wa-link">💬 Pesan via WA</a>
-        </div>
-        <!-- Produk 3 -->
-        <div class="product-card">
-          <span class="product-icon">🛒</span>
-          <h3>Direktori + Booking</h3>
-          <div class="price">Rp 8.500.000</div>
-          <div class="desc">Unlimited listing + sistem booking/pemesanan online. Ideal untuk jasa.</div>
-          <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20dengan%20paket%20%3A%20Direktori%20%2B%20Booking%20(Rp%208.500.000)%20-%20saya%20mau%20konsultasi%20lebih%20lanjut" target="_blank" class="wa-link">💬 Pesan via WA</a>
-        </div>
-        <!-- Produk 4 -->
-        <div class="product-card">
-          <span class="product-icon">🏙️</span>
-          <h3>Multi-Wilayah (Jabodetabek)</h3>
-          <div class="price">Rp 10.000.000</div>
-          <div class="desc">Listing untuk 5 kota (Jakarta, Bogor, Depok, Tangerang, Bekasi).</div>
-          <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20dengan%20paket%20%3A%20Multi-Wilayah%20Jabodetabek%20(Rp%2010.000.000)%20-%20saya%20mau%20konsultasi%20lebih%20lanjut" target="_blank" class="wa-link">💬 Pesan via WA</a>
-        </div>
-        <!-- Produk 5 -->
-        <div class="product-card">
-          <span class="product-icon">🇮🇩</span>
-          <h3>Direktori Nasional</h3>
-          <div class="price">Rp 15.000.000</div>
-          <div class="desc">Full direktori 34 provinsi. Unlimited listing + fitur premium.</div>
-          <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20dengan%20paket%20%3A%20Direktori%20Nasional%20(Rp%2015.000.000)%20-%20saya%20mau%20konsultasi%20lebih%20lanjut" target="_blank" class="wa-link">💬 Pesan via WA</a>
-        </div>
-        <!-- Produk 6 -->
-        <div class="product-card">
-          <span class="product-icon">🎯</span>
-          <h3>Custom (Kebutuhan Khusus)</h3>
-          <div class="price">Mulai Rp 7.500.000</div>
-          <div class="desc">Sesuaikan jumlah wilayah, listing, dan fitur sesuai kebutuhan Anda.</div>
-          <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20dengan%20paket%20%3A%20Custom%20(Kebutuhan%20Khusus)%20-%20saya%20mau%20konsultasi%20lebih%20lanjut" target="_blank" class="wa-link">💬 Pesan via WA</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PAKET HARGA RINGKASAN -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <div class="badge badge-orange">💰 Ringkasan Harga</div>
-        <h2>Pilih Paket Sesuai Kebutuhan</h2>
-      </div>
-      <div class="pricing-grid">
-        <div class="price-card">
-          <h3>Starter</h3>
-          <div class="price-amount">Rp 3,5Jt</div>
-          <ul class="price-features">
-            <li>1 halaman landingpage</li>
-            <li>5 listing produk/jasa</li>
-            <li>Hosting 1 tahun</li>
-            <li>Domain .com/.id</li>
-            <li>Responsif</li>
-          </ul>
-          <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20paket%20Starter%20(Rp%203.500.000)" target="_blank" class="btn btn-primary btn-block">Pesan</a>
-        </div>
-        <div class="price-card featured">
-          <span class="price-badge">Populer</span>
-          <h3>Profil</h3>
-          <div class="price-amount">Rp 5,5Jt</div>
-          <ul class="price-features">
-            <li>5 halaman profil</li>
-            <li>20 listing produk/jasa</li>
-            <li>Hosting + domain</li>
-            <li>Form kontak</li>
-            <li>SEO dasar</li>
-          </ul>
-          <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20paket%20Profil%20(Rp%205.500.000)" target="_blank" class="btn btn-orange btn-block">Pesan</a>
-        </div>
-        <div class="price-card">
-          <h3>Bisnis</h3>
-          <div class="price-amount">Rp 8,5Jt</div>
-          <ul class="price-features">
-            <li>Unlimited listing</li>
-            <li>Sistem booking/order</li>
-            <li>Optimasi SEO</li>
-            <li>Garansi 3 bulan</li>
-            <li>Support prioritas</li>
-          </ul>
-          <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20paket%20Bisnis%20(Rp%208.500.000)" target="_blank" class="btn btn-primary btn-block">Pesan</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CARA PESAN -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-head">
-        <div class="badge">📋 Cara Order</div>
-        <h2>4 Langkah Mudah</h2>
-      </div>
-      <div class="steps-wrap">
-        <div class="step-item"><div class="step-num">1</div><h4>Konsultasi</h4><p style="font-size:.85rem;color:var(--gray);">Chat WhatsApp, sampaikan kebutuhan & pilih paket.</p></div>
-        <div class="step-item"><div class="step-num">2</div><h4>Desain</h4><p style="font-size:.85rem;color:var(--gray);">Kami buat mockup & revisi 2x gratis.</p></div>
-        <div class="step-item"><div class="step-num">3</div><h4>Develop</h4><p style="font-size:.85rem;color:var(--gray);">Coding & integrasi data wilayah.</p></div>
-        <div class="step-item"><div class="step-num">4</div><h4>Launch</h4><p style="font-size:.85rem;color:var(--gray);">Go live & serah terima file website.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONI -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <div class="badge badge-orange">⭐ Testimoni</div>
-        <h2>Apa Kata Klien Kami</h2>
-      </div>
-      <div class="testimoni-grid">
-        <div class="testimoni-card"><div class="stars">★★★★★</div><p>"Website direktori untuk desa kami jadi lebih profesional dan mudah diakses."</p><div class="nama">- Pak Ahmad, Kepala Desa Cibiru</div></div>
-        <div class="testimoni-card"><div class="stars">★★★★★</div><p>"Listing produk kami meningkat 200% setelah pakai Bandar Situs. Sangat direkomendasikan!"</p><div class="nama">- Ibu Rina, Pemilik Toko Bunda</div></div>
-        <div class="testimoni-card"><div class="stars">★★★★★</div><p>"Proses cepat, hasil memuaskan, dan tim sangat responsif. Terima kasih Bandar Situs!"</p><div class="nama">- Pak Suryadi, Pengusaha UMKM</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section section-alt" id="faq">
-    <div class="container">
-      <div class="section-head">
-        <div class="badge">❓ FAQ</div>
-        <h2>Pertanyaan Umum</h2>
-      </div>
-      <div class="faq-list">
-        <div class="faq-item"><div class="faq-q"><span>Berapa lama proses pembuatan website listing?</span><span>+</span></div><div class="faq-a">Rata-rata 7-14 hari kerja tergantung kompleksitas paket dan jumlah wilayah.</div></div>
-        <div class="faq-item"><div class="faq-q"><span>Apakah bisa memilih wilayah tertentu saja?</span><span>+</span></div><div class="faq-a">Tentu! Anda bisa memilih nasional, Banyumas, Jabodetabek, atau kustom sesuai target pasar.</div></div>
-        <div class="faq-item"><div class="faq-q"><span>Apakah termasuk hosting & domain?</span><span>+</span></div><div class="faq-a">Ya, semua paket termasuk hosting 1 tahun dan domain .com/.id.</div></div>
-        <div class="faq-item"><div class="faq-q"><span>Bisa revisi desain?</span><span>+</span></div><div class="faq-a">Ya, kami berikan 2 kali revisi gratis untuk setiap paket.</div></div>
-        <div class="faq-item"><div class="faq-q"><span>Bagaimana sistem pembayarannya?</span><span>+</span></div><div class="faq-a">DP 50% sebelum pengerjaan, 50% sisanya setelah website selesai dan disetujui.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section id="final-cta">
-    <div class="container">
-      <h2>Siap Punya Website Listing untuk Bisnis Anda?</h2>
-      <p>Konsultasikan kebutuhan Anda dengan tim Bandar Situs sekarang. Gratis!</p>
-      <a href="https://wa.me/6285773009666?text=Halo%20Bandar%20Situs%2C%20saya%20mau%20konsultasi%20pembuatan%20website%20listing" target="_blank" class="btn btn-wa btn-lg">💬 Konsultasi via WhatsApp</a>
-    </div>
-  </section>
+<main id="app">
+  <div class="loading-wrap"><div class="spinner"></div>Memuat data wilayah...</div>
 </main>
 
 <div id="wa-float">
@@ -437,10 +222,10 @@
       <div>
         <h3>Layanan</h3>
         <ul>
-          <li><a href="#produk">Landingpage Direktori</a></li>
-          <li><a href="#produk">Profil Bisnis + Listing</a></li>
-          <li><a href="#produk">Direktori + Booking</a></li>
-          <li><a href="#produk">Custom Website</a></li>
+          <li><a href="#" onclick="navigate(event, '')">Landingpage Direktori</a></li>
+          <li><a href="#" onclick="navigate(event, '')">Profil Bisnis + Listing</a></li>
+          <li><a href="#" onclick="navigate(event, '')">Direktori + Booking</a></li>
+          <li><a href="#" onclick="navigate(event, '')">Custom Website</a></li>
         </ul>
       </div>
       <div>
@@ -457,25 +242,569 @@
 </footer>
 
 <script>
-  // FAQ toggle
-  document.querySelectorAll('.faq-q').forEach(el => {
-    el.addEventListener('click', function() {
-      const item = this.closest('.faq-item');
-      const open = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!open) item.classList.add('open');
-    });
-  });
+  // ========== KONFIGURASI ==========
+  const MODULE = 'jasabuatwebsite';
+  const PHONE = '6285773009666';
+  const PHONE_DISPLAY = '085773009666';
+  const BRAND = 'Bandar Situs';
 
-  // Smooth scroll untuk link internal
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (href === '#') return;
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
+  const CSV_URLS = {
+    provinces: "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/provinces.csv",
+    regencies: "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/regencies.csv",
+    districts: "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/districts.csv",
+    villages: "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/villages.csv"
+  };
+
+  const PRICING = {
+    starter: "Rp 3.500.000",
+    profil: "Rp 5.500.000",
+    bisnis: "Rp 8.500.000"
+  };
+
+  // ========== STATE WILAYAH ==========
+  const WILAYAH = {
+    provinces: [],
+    regenciesByProvince: new Map(),
+    districtsByRegency: new Map(),
+    villagesByDistrict: new Map(),
+    loaded: false
+  };
+
+  function slugify(str) {
+    return String(str).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-+|-+$)/g, '');
+  }
+  function toTitle(s) {
+    return String(s).toLowerCase().split(' ').filter(Boolean).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  }
+  function parseCsv(line) {
+    const parts = line.split(',');
+    if (parts.length < 2) return null;
+    return parts.map(p => p.trim());
+  }
+
+  async function fetchCsv(url) {
+    const res = await fetch(url);
+    const txt = await res.text();
+    return txt.split('\n').filter(Boolean);
+  }
+
+  async function loadAll() {
+    if (WILAYAH.loaded) return;
+    const provLines = await fetchCsv(CSV_URLS.provinces);
+    WILAYAH.provinces = provLines.map(line => {
+      const p = parseCsv(line);
+      if (!p) return null;
+      const name = toTitle(p[1]);
+      return { id: p[0], name, slug: slugify(name) };
+    }).filter(Boolean);
+
+    const regLines = await fetchCsv(CSV_URLS.regencies);
+    regLines.forEach(line => {
+      const r = parseCsv(line);
+      if (!r) return;
+      const name = toTitle(r[2]);
+      const item = { id: r[0], provinceId: r[1], name, slug: slugify(name) };
+      if (!WILAYAH.regenciesByProvince.has(item.provinceId)) WILAYAH.regenciesByProvince.set(item.provinceId, []);
+      WILAYAH.regenciesByProvince.get(item.provinceId).push(item);
     });
+
+    const distLines = await fetchCsv(CSV_URLS.districts);
+    distLines.forEach(line => {
+      const d = parseCsv(line);
+      if (!d) return;
+      const name = toTitle(d[2]);
+      const item = { id: d[0], regencyId: d[1], name, slug: slugify(name) };
+      if (!WILAYAH.districtsByRegency.has(item.regencyId)) WILAYAH.districtsByRegency.set(item.regencyId, []);
+      WILAYAH.districtsByRegency.get(item.regencyId).push(item);
+    });
+
+    const vilLines = await fetchCsv(CSV_URLS.villages);
+    vilLines.forEach(line => {
+      const v = parseCsv(line);
+      if (!v) return;
+      const name = toTitle(v[2]);
+      if (!WILAYAH.villagesByDistrict.has(v[1])) WILAYAH.villagesByDistrict.set(v[1], []);
+      WILAYAH.villagesByDistrict.get(v[1]).push(name);
+    });
+
+    WILAYAH.loaded = true;
+  }
+
+  function findProvince(slug) { return WILAYAH.provinces.find(p => p.slug === slug) || null; }
+  function findRegency(provId, slug) {
+    const list = WILAYAH.regenciesByProvince.get(provId) || [];
+    return list.find(r => r.slug === slug) || null;
+  }
+  function findDistrict(regId, slug) {
+    const list = WILAYAH.districtsByRegency.get(regId) || [];
+    return list.find(d => d.slug === slug) || null;
+  }
+
+  // ========== ROUTING ==========
+  function hashUrl(path) { return path ? '#' + MODULE + '/' + path : '#'; }
+
+  function navigate(e, path) {
+    if (e) e.preventDefault();
+    const target = hashUrl(path);
+    if (window.location.hash === target || (target === '#' && (window.location.hash === '' || window.location.hash === '#'))) {
+      renderRoute();
+    } else {
+      window.location.hash = target;
+    }
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', renderRoute);
+
+  function getParams() {
+    let h = window.location.hash.replace(/^#/, '');
+    const parts = h.split('/').filter(Boolean);
+    if (parts.length === 0) return [];
+    if (parts[0] !== MODULE) return null;
+    return parts.slice(1);
+  }
+
+  function updateSEO(title, desc, path) {
+    const fullTitle = PHONE_DISPLAY + ' ' + title + ' – ' + BRAND;
+    document.title = fullTitle;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', desc);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', fullTitle);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', desc);
+    const canon = window.location.origin + window.location.pathname + hashUrl(path);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', canon);
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', canon);
+  }
+
+  // ========== RENDER ==========
+  async function renderRoute() {
+    const app = document.getElementById('app');
+    await loadAll();
+
+    const params = getParams();
+    if (params === null) {
+      app.innerHTML = '<div class="container section" style="text-align:center;padding:80px 24px;"><h2>Halaman tidak ditemukan</h2><a href="#" class="btn btn-primary" onclick="navigate(event,\'\')">Kembali</a></div>';
+      return;
+    }
+
+    if (params.length === 0) {
+      updateSEO('Jasa Pembuatan Website Listing & Direktori', 'Jasa pembuatan website listing/direktori untuk bisnis, desa, dan organisasi. Mulai ' + PRICING.starter + '.', '');
+      app.innerHTML = renderLandingPage();
+      initFAQ();
+      return;
+    }
+
+    const prov = findProvince(params[0]);
+    if (!prov) {
+      app.innerHTML = '<div class="container section" style="text-align:center;padding:80px 24px;"><h2>Wilayah tidak ditemukan</h2><a href="#" class="btn btn-primary" onclick="navigate(event,\'\')">Kembali</a></div>';
+      return;
+    }
+
+    if (params.length === 1) {
+      updateSEO('Jasa Buat Website Listing ' + prov.name, 'Jasa pembuatan website listing/direktori untuk ' + prov.name + '. Tampilkan kecamatan & desa.', params[0]);
+      app.innerHTML = renderProvinsiPage(prov);
+      initFAQ();
+      return;
+    }
+
+    const reg = findRegency(prov.id, params[1]);
+    if (!reg) {
+      app.innerHTML = '<div class="container section" style="text-align:center;padding:80px 24px;"><h2>Wilayah tidak ditemukan</h2><a href="#" class="btn btn-primary" onclick="navigate(event,\'\')">Kembali</a></div>';
+      return;
+    }
+
+    if (params.length === 2) {
+      const dists = WILAYAH.districtsByRegency.get(reg.id) || [];
+      updateSEO('Jasa Buat Website Listing ' + reg.name + ', ' + prov.name, 'Jasa website listing/direktori untuk ' + reg.name + ', ' + prov.name + '.', params[0] + '/' + params[1]);
+      app.innerHTML = renderKabupatenPage(prov, reg, dists);
+      initFAQ();
+      return;
+    }
+
+    const dist = findDistrict(reg.id, params[2]);
+    if (!dist) {
+      app.innerHTML = '<div class="container section" style="text-align:center;padding:80px 24px;"><h2>Wilayah tidak ditemukan</h2><a href="#" class="btn btn-primary" onclick="navigate(event,\'\')">Kembali</a></div>';
+      return;
+    }
+    const desaList = WILAYAH.villagesByDistrict.get(dist.id) || [];
+    updateSEO('Jasa Buat Website Listing ' + dist.name + ', ' + reg.name + ', ' + prov.name, 'Jasa pembuatan website listing/direktori untuk ' + dist.name + ', ' + reg.name + ', ' + prov.name + '.', params.join('/'));
+    app.innerHTML = renderDesaPage(prov, reg, dist, desaList);
+    initFAQ();
+  }
+
+  // ========== COMPONENTS ==========
+  function renderHero(title, subtitle, ctaText, badgeText) {
+    return `
+      <section id="hero">
+        <div class="container"><div class="hero-grid">
+          <div>
+            <div class="badge badge-orange">${badgeText || '🚀 Jasa Pembuatan Website Listing'}</div>
+            <h1 class="hero-title">${title || 'Bikin Website Direktori <span class="hl-orange">Untuk Bisnis Anda</span>'}</h1>
+            <p class="hero-sub">${subtitle || 'Platform listing/direktori untuk produk, jasa, atau layanan. Fleksibel: <strong>nasional</strong>, <strong>Banyumas</strong>, atau <strong>Jabodetabek</strong>. Mulai ' + PRICING.starter + '.</p>'}
+            <div class="hero-cta-group">
+              <a href="#produk" class="btn btn-wa btn-lg">💬 Lihat Produk & Pesan</a>
+              <a href="#wilayah" class="btn btn-outline">Pilih Wilayah ↓</a>
+            </div>
+          </div>
+          <div>
+            <div class="hero-card">
+              <div style="font-size:3rem;">📋</div>
+              <h3 style="color:#fff; margin:8px 0;">Mulai ${PRICING.starter}</h3>
+              <p style="color:rgba(255,255,255,.8); font-size:.9rem;">Termasuk hosting 1 tahun + domain</p>
+              <p style="color:rgba(255,255,255,.6); font-size:.8rem; margin-top:10px;">${PHONE_DISPLAY}</p>
+            </div>
+          </div>
+        </div></div>
+      </section>
+    `;
+  }
+
+  function renderStats() {
+    const totalRegencies = Array.from(WILAYAH.regenciesByProvince.values()).reduce((sum, arr) => sum + arr.length, 0);
+    return `
+      <section id="stats">
+        <div class="container"><div class="stats-grid">
+          <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">Website Selesai</div></div>
+          <div class="stat-item"><div class="stat-num">${WILAYAH.provinces.length}</div><div class="stat-label">Provinsi Tercover</div></div>
+          <div class="stat-item"><div class="stat-num">${totalRegencies}</div><div class="stat-label">Kecamatan</div></div>
+          <div class="stat-item"><div class="stat-num">${PRICING.starter}</div><div class="stat-label">Harga Mulai</div></div>
+        </div></div>
+      </section>
+    `;
+  }
+
+  function renderWilayahFleksibel() {
+    return `
+      <section class="section section-alt" id="wilayah">
+        <div class="container">
+          <div class="section-head">
+            <div class="badge">🗺️ Pilih Cakupan Wilayah</div>
+            <h2>Sesuaikan dengan Kebutuhan Bisnis Anda</h2>
+            <p>Website listing bisa diatur untuk seluruh Indonesia, satu kabupaten/kota, atau beberapa wilayah sekaligus.</p>
+          </div>
+          <div class="region-grid">
+            <div class="region-card"><span class="icon">🇮🇩</span><h4>Nasional</h4><p style="font-size:.85rem;color:var(--gray);">Seluruh provinsi di Indonesia</p></div>
+            <div class="region-card"><span class="icon">📍</span><h4>Lokal (Banyumas)</h4><p style="font-size:.85rem;color:var(--gray);">Kabupaten Banyumas + sekitarnya</p></div>
+            <div class="region-card"><span class="icon">🏙️</span><h4>Jabodetabek</h4><p style="font-size:.85rem;color:var(--gray);">Jakarta, Bogor, Depok, Tangerang, Bekasi</p></div>
+            <div class="region-card"><span class="icon">🎯</span><h4>Kustom</h4><p style="font-size:.85rem;color:var(--gray);">Pilih provinsi/kabupaten sesuai target</p></div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderKeunggulan() {
+    return `
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div class="badge badge-orange">⭐ Keunggulan</div>
+            <h2>Kenapa Pilih Bandar Situs?</h2>
+            <p>Solusi website direktori yang lengkap dan profesional untuk bisnis Anda.</p>
+          </div>
+          <div class="services-grid">
+            <div class="service-card"><div class="service-icon">⚡</div><h3>SEO Siap Pakai</h3><p>Struktur URL bersih, meta otomatis, dan judul halaman mengandung nomor telepon untuk optimasi pencarian.</p></div>
+            <div class="service-card"><div class="service-icon">📱</div><h3>Responsif & Cepat</h3><p>Tampilan optimal di desktop, tablet, dan smartphone. Loading cepat dengan cache bawaan.</p></div>
+            <div class="service-card"><div class="service-icon">🔧</div><h3>Fleksibel & Mudah</h3><p>Pilih cakupan wilayah nasional, lokal, atau kustom. Sistem siap pakai tanpa ribet.</p></div>
+            <div class="service-card"><div class="service-icon">📊</div><h3>Data Wilayah Lengkap</h3><p>Integrasi data provinsi, kabupaten, kecamatan, dan desa dari database resmi Indonesia.</p></div>
+            <div class="service-card"><div class="service-icon">💬</div><h3>Integrasi WhatsApp</h3><p>Setiap produk/layanan bisa langsung dipesan via WhatsApp dengan pesan otomatis.</p></div>
+            <div class="service-card"><div class="service-icon">🛡️</div><h3>Garansi & Support</h3><p>Garansi kepuasan 30 hari dan dukungan teknis selama 3 bulan setelah website live.</p></div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderProduk() {
+    const products = [
+      { icon: '📄', name: 'Landingpage Direktori', price: PRICING.starter, desc: '1 halaman landingpage + 5 listing produk. Cocok untuk bisnis baru.' },
+      { icon: '🏘️', name: 'Profil Bisnis + Listing', price: PRICING.profil, desc: '5 halaman profil + 20 listing produk/jasa. SEO & form kontak.' },
+      { icon: '🛒', name: 'Direktori + Booking', price: PRICING.bisnis, desc: 'Unlimited listing + sistem booking/pemesanan online. Ideal untuk jasa.' },
+      { icon: '🏙️', name: 'Multi-Wilayah (Jabodetabek)', price: 'Rp 10.000.000', desc: 'Listing untuk 5 kota (Jakarta, Bogor, Depok, Tangerang, Bekasi).' },
+      { icon: '🇮🇩', name: 'Direktori Nasional', price: 'Rp 15.000.000', desc: 'Full direktori 34 provinsi. Unlimited listing + fitur premium.' },
+      { icon: '🎯', name: 'Custom (Kebutuhan Khusus)', price: 'Mulai Rp 7.500.000', desc: 'Sesuaikan jumlah wilayah, listing, dan fitur sesuai kebutuhan Anda.' }
+    ];
+
+    return `
+      <section class="section section-alt" id="produk">
+        <div class="container">
+          <div class="section-head">
+            <div class="badge">📋 Produk & Layanan</div>
+            <h2>Pilih Paket Website Listing</h2>
+            <p>Klik tombol WhatsApp untuk pemesanan. Pesan otomatis terisi dengan detail produk.</p>
+          </div>
+          <div class="product-grid">
+            ${products.map(p => `
+              <div class="product-card">
+                <span class="product-icon">${p.icon}</span>
+                <h3>${p.name}</h3>
+                <div class="price">${p.price}</div>
+                <div class="desc">${p.desc}</div>
+                <a href="https://wa.me/${PHONE}?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20dengan%20paket%20%3A%20${encodeURIComponent(p.name)}%20(${encodeURIComponent(p.price)})%20-%20saya%20mau%20konsultasi%20lebih%20lanjut" target="_blank" class="wa-link">💬 Pesan via WA</a>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderPricing() {
+    return `
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div class="badge badge-orange">💰 Ringkasan Harga</div>
+            <h2>Pilih Paket Sesuai Kebutuhan</h2>
+          </div>
+          <div class="pricing-grid">
+            <div class="price-card">
+              <h3>Starter</h3>
+              <div class="price-amount">${PRICING.starter}</div>
+              <ul class="price-features">
+                <li>1 halaman landingpage</li>
+                <li>5 listing produk/jasa</li>
+                <li>Hosting 1 tahun</li>
+                <li>Domain .com/.id</li>
+                <li>Responsif</li>
+              </ul>
+              <a href="https://wa.me/${PHONE}?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20paket%20Starter%20(${encodeURIComponent(PRICING.starter)})" target="_blank" class="btn btn-primary btn-block">Pesan</a>
+            </div>
+            <div class="price-card featured">
+              <span class="price-badge">Populer</span>
+              <h3>Profil</h3>
+              <div class="price-amount">${PRICING.profil}</div>
+              <ul class="price-features">
+                <li>5 halaman profil</li>
+                <li>20 listing produk/jasa</li>
+                <li>Hosting + domain</li>
+                <li>Form kontak</li>
+                <li>SEO dasar</li>
+              </ul>
+              <a href="https://wa.me/${PHONE}?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20paket%20Profil%20(${encodeURIComponent(PRICING.profil)})" target="_blank" class="btn btn-orange btn-block">Pesan</a>
+            </div>
+            <div class="price-card">
+              <h3>Bisnis</h3>
+              <div class="price-amount">${PRICING.bisnis}</div>
+              <ul class="price-features">
+                <li>Unlimited listing</li>
+                <li>Sistem booking/order</li>
+                <li>Optimasi SEO</li>
+                <li>Garansi 3 bulan</li>
+                <li>Support prioritas</li>
+              </ul>
+              <a href="https://wa.me/${PHONE}?text=Halo%20Bandar%20Situs%2C%20saya%20tertarik%20paket%20Bisnis%20(${encodeURIComponent(PRICING.bisnis)})" target="_blank" class="btn btn-primary btn-block">Pesan</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderTestimonials() {
+    return `
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-head">
+            <div class="badge badge-orange">⭐ Testimoni</div>
+            <h2>Apa Kata Klien Kami</h2>
+          </div>
+          <div class="testimoni-grid">
+            <div class="testimoni-card"><div class="stars">★★★★★</div><p>"Website direktori untuk desa kami jadi lebih profesional dan mudah diakses."</p><div class="nama">- Pak Ahmad, Kepala Desa Cibiru</div></div>
+            <div class="testimoni-card"><div class="stars">★★★★★</div><p>"Listing produk kami meningkat 200% setelah pakai Bandar Situs. Sangat direkomendasikan!"</p><div class="nama">- Ibu Rina, Pemilik Toko Bunda</div></div>
+            <div class="testimoni-card"><div class="stars">★★★★★</div><p>"Proses cepat, hasil memuaskan, dan tim sangat responsif. Terima kasih Bandar Situs!"</p><div class="nama">- Pak Suryadi, Pengusaha UMKM</div></div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderSteps() {
+    return `
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div class="badge">📋 Cara Order</div>
+            <h2>4 Langkah Mudah</h2>
+          </div>
+          <div class="steps-wrap">
+            <div class="step-item"><div class="step-num">1</div><h4>Konsultasi</h4><p style="font-size:.85rem;color:var(--gray);">Chat WhatsApp, sampaikan kebutuhan & pilih paket.</p></div>
+            <div class="step-item"><div class="step-num">2</div><h4>Desain</h4><p style="font-size:.85rem;color:var(--gray);">Kami buat mockup & revisi 2x gratis.</p></div>
+            <div class="step-item"><div class="step-num">3</div><h4>Develop</h4><p style="font-size:.85rem;color:var(--gray);">Coding & integrasi data wilayah.</p></div>
+            <div class="step-item"><div class="step-num">4</div><h4>Launch</h4><p style="font-size:.85rem;color:var(--gray);">Go live & serah terima file website.</p></div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderFAQ() {
+    return `
+      <section class="section section-alt" id="faq">
+        <div class="container">
+          <div class="section-head">
+            <div class="badge">❓ FAQ</div>
+            <h2>Pertanyaan Umum</h2>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item"><div class="faq-q"><span>Berapa lama proses pembuatan website listing?</span><span>+</span></div><div class="faq-a">Rata-rata 7-14 hari kerja tergantung kompleksitas paket dan jumlah wilayah.</div></div>
+            <div class="faq-item"><div class="faq-q"><span>Apakah bisa memilih wilayah tertentu saja?</span><span>+</span></div><div class="faq-a">Tentu! Anda bisa memilih nasional, Banyumas, Jabodetabek, atau kustom sesuai target pasar.</div></div>
+            <div class="faq-item"><div class="faq-q"><span>Apakah termasuk hosting & domain?</span><span>+</span></div><div class="faq-a">Ya, semua paket termasuk hosting 1 tahun dan domain .com/.id.</div></div>
+            <div class="faq-item"><div class="faq-q"><span>Bisa revisi desain?</span><span>+</span></div><div class="faq-a">Ya, kami berikan 2 kali revisi gratis untuk setiap paket.</div></div>
+            <div class="faq-item"><div class="faq-q"><span>Bagaimana sistem pembayarannya?</span><span>+</span></div><div class="faq-a">DP 50% sebelum pengerjaan, 50% sisanya setelah website selesai dan disetujui.</div></div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderCTA(title, desc) {
+    return `
+      <section id="final-cta">
+        <div class="container">
+          <h2>${title || 'Siap Punya Website Listing untuk Bisnis Anda?'}</h2>
+          <p>${desc || 'Konsultasikan kebutuhan Anda dengan tim Bandar Situs sekarang. Gratis!'}</p>
+          <a href="https://wa.me/${PHONE}?text=Halo%20Bandar%20Situs%2C%20saya%20mau%20konsultasi%20pembuatan%20website%20listing" target="_blank" class="btn btn-wa btn-lg">💬 Konsultasi via WhatsApp</a>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderAreaLayanan() {
+    return `
+      <section class="section section-alt" id="area-layanan">
+        <div class="container">
+          <div class="section-head">
+            <div class="badge">🗺️ Pilih Wilayah</div>
+            <h2>Provinsi Tersedia untuk Listing</h2>
+            <p>Klik provinsi → lihat kecamatan → pilih desa untuk detail lebih lanjut</p>
+          </div>
+          <div class="listing-grid">${WILAYAH.provinces.map(p => `
+            <a href="${hashUrl(p.slug)}" class="listing-card" onclick="navigate(event,'${p.slug}')">
+              <div class="listing-icon">📍</div><div><div class="listing-name">${p.name}</div><div class="listing-sub">${(WILAYAH.regenciesByProvince.get(p.id)||[]).length} kecamatan</div></div>
+            </a>
+          `).join('')}</div>
+        </div>
+      </section>
+    `;
+  }
+
+  // ========== PAGE RENDERERS ==========
+  function renderLandingPage() {
+    return `
+      ${renderHero()}
+      ${renderStats()}
+      ${renderWilayahFleksibel()}
+      ${renderKeunggulan()}
+      ${renderProduk()}
+      ${renderPricing()}
+      ${renderTestimonials()}
+      ${renderSteps()}
+      ${renderAreaLayanan()}
+      ${renderFAQ()}
+      ${renderCTA()}
+    `;
+  }
+
+  function renderProvinsiPage(prov) {
+    const regs = WILAYAH.regenciesByProvince.get(prov.id) || [];
+    return `
+      <div class="breadcrumb-wrap"><div class="container"><div class="breadcrumb"><a href="#" onclick="navigate(event,'')">Home</a> <span class="sep">›</span> <strong>${prov.name}</strong> <span class="phone-badge">📞 ${PHONE_DISPLAY}</span></div></div></div>
+      ${renderHero(
+        `Jasa Buat Website Listing <span class="hl-orange">${prov.name}</span>`,
+        `Layanan pembuatan website listing/direktori untuk seluruh kecamatan dan desa di ${prov.name}. Mulai ${PRICING.starter}.`,
+        'Pesan Sekarang',
+        `📍 ${prov.name}`
+      )}
+      ${renderStats()}
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-head"><div class="badge">🗺️ Pilih Kecamatan</div><h2>Kecamatan di ${prov.name}</h2><p>Klik kecamatan untuk melihat daftar desa/kelurahan</p></div>
+          <div class="listing-grid">${regs.map(r => `
+            <a href="${hashUrl(prov.slug + '/' + r.slug)}" class="listing-card" onclick="navigate(event,'${prov.slug}/${r.slug}')">
+              <div class="listing-icon">🏘️</div><div><div class="listing-name">${r.name}</div><div class="listing-sub">${(WILAYAH.districtsByRegency.get(r.id)||[]).length} desa</div></div>
+            </a>
+          `).join('')}</div>
+        </div>
+      </section>
+      ${renderKeunggulan()}
+      ${renderProduk()}
+      ${renderPricing()}
+      ${renderTestimonials()}
+      ${renderFAQ()}
+      ${renderCTA(`Siap Punya Website Listing untuk ${prov.name}?`, `Kami siap bantu tampilkan produk/jasa Anda di seluruh kecamatan ${prov.name}.`)}
+    `;
+  }
+
+  function renderKabupatenPage(prov, reg, dists) {
+    return `
+      <div class="breadcrumb-wrap"><div class="container"><div class="breadcrumb"><a href="#" onclick="navigate(event,'')">Home</a> <span class="sep">›</span> <a href="${hashUrl(prov.slug)}" onclick="navigate(event,'${prov.slug}')">${prov.name}</a> <span class="sep">›</span> <strong>${reg.name}</strong> <span class="phone-badge">📞 ${PHONE_DISPLAY}</span></div></div></div>
+      ${renderHero(
+        `Jasa Buat Website Listing <span class="hl-orange">${reg.name}</span>, ${prov.name}`,
+        `Layanan pembuatan website listing/direktori untuk seluruh desa/kelurahan di ${reg.name}, ${prov.name}. Mulai ${PRICING.starter}.`,
+        'Pesan Sekarang',
+        `📍 ${reg.name}, ${prov.name}`
+      )}
+      ${renderStats()}
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-head"><div class="badge">📍 ${reg.name}</div><h2>Desa / Kelurahan di ${reg.name}</h2><p>Klik desa untuk halaman detail</p></div>
+          <div class="listing-grid">${dists.map(d => {
+            const desa = WILAYAH.villagesByDistrict.get(d.id) || [];
+            return `<a href="${hashUrl(prov.slug + '/' + reg.slug + '/' + d.slug)}" class="listing-card" onclick="navigate(event,'${prov.slug}/${reg.slug}/${d.slug}')">
+              <div class="listing-icon">🏡</div><div><div class="listing-name">${d.name}</div><div class="listing-sub">${desa.length} desa/kelurahan</div></div>
+            </a>`;
+          }).join('')}</div>
+        </div>
+      </section>
+      ${renderKeunggulan()}
+      ${renderProduk()}
+      ${renderPricing()}
+      ${renderTestimonials()}
+      ${renderFAQ()}
+      ${renderCTA(`Siap Punya Website Listing untuk ${reg.name}?`, `Kami siap bantu tampilkan produk/jasa Anda di seluruh desa ${reg.name}.`)}
+    `;
+  }
+
+  function renderDesaPage(prov, reg, dist, desaList) {
+    return `
+      <div class="breadcrumb-wrap"><div class="container"><div class="breadcrumb"><a href="#" onclick="navigate(event,'')">Home</a> <span class="sep">›</span> <a href="${hashUrl(prov.slug)}" onclick="navigate(event,'${prov.slug}')">${prov.name}</a> <span class="sep">›</span> <a href="${hashUrl(prov.slug + '/' + reg.slug)}" onclick="navigate(event,'${prov.slug}/${reg.slug}')">${reg.name}</a> <span class="sep">›</span> <strong>${dist.name}</strong> <span class="phone-badge">📞 ${PHONE_DISPLAY}</span></div></div></div>
+      ${renderHero(
+        `Jasa Buat Website Listing <span class="hl-orange">${dist.name}</span>, ${reg.name}`,
+        `Layanan pembuatan website listing/direktori untuk desa/kelurahan ${dist.name}, ${reg.name}, ${prov.name}. Mulai ${PRICING.starter}.`,
+        'Pesan Sekarang',
+        `🏡 ${dist.name}, ${reg.name}`
+      )}
+      ${renderStats()}
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-head"><div class="badge">🏡 Desa/Kelurahan</div><h2>Wilayah ${dist.name}</h2><p>Desa/kelurahan yang tercakup di kecamatan ${dist.name}</p></div>
+          <div class="coverage-box"><div style="display:flex;flex-wrap:wrap;gap:8px;">${desaList.map(d => `<span class="desa-tag">📍 ${d}</span>`).join('') || '<span style="color:var(--gray);">Belum ada data desa.</span>'}</div></div>
+          <div style="margin-top:24px;text-align:center;"><a href="https://wa.me/${PHONE}?text=Halo%20saya%20tertarik%20buat%20website%20listing%20untuk%20${encodeURIComponent(dist.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Pesan Website Sekarang</a></div>
+        </div>
+      </section>
+      ${renderKeunggulan()}
+      ${renderProduk()}
+      ${renderPricing()}
+      ${renderTestimonials()}
+      ${renderFAQ()}
+      ${renderCTA(`Siap Punya Website Listing untuk ${dist.name}?`, `Kami siap bantu tampilkan produk/jasa Anda di desa/kelurahan ${dist.name}.`)}
+    `;
+  }
+
+  function initFAQ() {
+    document.querySelectorAll('.faq-q').forEach(el => {
+      el.addEventListener('click', function() {
+        const item = this.closest('.faq-item');
+        const open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!open) item.classList.add('open');
+      });
+    });
+  }
+
+  // ========== BOOT ==========
+  window.addEventListener('DOMContentLoaded', () => {
+    renderRoute();
   });
 </script>
 </body>
