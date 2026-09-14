@@ -1,0 +1,96 @@
+{
+  "version": "1.0",
+  "name": "Pahala Ngalik V1 Database Dummy",
+  "characters": [
+    {
+      "latin": "paih",
+      "image": "img1800.png",
+      "label": "Paih"
+    },
+    {
+      "latin": "pung",
+      "image": "img2104.png",
+      "label": "Pung"
+    },
+    {
+      "latin": "nga",
+      "image": "img1806.png",
+      "label": "Nga"
+    },
+    {
+      "latin": "par",
+      "image": "img1805.png",
+      "label": "Par"
+    },
+    {
+      "latin": "baca",
+      "image": "img2107.png",
+      "label": "Baca (Bentuk Utuh)"
+    },
+    {
+      "latin": "ba",
+      "image": "img2100.png",
+      "label": "Ba"
+    },
+    {
+      "latin": "ca",
+      "image": "img1800.png",
+      "label": "Ca"
+    },
+    {
+      "latin": "pa",
+      "image": "img2100.png",
+      "label": "Pa"
+    },
+    {
+      "latin": "pe",
+      "image": "img2101.png",
+      "label": "Pe"
+    },
+    {
+      "latin": "pi",
+      "image": "img2102.png",
+      "label": "Pi"
+    },
+    {
+      "latin": "po",
+      "image": "img2103.png",
+      "label": "Po"
+    },
+    {
+      "latin": "pu",
+      "image": "img2104.png",
+      "label": "Pu"
+    },
+    {
+      "latin": "sa",
+      "image": "img1801.png",
+      "label": "Sa"
+    },
+    {
+      "latin": "ja",
+      "image": "img1802.png",
+      "label": "Ja"
+    },
+    {
+      "latin": "ka",
+      "image": "img1803.png",
+      "label": "Ka"
+    },
+    {
+      "latin": "na",
+      "image": "img1804.png",
+      "label": "Na"
+    },
+    {
+      "latin": "p",
+      "image": "img2105.png",
+      "label": "P (Pemati)"
+    },
+    {
+      "latin": "b",
+      "image": "img2106.png",
+      "label": "B (Pemati)"
+    }
+  ]
+}

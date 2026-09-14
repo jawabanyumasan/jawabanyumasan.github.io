@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pahala Ngalik V1 - Transliterator Aksara Gambar (RTL)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pahala Ngalik</h1>
+            <p class="subtitle">Prototype transliterator aksara gambar · RTL</p>
+        </header>
+
+        <main>
+            <!-- Control Panel & Input Area -->
+            <section class="card input-section">
+                <div class="section-header">
+                    <label for="latinInput">Input Teks Latin</label>
+                    <div class="actions">
+                        <button id="btnClear" class="btn btn-secondary">Bersihkan</button>
+                        <button id="btnToggleDebug" class="btn btn-outline">Debug: OFF</button>
+                    </div>
+                </div>
+                <textarea id="latinInput" rows="4" placeholder="Contoh: baca pung pa..."></textarea>
+            </section>
+
+            <!-- Output Display Area -->
+            <section class="card output-section">
+                <h2>Hasil Pahala Ngalik (RTL)</h2>
+                <div id="outputContainer" class="output-container" dir="rtl">
+                    <span class="placeholder-text">Hasil visual aksara akan muncul di sini...</span>
+                </div>
+            </section>
+
+            <!-- Debug Panel (Hidden by default) -->
+            <section id="debugSection" class="card debug-section hidden">
+                <div class="section-header">
+                    <h2>Mode Debug Parsing</h2>
+                    <button id="btnCopyDebug" class="btn btn-small">Salin Parsing</button>
+                </div>
+                <pre id="debugOutput">Belum ada input untuk didebug.</pre>
+            </section>
+
+            <!-- Character Database Catalog -->
+            <section class="card catalog-section">
+                <h2>Database Karakter Tersedia</h2>
+                <div id="characterCatalog" class="catalog-grid">
+                    <!-- Dynamic catalog populated by app.js -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Pahala Ngalik V1. Client-side static application.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
