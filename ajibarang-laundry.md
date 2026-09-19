@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "085773009666 Laundry Kiloan Di Sokaraja Banyumas"
-description: "Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Sokaraja Banyumas."
+title: "085773009666 Laundry Kiloan Di Ajibarang Banyumas"
+description: "Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Ajibarang Banyumas."
 permalink: /sokaraja-laundry/
 ---
 
@@ -9,9 +9,9 @@ permalink: /sokaraja-laundry/
   <article class="page-content">
 
     <header class="post-header">
-      <h1 class="post-title">Laundry Kiloan dan Satuan Di Sokaraja Banyumas</h1>
+      <h1 class="post-title">Laundry Kiloan dan Satuan Di Ajibarang Banyumas</h1>
       <p class="post-description">
-        Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Sokaraja Banyumas
+        Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Ajibarang Banyumas
       </p>
     </header>
     
