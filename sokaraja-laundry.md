@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "085773009666 Laundry Kiloan Di Sokaraja banyumas"
+title: "085773009666 Laundry Kiloan Di Sokaraja Banyumas"
 description: "Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Sokaraja Banyumas."
 permalink: /sokaraja-laundry/
 ---
@@ -9,7 +9,7 @@ permalink: /sokaraja-laundry/
   <article class="page-content">
 
     <header class="post-header">
-      <h1 class="post-title">085773009666 Laundry Kiloan Di Sokaraja banyumas</h1>
+      <h1 class="post-title">Laundry Kiloan dan Satuan Di Sokaraja Banyumas</h1>
       <p class="post-description">
         Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Sokaraja Banyumas
       </p>
@@ -46,6 +46,30 @@ Laundry Boneka: Boneka Anda akan dicuci dengan lembut, menjaga bentuk dan kehalu
 Dengan layanan laundry kiloan dan satuan terbaik di Sokaraja Banyumas, kami siap membantu Anda menjaga kebersihan dan kenyamanan barang-barang Anda. Dengan menggunakan deterjen ramah lingkungan dan parfum premium grade A, hasil laundry kami tak hanya bersih, tetapi juga harum dan segar. Ditambah lagi, kami menawarkan layanan antar jemput gratis dan opsi bayar di tempat untuk kenyamanan lebih.  
 Hubungi kami sekarang dan nikmati layanan laundry berkualitas tinggi yang praktis dan efisien! 🌟
 
+### Area Sokaraja
+<details>
+<summary><strong>Kecamatan Sokaraja</strong></summary>
+
+- Banjaranyar
+- Banjarsari Kidul
+- Jompo Kulon
+- Kalikidang
+- Karangduren
+- Karangkedawung
+- Karangnanas
+- Karangrau
+- Kedondong
+- Klahang
+- Lemberang
+- Pamijen
+- Sokaraja Kidul
+- Sokaraja Kulon
+- Sokaraja Lor
+- Sokaraja Tengah
+- Sokaraja Wetan
+- Wiradadi
+
+</details>
     <div class="back-home">
       <a href="{{ '/' | relative_url }}" class="btn btn-primary">
         <i class="fa-solid fa-house"></i> Kembali ke Beranda
