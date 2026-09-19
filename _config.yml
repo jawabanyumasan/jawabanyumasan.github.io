@@ -1,0 +1,98 @@
+# ============================================
+# Blogjak Theme Versi 2.1 — SEO & Search Enhanced
+# ============================================
+
+title: "Blogjak Theme"
+tagline: "Versi 2 - Pure Markdown Blogging"
+description: "Tema Jekyll native dengan dark mode, gallery grid, pagination dinamis, search, dan SEO optimization."
+author: "Blogjak"
+email: "hello@blogjak.dev"
+
+# ====== PENTING: URL & BASEURL ======
+url: "https://username.github.io"
+baseurl: "/blogjak-theme"
+
+# ---------- Build Settings ----------
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:year/:month/:day/:title/
+timezone: Asia/Jakarta
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+
+# ---------- Pagination ----------
+paginate: 6
+paginate_path: "/page/:num/"
+
+# ---------- Plugins ----------
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-redirect-from
+
+# ---------- SEO Defaults ----------
+lang: id_ID
+logo: "/assets/images/logo.png"
+
+twitter:
+  username: blogjak
+  card: summary_large_image
+
+social:
+  name: Blogjak Theme
+  github: "https://github.com/blogjak"
+  twitter: "https://twitter.com/blogjak"      # atau X: https://x.com/blogjak
+  facebook: "https://facebook.com/blogjakcom"
+  instagram: "https://instagram.com/blogjak"
+  youtube: ""
+  linkedin: ""
+  tiktok: ""
+  telegram: ""
+  whatsapp: ""
+  pinterest: ""
+  reddit: ""
+  discord: ""
+  medium: ""
+  devto: ""
+  rss: "/feed.xml"                            # otomatis dari jekyll-feed
+
+# ---------- Search ----------
+search:
+  enabled: true
+  placeholder: "Cari artikel..."
+  max_results: 10
+  excerpt_length: 150
+
+# ---------- Related Posts ----------
+related:
+  enabled: true
+  count: 3
+  strategy: categories   # options: categories, tags, both
+
+# ---------- Defaults ----------
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: true
+      sitemap: true
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# ---------- Exclude ----------
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - LICENSE

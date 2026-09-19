@@ -1,0 +1,70 @@
+---
+layout: default
+---
+<article class="post-single">
+  <header class="post-header">
+    <div class="container">
+      {% if page.categories %}
+        <div class="post-meta-top">
+          {% for cat in page.categories %}
+            <span class="post-category">{{ cat }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <h1 class="post-title">{{ page.title }}</h1>
+
+      {% if page.description %}
+        <p class="post-description">{{ page.description }}</p>
+      {% endif %}
+
+      <div class="post-meta">
+        <span class="meta-item">
+          <i class="fa-regular fa-calendar"></i>
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %B %Y" }}</time>
+        </span>
+        <span class="meta-item">
+          <i class="fa-regular fa-user"></i> {{ page.author | default: site.author }}
+        </span>
+      </div>
+    </div>
+  </header>
+
+  {% if page.image %}
+  <div class="post-hero">
+    <div class="container">
+      <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" loading="lazy">
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="container">
+    <div class="post-content">
+      {{ content }}                 <!-- ✅ HANYA SATU {{ content }} -->
+    </div>
+
+    {% include related-posts.html %}
+
+    <nav class="post-navigation">
+      {% if page.previous.url %}
+        <a class="post-nav-link prev" href="{{ page.previous.url | relative_url }}">
+          <span class="nav-label"><i class="fa-solid fa-arrow-left"></i> Sebelumnya</span>
+          <span class="nav-title">{{ page.previous.title }}</span>
+        </a>
+      {% else %}<span></span>{% endif %}
+
+      {% if page.next.url %}
+        <a class="post-nav-link next" href="{{ page.next.url | relative_url }}">
+          <span class="nav-label">Selanjutnya <i class="fa-solid fa-arrow-right"></i></span>
+          <span class="nav-title">{{ page.next.title }}</span>
+        </a>
+      {% endif %}
+    </nav>
+
+    <div class="back-home">
+      <a href="{{ '/' | relative_url }}" class="btn btn-primary">
+        <i class="fa-solid fa-house"></i> Kembali ke Beranda
+      </a>
+    </div>
+  </div>
+</article>
