@@ -1,6 +1,0 @@
-```txt
-User-agent: *
-Allow: /
-
-Sitemap: https://jawabanyumasan.pages.dev/sitemap.xml
-```
