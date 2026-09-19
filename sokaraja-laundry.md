@@ -56,10 +56,8 @@ Laundry Boneka: Boneka Anda akan dicuci dengan lembut, menjaga bentuk dan kehalu
 <br/><br/>
 Dengan layanan laundry kiloan dan satuan terbaik di Sokaraja Banyumas, kami siap membantu Anda menjaga kebersihan dan kenyamanan barang-barang Anda. Dengan menggunakan deterjen ramah lingkungan dan parfum premium grade A, hasil laundry kami tak hanya bersih, tetapi juga harum dan segar. Ditambah lagi, kami menawarkan layanan antar jemput gratis dan opsi bayar di tempat untuk kenyamanan lebih.
 <br/>
-Hubungi kami sekarang dan nikmati layanan laundry berkualitas tinggi yang praktis dan efisien! 🌟
-</p> 
+Hubungi kami sekarang dan nikmati layanan laundry berkualitas tinggi yang praktis dan efisien di area Sokaraja:
 
-### Area Sokaraja
 <details>
 <summary><strong>Kecamatan Sokaraja</strong></summary>
 
