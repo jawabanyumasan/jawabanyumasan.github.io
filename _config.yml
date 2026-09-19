@@ -9,8 +9,8 @@ author: "Blogjak"
 email: "hello@blogjak.dev"
 
 # ====== PENTING: URL & BASEURL ======
-url: "https://username.github.io"
-baseurl: "/blogjak-theme"
+url: "https://jawabanyumasan.github.io"
+baseurl: ""
 
 # ---------- Build Settings ----------
 markdown: kramdown
