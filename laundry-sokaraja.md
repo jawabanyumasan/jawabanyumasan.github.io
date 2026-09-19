@@ -2,7 +2,7 @@
 layout: default
 title: "085773009666 Laundry Kiloan Di Sokaraja Banyumas"
 description: "Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Sokaraja Banyumas."
-permalink: /sokaraja-laundry/
+permalink: /laundry-sokaraja/
 ---
 
 <div class="container">
