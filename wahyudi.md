@@ -9,7 +9,7 @@ permalink: /wahyudi/
   <article class="page-content">
 
     <header class="post-header">
-      <h1 class="post-title">Wahyudig</h1>
+      <h1 class="post-title">Wahyudi</h1>
       <p class="post-description">
         Kenali lebih dekat Wahyudi sang penulis dan developer situs ini.
       </p>
