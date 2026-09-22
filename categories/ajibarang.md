@@ -1,6 +1,6 @@
 ---
 layout: category
-title: "ajibarang"
-category_name: "ajibarang"
+title: "Ajibarang"
+category_name: "Ajibarang"
 permalink: /categories/ajibarang/
 ---
