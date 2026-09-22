@@ -2,7 +2,7 @@
 layout: post
 title: "085773009666 Laundry Kiloan Jompo Kulon Banyumas"
 description: "Kami hadir untuk memberikan solusi terbaik untuk kebutuhan laundry Anda! Kami menawarkan layanan laundry kiloan dan satuan yang memberikan hasil bersih, rapi, dan wangi, dengan berbagai layanan tambahan untuk memastikan kenyamanan Anda."
-date: 2026-03-05 09:00:00 +0700
+date: 2026-09-22 09:00:00 +0700
 categories: [Sokaraja]
 tags: [laundry, sokaraja]
 author: Wahyudi
