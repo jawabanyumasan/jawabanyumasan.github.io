@@ -1,6 +1,6 @@
 ---
 layout: category
-title: "sokaraja"
-category_name: "sokaraja"
-permalink: /categories/sokaraja/
+title: "ajibarang"
+category_name: "ajibarang"
+permalink: /categories/ajibarang/
 ---
