@@ -69,6 +69,11 @@ related:
   count: 3
   strategy: categories   # options: categories, tags, both
 
+# ====== Search Engine Verification ======
+google_site_verification: "kLsLZsjqKqLO_FK5leJbchpX4pF-vsPfsC0Ksw6BTKs"
+bing_site_verification: ""
+yandex_site_verification: ""
+
 # ---------- Defaults ----------
 defaults:
   - scope:
