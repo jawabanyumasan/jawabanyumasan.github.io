@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "Banyumas"
-tag_name: "Banyumas"
+title: "banyumas"
+tag_name: "banyumas"
 permalink: /tags/banyumas/
 ---
