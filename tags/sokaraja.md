@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "laundry"
-tag_name: "laundry"
-permalink: /tags/laundry/
+title: "sokaraja"
+tag_name: "sokaraja"
+permalink: /tags/sokaraja/
 ---
