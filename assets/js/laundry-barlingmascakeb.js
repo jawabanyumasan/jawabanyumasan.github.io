@@ -1,6 +1,6 @@
 /**
  * JS SCOPED: Halaman Laundry Listing Barlingmascakeb
- * Memastikan data wilayah dan desa dimuat tuntas sebelum render untuk menghindari loading ganda.
+ * Menyesuaikan modul rute ke #wilayah, pemetaan desa akurat, dan format Title SEO bersih.
  */
 (function () {
   'use strict';
@@ -8,17 +8,18 @@
   const appContainer = document.getElementById('laundry-app');
   if (!appContainer) return;
 
-  const MODULE = 'laundry-barlingmascakeb';
+  const MODULE = 'wilayah'; // Diubah sesuai permintaan rute #wilayah
+  const SITE_NAME = 'Barlingmascakeb Laundry';
   const CONFIG_URL = window.location.origin + '/config.csv';
   const CSV_DISTRICTS = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/districts.csv";
   const CSV_VILLAGES = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/villages.csv";
 
   const TARGET_REGIONS = [
-    { id: "3304", name: "Kabupaten Banjarnegara", slug: "kabupaten-banjarnegara" },
-    { id: "3303", name: "Kabupaten Purbalingga",  slug: "kabupaten-purbalingga" },
-    { id: "3302", name: "Kabupaten Banyumas",     slug: "kabupaten-banyumas" },
-    { id: "3301", name: "Kabupaten Cilacap",      slug: "kabupaten-cilacap" },
-    { id: "3305", name: "Kabupaten Kebumen",      slug: "kabupaten-kebumen" }
+    { id: "3304", name: "Banjarnegara", slug: "kabupaten-banjarnegara" },
+    { id: "3303", name: "Purbalingga",  slug: "kabupaten-purbalingga" },
+    { id: "3302", name: "Banyumas",     slug: "kabupaten-banyumas" },
+    { id: "3301", name: "Cilacap",      slug: "kabupaten-cilacap" },
+    { id: "3305", name: "Kebumen",      slug: "kabupaten-kebumen" }
   ];
   const TARGET_IDS = new Set(TARGET_REGIONS.map(r => r.id));
 
@@ -60,7 +61,6 @@
     }
   }
 
-  // Load Config (opsional jika ada config.csv)
   async function loadConfig() {
     const lines = await fetchLines(CONFIG_URL);
     lines.forEach(line => {
@@ -71,11 +71,10 @@
     });
   }
 
-  // Load Districts & Villages Sekaligus di awal agar data tuntas ter-load
   async function loadAllGeographicData(statusCallback) {
     if (state.isInitialized) return;
 
-    if (statusCallback) statusCallback('Memuat data kecamatan Barlingmascakeb...');
+    if (statusCallback) statusCallback('Memuat data kecamatan...');
     const dLines = await fetchLines(CSV_DISTRICTS);
     dLines.forEach(line => {
       const parts = parseCsvLine(line);
@@ -87,14 +86,20 @@
       state.targetDistrictIds.add(item.id);
     });
 
-    if (statusCallback) statusCallback('Memuat data seluruh desa/kelurahan...');
+    if (statusCallback) statusCallback('Memuat data desa/kelurahan...');
     const vLines = await fetchLines(CSV_VILLAGES);
     vLines.forEach(line => {
       const parts = parseCsvLine(line);
-      if (!parts || !state.targetDistrictIds.has(parts[1])) return;
+      // Format districts.csv / villages.csv umumnya: [village_id, district_id, name]
+      if (!parts || parts.length < 3) return;
+      const districtId = parts[1];
+      if (!state.targetDistrictIds.has(districtId)) return;
+
       const name = toTitleCase(parts[2]);
-      if (!state.villagesByDistrict.has(parts[1])) state.villagesByDistrict.set(parts[1], []);
-      state.villagesByDistrict.get(parts[1]).push(name);
+      if (!state.villagesByDistrict.has(districtId)) {
+        state.villagesByDistrict.set(districtId, []);
+      }
+      state.villagesByDistrict.get(districtId).push(name);
     });
 
     state.isInitialized = true;
@@ -108,6 +113,11 @@
     return parts.slice(1);
   }
 
+  function updateSEO(titleText) {
+    const fullTitle = `${state.phone} Laundry ${titleText} – ${SITE_NAME}`;
+    document.title = fullTitle;
+  }
+
   window.addEventListener('hashchange', renderRouter);
 
   function renderRouter() {
@@ -116,6 +126,7 @@
 
     if (params.length === 0) {
       hideBreadcrumb();
+      updateSEO('Kiloan & Express Barlingmascakeb');
       appContainer.innerHTML = renderHomeView();
       return;
     }
@@ -128,6 +139,7 @@
         { name: 'Home', path: '' },
         { name: region.name, path: region.slug }
       ]);
+      updateSEO(region.name);
       appContainer.innerHTML = renderKabupatenView(region);
       return;
     }
@@ -142,6 +154,7 @@
         { name: region.name, path: region.slug },
         { name: district.name, path: `${region.slug}/${district.slug}` }
       ]);
+      updateSEO(`${district.name} (${region.name})`);
       appContainer.innerHTML = renderKecamatanView(region, district);
       return;
     }
@@ -255,7 +268,6 @@
   }
 
   async function boot() {
-    // Tampilkan status loading awal satu kali saja
     appContainer.innerHTML = `
       <div style="text-align:center; padding: 4rem 1rem;">
         <div class="spinner"></div>
@@ -269,7 +281,6 @@
       if (statusEl) statusEl.innerText = msg;
     });
 
-    // Jika hash belum diatur, set default ke modul utama
     if (!window.location.hash || window.location.hash === '#' || !window.location.hash.startsWith(`#${MODULE}`)) {
       window.location.hash = `#${MODULE}`;
     } else {
