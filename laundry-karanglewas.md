@@ -7,7 +7,6 @@ permalink: /laundry-karanglewas/
 
 <div class="container">
   <article class="page-content">
-
     <header class="post-header">
       <h1 class="post-title">Laundry Kiloan dan Satuan Di Karanglewas Banyumas</h1>
       <p class="post-description">
@@ -50,6 +49,7 @@ Laundry Kiloan dan Satuan di Karanglewas: Solusi Buat Kamu!<br/>
 Buat kamu yang tinggal di Karanglewas atau sekitarnya, jasa laundry kiloan dan satuan ini bener-bener jadi penyelamat. Apalagi kalo kamu tipe orang sibuk yang nggak punya banyak waktu buat ngurus cucian. Dengan layanan free delivery, kamu bisa nikmati hidup lebih santai tanpa khawatir sama baju kotor yang numpuk.
 <br/><br/>
 Jadi, tunggu apa lagi? Yuk, coba jasa laundry di Karanglewas dan rasain sendiri kemudahannya. Dijamin, kamu bakal ketagihan! 😊
+
  <details>
 <summary><strong>Kecamatan Karanglewas</strong></summary>
 
@@ -74,6 +74,5 @@ Jadi, tunggu apa lagi? Yuk, coba jasa laundry di Karanglewas dan rasain sendiri 
         <i class="fa-solid fa-house"></i> Kembali ke Beranda
       </a>
     </div>
-
-  </article>
+</article>
 </div>
