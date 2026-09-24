@@ -1,6 +1,6 @@
 /**
  * JS SCOPED: Halaman Laundry Listing Barlingmascakeb
- * Menyesuaikan modul rute ke #wilayah, pemetaan desa akurat, dan format Title SEO bersih.
+ * Menghilangkan teks status loading dan menyesuaikan format Title SEO tanpa tanda kurung.
  */
 (function () {
   'use strict';
@@ -8,8 +8,8 @@
   const appContainer = document.getElementById('laundry-app');
   if (!appContainer) return;
 
-  const MODULE = 'wilayah'; // Diubah sesuai permintaan rute #wilayah
-  const SITE_NAME = 'Barlingmascakeb Laundry';
+  const MODULE = 'wilayah';
+  const SITE_NAME = 'Barlingmascakeb';
   const CONFIG_URL = window.location.origin + '/config.csv';
   const CSV_DISTRICTS = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/districts.csv";
   const CSV_VILLAGES = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/villages.csv";
@@ -71,10 +71,9 @@
     });
   }
 
-  async function loadAllGeographicData(statusCallback) {
+  async function loadAllGeographicData() {
     if (state.isInitialized) return;
 
-    if (statusCallback) statusCallback('Memuat data kecamatan...');
     const dLines = await fetchLines(CSV_DISTRICTS);
     dLines.forEach(line => {
       const parts = parseCsvLine(line);
@@ -86,11 +85,9 @@
       state.targetDistrictIds.add(item.id);
     });
 
-    if (statusCallback) statusCallback('Memuat data desa/kelurahan...');
     const vLines = await fetchLines(CSV_VILLAGES);
     vLines.forEach(line => {
       const parts = parseCsvLine(line);
-      // Format districts.csv / villages.csv umumnya: [village_id, district_id, name]
       if (!parts || parts.length < 3) return;
       const districtId = parts[1];
       if (!state.targetDistrictIds.has(districtId)) return;
@@ -114,7 +111,7 @@
   }
 
   function updateSEO(titleText) {
-    const fullTitle = `${state.phone} Laundry ${titleText} – ${SITE_NAME}`;
+    const fullTitle = `${state.phone} Laundry ${titleText} - ${SITE_NAME}`;
     document.title = fullTitle;
   }
 
@@ -139,7 +136,7 @@
         { name: 'Home', path: '' },
         { name: region.name, path: region.slug }
       ]);
-      updateSEO(region.name);
+      updateSEO(`Kiloan ${region.name}`);
       appContainer.innerHTML = renderKabupatenView(region);
       return;
     }
@@ -154,7 +151,8 @@
         { name: region.name, path: region.slug },
         { name: district.name, path: `${region.slug}/${district.slug}` }
       ]);
-      updateSEO(`${district.name} (${region.name})`);
+      // Title format tanpa tanda kurung: Laundry Sokaraja Banyumas
+      updateSEO(`${district.name} ${region.name}`);
       appContainer.innerHTML = renderKecamatanView(region, district);
       return;
     }
@@ -268,18 +266,15 @@
   }
 
   async function boot() {
+    // Tampilkan animasi spinner bersih tanpa teks status loading di bawahnya
     appContainer.innerHTML = `
       <div style="text-align:center; padding: 4rem 1rem;">
         <div class="spinner"></div>
-        <p id="loading-status-text" style="color: var(--text-muted); margin-top: 1rem;">Memuat konfigurasi &amp; data wilayah...</p>
       </div>
     `;
 
     await loadConfig();
-    await loadAllGeographicData(function(msg) {
-      const statusEl = document.getElementById('loading-status-text');
-      if (statusEl) statusEl.innerText = msg;
-    });
+    await loadAllGeographicData();
 
     if (!window.location.hash || window.location.hash === '#' || !window.location.hash.startsWith(`#${MODULE}`)) {
       window.location.hash = `#${MODULE}`;
