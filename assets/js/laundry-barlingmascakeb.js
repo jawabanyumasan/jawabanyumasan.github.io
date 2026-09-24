@@ -1,16 +1,15 @@
 /**
  * JS SCOPED: Halaman Laundry Listing Barlingmascakeb
- * Dibungkus IIFE + Guard terhadap eksistensi elemen halaman.
+ * Memastikan data wilayah dan desa dimuat tuntas sebelum render untuk menghindari loading ganda.
  */
 (function () {
   'use strict';
 
-  // Guard: pastikan elemen utama halaman ini memang ada di DOM
   const appContainer = document.getElementById('laundry-app');
   if (!appContainer) return;
 
-  const MODULE = 'wilayah';
-  const CONFIG_URL = window.location.origin + '/config.csv'; // Sesuaikan jika path berbeda
+  const MODULE = 'laundry-barlingmascakeb';
+  const CONFIG_URL = window.location.origin + '/config.csv';
   const CSV_DISTRICTS = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/districts.csv";
   const CSV_VILLAGES = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/villages.csv";
 
@@ -27,8 +26,7 @@
     districtsByRegency: new Map(),
     villagesByDistrict: new Map(),
     targetDistrictIds: new Set(),
-    loadedDistricts: false,
-    loadedVillages: false,
+    isInitialized: false,
     phone: "085773009666"
   };
 
@@ -62,10 +60,24 @@
     }
   }
 
-  async function initData() {
-    if (state.loadedDistricts) return;
-    const lines = await fetchLines(CSV_DISTRICTS);
+  // Load Config (opsional jika ada config.csv)
+  async function loadConfig() {
+    const lines = await fetchLines(CONFIG_URL);
     lines.forEach(line => {
+      const parts = parseCsvLine(line);
+      if (parts && parts[0].toLowerCase() === 'phone' && parts[1]) {
+        state.phone = parts[1];
+      }
+    });
+  }
+
+  // Load Districts & Villages Sekaligus di awal agar data tuntas ter-load
+  async function loadAllGeographicData(statusCallback) {
+    if (state.isInitialized) return;
+
+    if (statusCallback) statusCallback('Memuat data kecamatan Barlingmascakeb...');
+    const dLines = await fetchLines(CSV_DISTRICTS);
+    dLines.forEach(line => {
       const parts = parseCsvLine(line);
       if (!parts || !TARGET_IDS.has(parts[1])) return;
       const name = toTitleCase(parts[2]);
@@ -74,20 +86,18 @@
       state.districtsByRegency.get(item.regencyId).push(item);
       state.targetDistrictIds.add(item.id);
     });
-    state.loadedDistricts = true;
-  }
 
-  async function initVillages() {
-    if (state.loadedVillages) return;
-    const lines = await fetchLines(CSV_VILLAGES);
-    lines.forEach(line => {
+    if (statusCallback) statusCallback('Memuat data seluruh desa/kelurahan...');
+    const vLines = await fetchLines(CSV_VILLAGES);
+    vLines.forEach(line => {
       const parts = parseCsvLine(line);
       if (!parts || !state.targetDistrictIds.has(parts[1])) return;
       const name = toTitleCase(parts[2]);
       if (!state.villagesByDistrict.has(parts[1])) state.villagesByDistrict.set(parts[1], []);
       state.villagesByDistrict.get(parts[1]).push(name);
     });
-    state.loadedVillages = true;
+
+    state.isInitialized = true;
   }
 
   function getHashParams() {
@@ -98,27 +108,18 @@
     return parts.slice(1);
   }
 
-  function navigate(e, subPath) {
-    if (e) e.preventDefault();
-    const target = subPath ? `#${MODULE}/${subPath}` : `#${MODULE}`;
-    window.location.hash = target;
-    window.scrollTo(0, 0);
-  }
-
   window.addEventListener('hashchange', renderRouter);
 
-  async function renderRouter() {
+  function renderRouter() {
     const params = getHashParams();
-    if (params === null) return; // Bukan rute modul ini
+    if (params === null) return;
 
-    // TAMPILAN UTAMA (Home Listing)
     if (params.length === 0) {
       hideBreadcrumb();
       appContainer.innerHTML = renderHomeView();
       return;
     }
 
-    // LEVEL 1: KABUPATEN
     const region = TARGET_REGIONS.find(r => r.slug === params[0]);
     if (!region) { renderNotFound(); return; }
 
@@ -131,22 +132,17 @@
       return;
     }
 
-    // LEVEL 2: KECAMATAN
-    await initData();
     const distList = state.districtsByRegency.get(region.id) || [];
     const district = distList.find(d => d.slug === params[1]);
     if (!district) { renderNotFound(); return; }
 
     if (params.length === 2) {
-      appContainer.innerHTML = `<div class="spinner"></div><p style="text-align:center">Memuat desa di ${district.name}...</p>`;
-      await initVillages();
-      const villages = state.villagesByDistrict.get(district.id) || [];
       showBreadcrumb([
         { name: 'Home', path: '' },
         { name: region.name, path: region.slug },
         { name: district.name, path: `${region.slug}/${district.slug}` }
       ]);
-      appContainer.innerHTML = renderKecamatanView(region, district, villages);
+      appContainer.innerHTML = renderKecamatanView(region, district);
       return;
     }
 
@@ -224,7 +220,8 @@
     `;
   }
 
-  function renderKecamatanView(region, district, villages) {
+  function renderKecamatanView(region, district) {
+    const villages = state.villagesByDistrict.get(district.id) || [];
     return `
       <div class="laundry-hero">
         <h1>Laundry Kiloan Kecamatan ${district.name}</h1>
@@ -241,7 +238,7 @@
                 <div class="laundry-card-sub">Antar Jemput Tersedia</div>
               </div>
             </div>
-          `).join('<p>Belum ada data desa.</p>') : '<p>Data desa tidak ditemukan.</p>'}
+          `).join('') : '<p style="color:var(--text-muted)">Belum ada data desa untuk kecamatan ini.</p>'}
         </div>
       </div>
     `;
@@ -257,10 +254,23 @@
     `;
   }
 
-  // Jalankan inisialisasi awal saat skrip dimuat
   async function boot() {
-    await initData();
-    if (!window.location.hash || window.location.hash === '#') {
+    // Tampilkan status loading awal satu kali saja
+    appContainer.innerHTML = `
+      <div style="text-align:center; padding: 4rem 1rem;">
+        <div class="spinner"></div>
+        <p id="loading-status-text" style="color: var(--text-muted); margin-top: 1rem;">Memuat konfigurasi &amp; data wilayah...</p>
+      </div>
+    `;
+
+    await loadConfig();
+    await loadAllGeographicData(function(msg) {
+      const statusEl = document.getElementById('loading-status-text');
+      if (statusEl) statusEl.innerText = msg;
+    });
+
+    // Jika hash belum diatur, set default ke modul utama
+    if (!window.location.hash || window.location.hash === '#' || !window.location.hash.startsWith(`#${MODULE}`)) {
       window.location.hash = `#${MODULE}`;
     } else {
       renderRouter();
