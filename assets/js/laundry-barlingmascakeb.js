@@ -9,7 +9,7 @@
   const appContainer = document.getElementById('laundry-app');
   if (!appContainer) return;
 
-  const MODULE = 'laundry-barlingmascakeb';
+  const MODULE = 'wilayah';
   const CONFIG_URL = window.location.origin + '/config.csv'; // Sesuaikan jika path berbeda
   const CSV_DISTRICTS = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/districts.csv";
   const CSV_VILLAGES = "https://raw.githubusercontent.com/prodhokter/dataset-wilayah-indonesia/master/villages.csv";
