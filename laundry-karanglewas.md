@@ -14,8 +14,7 @@ permalink: /laundry-karanglewas/
       </p>
     </header>
 
-Laundry Kiloan dan Satuan di Karanglewas, Banyumas: Praktis, Hemat, dan Free Delivery!</h2>
-						<p class="sublead2">Hidup di era serba cepat kayak sekarang, siapa sih yang nggak pengin segala sesuatu jadi lebih praktis? Apalagi buat urusan cuci baju, yang kadang bikin kita malas karena sibuk atau capek seharian. Nah, buat kamu yang tinggal di Karanglewas, Kabupaten Banyumas, ada solusi nih: jasa laundry kiloan dan satuan yang siap bantu kamu bebas dari tumpukan baju kotor. Yang bikin lebih asyik? Mereka nawarin free delivery alias gratis antar-jemput! 
+Hidup di era serba cepat kayak sekarang, siapa sih yang nggak pengin segala sesuatu jadi lebih praktis? Apalagi buat urusan cuci baju, yang kadang bikin kita malas karena sibuk atau capek seharian. Nah, buat kamu yang tinggal di Karanglewas, Kabupaten Banyumas, ada solusi nih: jasa laundry kiloan dan satuan yang siap bantu kamu bebas dari tumpukan baju kotor. Yang bikin lebih asyik? Mereka nawarin free delivery alias gratis antar-jemput! 
 						<br/><br/>
 <img class="responsive" src="https://raw.githubusercontent.com/bandardeterjen/banyumas/refs/heads/images/bd-banyumas-karanglewas.jpg" alt="" />
 <br/>
