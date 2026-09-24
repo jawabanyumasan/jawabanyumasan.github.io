@@ -1,0 +1,207 @@
+/* =================================================================agang
+   CSS SCOPED: .laundry-barlingmascakeb-page
+   Menggunakan CSS Variable dari theme global & otomatis support dark mode
+   =================================================================== */
+
+.laundry-barlingmascakeb-page {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.laundry-barlingmascakeb-page .breadcrumb-wrap {
+  background: var(--bg-soft, var(--bg));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 8px);
+  padding: 10px 16px;
+  margin-bottom: 2rem;
+  font-size: 0.88rem;
+}
+
+.laundry-barlingmascakeb-page .breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+}
+
+.laundry-barlingmascakeb-page .breadcrumb a {
+  color: var(--royal-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.laundry-barlingmascakeb-page .breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.laundry-barlingmascakeb-page .laundry-hero {
+  background: var(--bg-elev, var(--white));
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 12px);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.laundry-barlingmascakeb-page .laundry-hero h1 {
+  color: var(--text);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.laundry-barlingmascakeb-page .laundry-hero p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto 1.5rem auto;
+  line-height: 1.6;
+}
+
+/* Grid & Cards */
+.laundry-barlingmascakeb-page .laundry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.laundry-barlingmascakeb-page .laundry-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem;
+  background: var(--bg-elev, var(--white));
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius, 12px);
+  transition: all 0.2s ease;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.laundry-barlingmascakeb-page .laundry-card:hover {
+  border-color: var(--royal-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.laundry-barlingmascakeb-page .laundry-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm, 8px);
+  background: var(--bg-soft, var(--bg));
+  color: var(--royal-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.laundry-barlingmascakeb-page .laundry-card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.laundry-barlingmascakeb-page .laundry-card-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Kabupaten Block */
+.laundry-barlingmascakeb-page .kab-block {
+  background: var(--bg-elev, var(--white));
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius, 12px);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.laundry-barlingmascakeb-page .kab-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.laundry-barlingmascakeb-page .kab-block-head h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.laundry-barlingmascakeb-page .kab-link-all {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--orange);
+  text-decoration: none;
+}
+
+.laundry-barlingmascakeb-page .kab-link-all:hover {
+  text-decoration: underline;
+}
+
+/* Stats & Features */
+.laundry-barlingmascakeb-page .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.laundry-barlingmascakeb-page .stat-item {
+  background: var(--bg-elev, var(--white));
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 12px);
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.laundry-barlingmascakeb-page .stat-num {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--royal-blue);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.laundry-barlingmascakeb-page .stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Spinner & Loading */
+.laundry-barlingmascakeb-page .spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--royal-blue);
+  border-radius: 50%;
+  animation: laundry-spin 0.8s linear infinite;
+  margin: 0 auto 1rem auto;
+}
+
+@keyframes laundry-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .laundry-barlingmascakeb-page .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .laundry-barlingmascakeb-page .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
