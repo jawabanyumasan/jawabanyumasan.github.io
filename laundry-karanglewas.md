@@ -1,17 +1,17 @@
 ---
 layout: default
-title: "085773009666 Laundry Kiloan Di Karnglewas Banyumas"
-description: "Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Karnglewas Banyumas."
-permalink: /laundry-karnglewas/
+title: "085773009666 Laundry Kiloan Di Karanglewas Banyumas"
+description: "Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Karanglewas Banyumas."
+permalink: /laundry-karanglewas/
 ---
 
 <div class="container">
   <article class="page-content">
 
     <header class="post-header">
-      <h1 class="post-title">Laundry Kiloan dan Satuan Di Karnglewas Banyumas</h1>
+      <h1 class="post-title">Laundry Kiloan dan Satuan Di Karanglewas Banyumas</h1>
       <p class="post-description">
-        Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Karnglewas Banyumas
+        Hubungi WA 08577300966 untuk jasa laundry kiloan dan satuan di Karanglewas Banyumas
       </p>
     </header>
 
