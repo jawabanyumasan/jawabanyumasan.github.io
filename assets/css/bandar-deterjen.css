@@ -1,6 +1,7 @@
-/* Scope khusus halaman Bandar Deterjen agar tidak konflik dengan global tag */
+/* Scope: .bandar-deterjen-page */
 .bandar-deterjen-page {
-  padding: 2rem 1rem 4rem;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
   color: var(--text);
   font-family: var(--font-sans);
 }
@@ -9,98 +10,162 @@
   margin-bottom: 3.5rem;
 }
 
-.bandar-deterjen-page .text-center { text-align: center; }
-.bandar-deterjen-page .text-right { text-align: right; }
-.bandar-deterjen-page .mb-3 { margin-bottom: 1rem; }
-.bandar-deterjen-page .mb-4 { margin-bottom: 2rem; }
-.bandar-deterjen-page .text-muted { color: var(--text-muted); }
+.bandar-deterjen-page .bd-section__head {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+}
+
+.bandar-deterjen-page .bd-section__title {
+  color: var(--royal-blue);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.bandar-deterjen-page .bd-section__title--left {
+  text-align: left;
+}
+
+.bandar-deterjen-page .bd-section__lead {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
 
 /* Hero Section */
 .bandar-deterjen-page .bd-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
   background-color: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2.5rem;
+  padding: 3rem;
   margin-bottom: 3.5rem;
 }
 
-.bandar-deterjen-page .bd-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: center;
-}
-
-.bandar-deterjen-page .bd-badge {
+.bandar-deterjen-page .bd-eyebrow {
   display: inline-block;
   background-color: var(--bg-soft);
   color: var(--royal-blue);
   font-size: 0.85rem;
   font-weight: 600;
-  padding: 0.3rem 0.8rem;
+  padding: 0.35rem 0.85rem;
   border-radius: var(--radius-sm);
   margin-bottom: 1rem;
   text-transform: uppercase;
 }
 
-.bandar-deterjen-page .bd-hero-text h1 {
-  font-size: 2.2rem;
+.bandar-deterjen-page .bd-hero__title {
+  font-size: 2.3rem;
   font-weight: 700;
   color: var(--royal-blue);
-  line-height: 1.25;
+  line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-.bandar-deterjen-page .bd-hero-text p {
+.bandar-deterjen-page .bd-hero__desc {
   color: var(--text-muted);
-  font-size: 1.05rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
   line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
-.bandar-deterjen-page .bd-hero-cta {
+.bandar-deterjen-page .bd-hero__actions {
   display: flex;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.bandar-deterjen-page .bd-video-wrapper {
+.bandar-deterjen-page .bd-btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.bandar-deterjen-page .bd-btn--ghost {
+  border: 1px solid var(--border);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.bandar-deterjen-page .bd-btn--ghost:hover {
+  border-color: var(--royal-blue);
+  color: var(--royal-blue);
+}
+
+.bandar-deterjen-page .bd-hero__badges {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.bandar-deterjen-page .bd-hero__badges li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bandar-deterjen-page .bd-hero__badges i {
+  color: var(--royal-blue);
+}
+
+.bandar-deterjen-page .bd-video {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
   height: 0;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
-.bandar-deterjen-page .bd-video-wrapper iframe {
+.bandar-deterjen-page .bd-video iframe {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%; border: none;
 }
 
 /* Comparison Section */
-.bandar-deterjen-page .bd-grid-2 {
+.bandar-deterjen-page .bd-compare {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
 }
 
-.bandar-deterjen-page .card {
+.bandar-deterjen-page .bd-compare__col {
   background-color: var(--bg-elev);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
   padding: 2rem;
+  border-radius: var(--radius);
 }
 
-.bandar-deterjen-page .card h2 {
-  font-size: 1.35rem;
-  color: var(--royal-blue);
+.bandar-deterjen-page .bd-compare__title {
+  font-size: 1.25rem;
   margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
+
+.bandar-deterjen-page .bd-compare__col--bad .bd-compare__title { color: var(--orange); }
+.bandar-deterjen-page .bd-compare__col--good .bd-compare__title { color: var(--royal-blue); }
 
 .bandar-deterjen-page .bd-list {
   list-style: none;
-  padding: 0; margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .bandar-deterjen-page .bd-list li {
@@ -112,134 +177,143 @@
   line-height: 1.5;
 }
 
-.bandar-deterjen-page .bd-list-bad li::before {
+.bandar-deterjen-page .bd-compare__col--bad .bd-list li::before {
   content: "✕";
   position: absolute; left: 0; color: var(--orange); font-weight: bold;
 }
 
-.bandar-deterjen-page .bd-list-good li::before {
+.bandar-deterjen-page .bd-compare__col--good .bd-list li::before {
   content: "✓";
   position: absolute; left: 0; color: var(--royal-blue); font-weight: bold;
 }
 
-/* Features Grid */
-.bandar-deterjen-page .bd-features-grid {
+/* Pillars (3 Kolom Utama) */
+.bandar-deterjen-page .bd-pillars {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
-.bandar-deterjen-page .bd-feature-card {
-  background-color: var(--bg-soft);
+.bandar-deterjen-page .bd-pillar {
+  background-color: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   text-align: center;
+  padding: 2rem 1.5rem;
 }
 
-.bandar-deterjen-page .bd-feature-card h3 {
+.bandar-deterjen-page .bd-pillar__icon {
+  font-size: 2rem;
+  color: var(--royal-blue);
+  margin-bottom: 1rem;
+}
+
+.bandar-deterjen-page .bd-pillar h3 {
+  font-size: 1.2rem;
   color: var(--text);
-  font-size: 1.15rem;
   margin-bottom: 0.5rem;
 }
 
-.bandar-deterjen-page .bd-feature-card p {
+.bandar-deterjen-page .bd-pillar p {
   color: var(--text-muted);
   font-size: 0.9rem;
+  line-height: 1.5;
 }
 
-/* Products Grid */
-.bandar-deterjen-page .bd-products-grid {
+/* Products Section */
+.bandar-deterjen-page .bd-products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
-.bandar-deterjen-page .bd-prod-card {
-  text-align: center;
+.bandar-deterjen-page .bd-product {
+  background-color: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
   transition: transform 0.2s ease;
 }
 
-.bandar-deterjen-page .bd-prod-card:hover {
+.bandar-deterjen-page .bd-product:hover {
   transform: translateY(-4px);
 }
 
-.bandar-deterjen-page .bd-prod-card img {
+.bandar-deterjen-page .bd-product img {
   width: 100%;
-  height: 180px;
+  height: 220px;
   object-fit: cover;
-  border-radius: var(--radius-sm);
-  margin-bottom: 1rem;
 }
 
-.bandar-deterjen-page .bd-prod-card h3 {
-  font-size: 1.1rem;
+.bandar-deterjen-page .bd-product figcaption {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bandar-deterjen-page .bd-product h3 {
+  font-size: 1.15rem;
   color: var(--royal-blue);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
-.bandar-deterjen-page .bd-prod-card p {
-  font-size: 0.88rem;
+.bandar-deterjen-page .bd-product p {
   color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
 }
 
-/* Order Form */
-.bandar-deterjen-page .bd-order-card {
-  max-width: 680px;
-  margin: 0 auto;
+/* Keunggulan Grid */
+.bandar-deterjen-page .bd-section--soft {
+  background-color: var(--bg-soft);
+  padding: 3rem 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
-.bandar-deterjen-page .bd-form-row {
+.bandar-deterjen-page .bd-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
 }
 
-.bandar-deterjen-page .bd-form-group {
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.bandar-deterjen-page .bd-form-group label {
-  font-size: 0.88rem;
-  font-weight: 600;
-  margin-bottom: 0.4rem;
-  color: var(--text);
-}
-
-.bandar-deterjen-page .bd-input {
-  padding: 0.75rem;
+.bandar-deterjen-page .bd-feature {
+  background-color: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bandar-deterjen-page .bd-feature i {
+  font-size: 1.5rem;
+  color: var(--royal-blue);
+  margin-bottom: 0.2rem;
+}
+
+.bandar-deterjen-page .bd-feature strong {
   font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.2s;
+  color: var(--text);
 }
 
-.bandar-deterjen-page .bd-input:focus {
-  border-color: var(--royal-blue);
+.bandar-deterjen-page .bd-feature span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
-/* Responsive Queries */
-@media (max-width: 768px) {
-  .bandar-deterjen-page .bd-hero-grid,
-  .bandar-deterjen-page .bd-grid-2,
-  .bandar-deterjen-page .bd-features-grid,
-  .bandar-deterjen-page .bd-products-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  .bandar-deterjen-page .bd-form-row {
-    grid-template-columns: 1fr;
-  }
-  .bandar-deterjen-page .bd-hero-cta {
-    flex-direction: column;
-  }
-}
-/* Styling Grid Artikel Terbaru */
+/* Blog / Artikel Terbaru Grid */
 .bandar-deterjen-page .landing-blog-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -251,6 +325,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-color: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .bandar-deterjen-page .landing-blog-image {
@@ -315,8 +392,303 @@
   line-height: 1.5;
 }
 
+/* Testimoni Carousel */
+.bandar-deterjen-page .bd-testi {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.bandar-deterjen-page .bd-testi__stage {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-height: 120px;
+}
+
+.bandar-deterjen-page .bd-testi__slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bandar-deterjen-page .bd-testi__slide {
+  position: absolute;
+  top: 0; left: 0; width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  margin: 0;
+  text-align: center;
+}
+
+.bandar-deterjen-page .bd-testi__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+}
+
+.bandar-deterjen-page .bd-testi__slide p {
+  font-size: 1.05rem;
+  color: var(--text);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.bandar-deterjen-page .bd-testi__slide cite {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--royal-blue);
+  font-style: normal;
+}
+
+.bandar-deterjen-page .bd-testi__nav {
+  background: none;
+  border: 1px solid var(--border);
+  background-color: var(--bg);
+  color: var(--text);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.bandar-deterjen-page .bd-testi__nav:hover {
+  background-color: var(--royal-blue);
+  color: #fff;
+  border-color: var(--royal-blue);
+}
+
+.bandar-deterjen-page .bd-testi__dots {
+  list-style: none;
+  padding: 0; margin: 1rem 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.bandar-deterjen-page .bd-testi__dots li {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background-color: var(--border);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bandar-deterjen-page .bd-testi__dots li.is-active {
+  background-color: var(--royal-blue);
+  width: 20px;
+  border-radius: 4px;
+}
+
+/* CTA & Form */
+.bandar-deterjen-page .bd-section--cta {
+  background-color: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3rem;
+}
+
+.bandar-deterjen-page .bd-cta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.bandar-deterjen-page .bd-cta__text p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.bandar-deterjen-page .bd-list--check li::before {
+  content: "✓";
+  color: var(--royal-blue);
+  font-weight: bold;
+}
+
+.bandar-deterjen-page .bd-form {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.bandar-deterjen-page .bd-form__title {
+  font-size: 1.25rem;
+  color: var(--royal-blue);
+  margin-bottom: 1.2rem;
+}
+
+.bandar-deterjen-page .bd-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.bandar-deterjen-page .bd-field input,
+.bandar-deterjen-page .bd-field select {
+  padding: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-elev);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  outline: none;
+  font-weight: normal;
+  transition: border-color 0.2s;
+}
+
+.bandar-deterjen-page .bd-field input:focus,
+.bandar-deterjen-page .bd-field select:focus {
+  border-color: var(--royal-blue);
+}
+
+.bandar-deterjen-page .bd-btn--block {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.bandar-deterjen-page .bd-form__note {
+  font-size: 0.85rem;
+  color: var(--orange);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Contact & Map */
+.bandar-deterjen-page .bd-contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.bandar-deterjen-page .bd-contact__info {
+  background-color: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bandar-deterjen-page .bd-contact__row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  align-items: flex-start;
+}
+
+.bandar-deterjen-page .bd-contact__row i {
+  font-size: 1.2rem;
+  color: var(--royal-blue);
+  margin-top: 0.2rem;
+  min-width: 20px;
+}
+
+.bandar-deterjen-page .bd-contact__row strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 0.1rem;
+}
+
+.bandar-deterjen-page .bd-contact__row p, 
+.bandar-deterjen-page .bd-contact__row a {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+  text-decoration: none;
+}
+
+.bandar-deterjen-page .bd-contact__row a:hover {
+  color: var(--royal-blue);
+  text-decoration: underline;
+}
+
+.bandar-deterjen-page .bd-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.bandar-deterjen-page .bd-social a {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background-color: var(--bg-soft);
+  color: var(--royal-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.bandar-deterjen-page .bd-social a:hover {
+  background-color: var(--royal-blue);
+  color: #fff;
+}
+
+.bandar-deterjen-page .bd-contact__map {
+  background-color: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0;
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.bandar-deterjen-page .bd-contact__map iframe {
+  width: 100%; height: 100%; min-height: 320px; border: none;
+}
+
+/* Responsive Queries */
+@media (max-width: 1024px) {
+  .bandar-deterjen-page .bd-features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
-  .bandar-deterjen-page .landing-blog-grid {
+  .bandar-deterjen-page .bd-hero,
+  .bandar-deterjen-page .bd-compare,
+  .bandar-deterjen-page .bd-pillars,
+  .bandar-deterjen-page .bd-products,
+  .bandar-deterjen-page .landing-blog-grid,
+  .bandar-deterjen-page .bd-cta,
+  .bandar-deterjen-page .bd-contact {
+    grid-template-columns: 1fr;
+  }
+  .bandar-deterjen-page .bd-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bandar-deterjen-page .bd-testi {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bandar-deterjen-page .bd-features {
     grid-template-columns: 1fr;
   }
 }
