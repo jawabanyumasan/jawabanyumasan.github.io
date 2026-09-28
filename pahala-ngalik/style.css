@@ -128,11 +128,11 @@ textarea {
 
 /* Container Hasil Transliterasi - SELALU BACKGROUND PUTIH */
 .output-area {
-    direction: rtl; /* Penulisan Kanan ke Kiri */
+    direction: rtl; /* Penulisan dari Kanan ke Kiri */
     text-align: right;
     min-height: 150px;
-    background-color: #ffffff !important; /* Tetap Putih Meskipum Dark Mode */
-    color: #1a1a1a !important;            /* Teks Tetap Hitam/Gelap */
+    background-color: #ffffff !important; /* Tetap Putih Meskipun Dark Mode */
+    color: #1a1a1a !important;            /* Teks Tetap Gelap */
     border: 1px solid #ccc;
     border-radius: 6px;
     padding: 20px;
@@ -149,12 +149,12 @@ textarea {
     align-items: center;
 }
 
-/* Pembungkus Kata (Gambar di dalamnya dempet/tanpa jarak) */
+/* Pembungkus Kata (Karakter disusun urut dari kanan ke kiri) */
 .word-box {
     display: inline-flex;
-    flex-direction: row-reverse; /* Mengatur urutan gambar dalam kata agar RTL presisi */
+    direction: rtl; /* Menjamin urutan item pertama berada di sebelah paling kanan */
     align-items: center;
-    gap: 0;                      /* Gambar dempet tanpa selisih/jarak */
+    gap: 0;         /* Gambar dempet tanpa selisih/jarak */
 }
 
 /* Item Gambar Aksara */
@@ -181,7 +181,7 @@ textarea {
     font-size: var(--img-size, 28px);
     line-height: 1;
     font-weight: bold;
-    color: #1a1a1a !important; /* Teks angka/tanda baca tetap gelap */
+    color: #1a1a1a !important;
     padding: 0;
 }
 
