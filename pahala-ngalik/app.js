@@ -1,8 +1,11 @@
+// URL Dasar Gambar di GitHub Pages
+const BASE_IMAGE_URL = 'https://jawabanyumasan.github.io/pahala-ngalik/img/';
+
 // Data Aksara Dasar & Sufiks
 const daftarAksara = [
     "p", "b", "h", "ng", "l", "r", "s", "z", 
     "d", "t", "dh", "th", "y", "w", "n", "m", 
-    "j", "c", "g", "k", "ny"
+    "j", "c", "g", "k", "ny", "a", "i", "u", "e", "o"
 ];
 
 const daftarSufiks = [
@@ -17,19 +20,19 @@ const daftarSufiks = [
     ""
 ];
 
-// Pemetaan Tanda Baca ke Karakter/Unicode Arab
+// Pemetaan Tanda Baca ke Karakter Arab
 const arabPunctuation = {
-    ',': '،',  // Koma Arab
-    ';': '؛',  // Titik koma Arab
-    '?': '؟',  // Tanda tanya Arab
-    '.': '.',  // Titik
-    '!': '!',  // Tanda seru
+    ',': '،',
+    ';': '؛',
+    '?': '؟',
+    '.': '.',
+    '!': '!',
     '-': '-',
     '(': '(',
     ')': ')'
 };
 
-// Generate Semua Kemungkinan Kombinasi Pola Nama File
+// Generate Kombinasi Pola Nama File
 let validTokens = [];
 daftarAksara.forEach(aksara => {
     daftarSufiks.forEach(sufiks => {
@@ -37,7 +40,7 @@ daftarAksara.forEach(aksara => {
     });
 });
 
-// Urutkan token berdasarkan panjang (descending) agar token terpanjang diproses lebih dulu
+// Urutkan token dari terpanjang agar diproses lebih dahulu
 validTokens.sort((a, b) => b.length - a.length);
 
 // Elemen DOM
@@ -46,8 +49,9 @@ const outputArea = document.getElementById('outputArea');
 const imgSizeSlider = document.getElementById('imgSizeSlider');
 const sizeValue = document.getElementById('sizeValue');
 const darkModeToggle = document.getElementById('darkModeToggle');
+const saveImgBtn = document.getElementById('saveImgBtn');
 
-// 1. Fungsi Tokenisasi Satu Kata/Suku Kata
+// 1. Tokenisasi Kata
 function tokenizeWord(word) {
     let result = [];
     let i = 0;
@@ -55,21 +59,21 @@ function tokenizeWord(word) {
     while (i < word.length) {
         let matched = false;
         
-        // Cek jika karakter saat ini adalah Angka Latin
+        // Angka Latin
         if (/[0-9]/.test(word[i])) {
             result.push({ type: 'number', val: word[i] });
             i++;
             continue;
         }
 
-        // Cek jika karakter saat ini adalah Tanda Baca
+        // Tanda Baca
         if (arabPunctuation[word[i]]) {
             result.push({ type: 'punct', val: arabPunctuation[word[i]] });
             i++;
             continue;
         }
 
-        // Cek pencocokan suku kata aksara dari pola terpanjang
+        // Pencocokan Pola Aksara
         for (let token of validTokens) {
             if (word.toLowerCase().startsWith(token, i)) {
                 result.push({ type: 'image', val: token });
@@ -79,7 +83,7 @@ function tokenizeWord(word) {
             }
         }
 
-        // Jika tidak cocok dengan pola aksara apa pun, tampilkan Teks Latin asli
+        // Jika tidak ada pola yang cocok
         if (!matched) {
             result.push({ type: 'text', val: word[i] });
             i++;
@@ -88,25 +92,22 @@ function tokenizeWord(word) {
     return result;
 }
 
-// 2. Fungsi Utama Transliterasi Multi-Paragraf
+// 2. Transliterasi Multi-Paragraf
 function transliterate() {
     const text = inputText.value;
     outputArea.innerHTML = '';
 
     if (!text.trim()) return;
 
-    // Split teks berdasarkan baris/paragraf
     const paragraphs = text.split('\n');
 
     paragraphs.forEach(paraText => {
         const paraDiv = document.createElement('div');
         paraDiv.className = 'paragraph';
 
-        // Parse kata per kata
         const words = paraText.split(' ');
         words.forEach((word, wIdx) => {
             if (word === '') {
-                // Tambahkan spasi antar kata jika ada spasi ganda
                 const space = document.createElement('span');
                 space.innerHTML = '&nbsp;';
                 paraDiv.appendChild(space);
@@ -118,10 +119,11 @@ function transliterate() {
                 if (token.type === 'image') {
                     const span = document.createElement('span');
                     span.className = 'char-item';
-                    span.innerHTML = `<img src="img/${token.val}.png" alt="${token.val}" onerror="this.onerror=null; this.parentNode.innerText='${token.val}';">`;
+                    const imgUrl = `${BASE_IMAGE_URL}${token.val}.jpg`;
+                    
+                    span.innerHTML = `<img src="${imgUrl}" alt="${token.val}" crossorigin="anonymous" onerror="this.onerror=null; this.parentNode.innerText='${token.val}';">`;
                     paraDiv.appendChild(span);
                 } else {
-                    // Angka, Tanda Baca Arab, atau Teks Latin Biasa
                     const span = document.createElement('span');
                     span.className = 'text-node';
                     span.textContent = token.val;
@@ -129,7 +131,6 @@ function transliterate() {
                 }
             });
 
-            // Beri spasi antar kata
             if (wIdx < words.length - 1) {
                 const space = document.createElement('span');
                 space.className = 'text-node';
@@ -142,7 +143,7 @@ function transliterate() {
     });
 }
 
-// 3. Pengaturan Ukuran Gambar Dikecilkan/Diperbesar (Slider)
+// 3. Slider Ukuran Gambar
 imgSizeSlider.addEventListener('input', (e) => {
     const size = e.target.value;
     sizeValue.textContent = `${size}px`;
@@ -156,7 +157,30 @@ darkModeToggle.addEventListener('click', () => {
     darkModeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
 });
 
-// 5. Footer Tahun Otomatis
+// 5. Simpan Hasil sebagai Gambar (PNG)
+saveImgBtn.addEventListener('click', () => {
+    if (!outputArea.hasChildNodes()) {
+        alert('Tidak ada teks untuk disimpan!');
+        return;
+    }
+
+    // Menggunakan html2canvas untuk mengonversi kontainer ke gambar
+    html2canvas(outputArea, {
+        useCORS: true, // Mengizinkan pengambilan gambar dari domain GitHub Pages
+        scale: 2,      // Meningkatkan kualitas hasil ekspor gambar
+        backgroundColor: getComputedStyle(document.body).getPropertyValue('--bg-color')
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'aksara-transliteration.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }).catch(err => {
+        console.error('Gagal mengunduh gambar:', err);
+        alert('Gagal mengunduh gambar. Pastikan koneksi internet stabil untuk memuat gambar.');
+    });
+});
+
+// 6. Footer Tahun
 function setupFooter() {
     const currentYear = new Date().getFullYear();
     const startYear = 2026;
@@ -164,12 +188,10 @@ function setupFooter() {
     document.getElementById('footerText').textContent = `Created By Wahyudi © ${yearText}`;
 }
 
-// Event Listener Input
+// Event Listener
 inputText.addEventListener('input', transliterate);
 
-// Inisialisasi
 document.addEventListener('DOMContentLoaded', () => {
     setupFooter();
-    // Default ukuran awal (gambar kecil agar muat banyak)
     document.documentElement.style.setProperty('--img-size', '28px');
 });
