@@ -3,35 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pahala Ngalik - Galeri Aksara</title>
-    
-    <!-- Memanggil CSS Terpisah -->
+    <title>Transliterasi Teks ke Aksara</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>Galeri Aksara</h1>
+        <header>
+            <h1>Transliterasi Aksara</h1>
+            <div class="top-controls">
+                <button id="darkModeToggle" class="btn-toggle">🌙 Dark Mode</button>
+            </div>
+        </header>
 
-        <!-- Filter & Pencarian -->
-        <div class="filter-container">
-            <div class="filter-group">
-                <label for="filterAksara">Aksara:</label>
-                <select id="filterAksara">
-                    <option value="all">Semua Aksara</option>
-                </select>
+        <div class="editor-section">
+            <!-- Form Input Latin -->
+            <div class="input-group">
+                <label for="inputText">Ketik Teks Latin (Multi Paragraf):</label>
+                <textarea id="inputText" placeholder="Ketik di sini... (misal: aksara 123, pa, pi?)"></textarea>
             </div>
 
-            <div class="filter-group">
-                <input type="text" id="searchInput" placeholder="Cari pola (misal: pa, pi, pang)...">
+            <!-- Area Tampilan Hasil -->
+            <div class="output-group">
+                <label>Hasil Aksara (RTL):</label>
+                
+                <!-- Pengatur Ukuran Gambar -->
+                <div class="size-control">
+                    <span>Ukuran Gambar:</span>
+                    <input type="range" id="imgSizeSlider" min="16" max="64" value="28">
+                    <span id="sizeValue">28px</span>
+                </div>
+
+                <!-- Container Hasil RTL -->
+                <div id="outputArea" class="output-area"></div>
             </div>
         </div>
-
-        <!-- Tempat Gambar Tampil -->
-        <div class="grid" id="imageGrid"></div>
     </div>
 
-    <!-- Memanggil JS Terpisah -->
+    <!-- Footer -->
+    <footer>
+        <p id="footerText">Created By Wahyudi</p>
+    </footer>
+
     <script src="app.js"></script>
 </body>
 </html>
