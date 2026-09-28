@@ -90,7 +90,7 @@ function tokenizeWord(word) {
     return result;
 }
 
-// 2. Transliterasi Multi-Paragraf (Dengan Pembungkus Kata / Word Box)
+// 2. Transliterasi Multi-Paragraf (Urut Kanan ke Kiri)
 function transliterate() {
     const text = inputText.value;
     outputArea.innerHTML = '';
@@ -107,11 +107,12 @@ function transliterate() {
         words.forEach(word => {
             if (word === '') return;
 
-            // Setiap kata dikelompokkan dalam satu word-box agar gambarnya dempet
             const wordBox = document.createElement('div');
             wordBox.className = 'word-box';
 
             const tokens = tokenizeWord(word);
+            
+            // Masukkan token sesuai urutan pengetikan
             tokens.forEach(token => {
                 if (token.type === 'image') {
                     const span = document.createElement('span');
@@ -159,7 +160,7 @@ saveImgBtn.addEventListener('click', () => {
     html2canvas(outputArea, {
         useCORS: true,
         scale: 2,
-        backgroundColor: '#ffffff' // Hasil ekspor gambar selalu latar putih
+        backgroundColor: '#ffffff'
     }).then(canvas => {
         const link = document.createElement('a');
         link.download = 'aksara-transliteration.png';
