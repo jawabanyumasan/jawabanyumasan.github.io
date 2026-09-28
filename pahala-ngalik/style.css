@@ -32,7 +32,7 @@ body {
     flex-direction: column;
 }
 
-/* Tampilan Fullwidth */
+/* Fullwidth Layout */
 .container {
     width: 100%;
     max-width: 100%;
@@ -40,7 +40,7 @@ body {
     flex: 1;
 }
 
-/* Header & Controls */
+/* Header Controls */
 header {
     display: flex;
     justify-content: space-between;
@@ -74,11 +74,7 @@ h1 {
     background: var(--accent-color);
 }
 
-.btn-toggle:hover {
-    opacity: 0.9;
-}
-
-.btn-action:hover {
+.btn-toggle:hover, .btn-action:hover {
     opacity: 0.9;
 }
 
@@ -130,32 +126,45 @@ textarea {
     accent-color: var(--accent-color);
 }
 
-/* Transliteration Output Container (RTL & Multi-paragraph) */
+/* Container Hasil Transliterasi - SELALU BACKGROUND PUTIH */
 .output-area {
-    direction: rtl; /* Teks dari kanan ke kiri */
+    direction: rtl; /* Penulisan Kanan ke Kiri */
     text-align: right;
     min-height: 150px;
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
+    background-color: #ffffff !important; /* Tetap Putih Meskipum Dark Mode */
+    color: #1a1a1a !important;            /* Teks Tetap Hitam/Gelap */
+    border: 1px solid #ccc;
     border-radius: 6px;
     padding: 20px;
     overflow-x: auto;
 }
 
+/* Paragraf & Kata */
 .paragraph {
     display: flex;
     flex-wrap: wrap;
     direction: rtl;
-    gap: 4px;
+    gap: 12px; /* Jarak/Spasi Antar Kata */
     margin-bottom: 15px;
     align-items: center;
 }
 
-/* Styling Karakter Aksara & Gambar */
+/* Pembungkus Kata (Gambar di dalamnya dempet/tanpa jarak) */
+.word-box {
+    display: inline-flex;
+    flex-direction: row-reverse; /* Mengatur urutan gambar dalam kata agar RTL presisi */
+    align-items: center;
+    gap: 0;                      /* Gambar dempet tanpa selisih/jarak */
+}
+
+/* Item Gambar Aksara */
 .char-item {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
 .char-item img {
@@ -163,14 +172,17 @@ textarea {
     width: auto;
     object-fit: contain;
     display: block;
+    border: none;
+    outline: none;
 }
 
-/* Angka Latin dan Tanda Baca */
+/* Teks Angka & Tanda Baca */
 .text-node {
     font-size: var(--img-size, 28px);
     line-height: 1;
     font-weight: bold;
-    padding: 0 2px;
+    color: #1a1a1a !important; /* Teks angka/tanda baca tetap gelap */
+    padding: 0;
 }
 
 /* Footer */
