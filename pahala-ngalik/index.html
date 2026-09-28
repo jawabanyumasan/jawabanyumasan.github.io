@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transliterasi Teks ke Aksara</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Library html2canvas untuk fitur simpan gambar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -12,6 +14,7 @@
         <header>
             <h1>Transliterasi Aksara</h1>
             <div class="top-controls">
+                <button id="saveImgBtn" class="btn-action">📷 Simpan Gambar</button>
                 <button id="darkModeToggle" class="btn-toggle">🌙 Dark Mode</button>
             </div>
         </header>
@@ -20,7 +23,7 @@
             <!-- Form Input Latin -->
             <div class="input-group">
                 <label for="inputText">Ketik Teks Latin (Multi Paragraf):</label>
-                <textarea id="inputText" placeholder="Ketik di sini... (misal: aksara 123, pa, pi?)"></textarea>
+                <textarea id="inputText" placeholder="Ketik di sini... (misal: aksara pa, pi, pu?)"></textarea>
             </div>
 
             <!-- Area Tampilan Hasil -->
