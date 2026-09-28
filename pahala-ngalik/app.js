@@ -40,7 +40,6 @@ daftarAksara.forEach(aksara => {
     });
 });
 
-// Urutkan token dari terpanjang agar diproses lebih dahulu
 validTokens.sort((a, b) => b.length - a.length);
 
 // Elemen DOM
@@ -66,7 +65,7 @@ function tokenizeWord(word) {
             continue;
         }
 
-        // Tanda Baca
+        // Tanda Baca Arab
         if (arabPunctuation[word[i]]) {
             result.push({ type: 'punct', val: arabPunctuation[word[i]] });
             i++;
@@ -83,7 +82,6 @@ function tokenizeWord(word) {
             }
         }
 
-        // Jika tidak ada pola yang cocok
         if (!matched) {
             result.push({ type: 'text', val: word[i] });
             i++;
@@ -92,7 +90,7 @@ function tokenizeWord(word) {
     return result;
 }
 
-// 2. Transliterasi Multi-Paragraf
+// 2. Transliterasi Multi-Paragraf (Dengan Pembungkus Kata / Word Box)
 function transliterate() {
     const text = inputText.value;
     outputArea.innerHTML = '';
@@ -106,13 +104,12 @@ function transliterate() {
         paraDiv.className = 'paragraph';
 
         const words = paraText.split(' ');
-        words.forEach((word, wIdx) => {
-            if (word === '') {
-                const space = document.createElement('span');
-                space.innerHTML = '&nbsp;';
-                paraDiv.appendChild(space);
-                return;
-            }
+        words.forEach(word => {
+            if (word === '') return;
+
+            // Setiap kata dikelompokkan dalam satu word-box agar gambarnya dempet
+            const wordBox = document.createElement('div');
+            wordBox.className = 'word-box';
 
             const tokens = tokenizeWord(word);
             tokens.forEach(token => {
@@ -122,28 +119,23 @@ function transliterate() {
                     const imgUrl = `${BASE_IMAGE_URL}${token.val}.jpg`;
                     
                     span.innerHTML = `<img src="${imgUrl}" alt="${token.val}" crossorigin="anonymous" onerror="this.onerror=null; this.parentNode.innerText='${token.val}';">`;
-                    paraDiv.appendChild(span);
+                    wordBox.appendChild(span);
                 } else {
                     const span = document.createElement('span');
                     span.className = 'text-node';
                     span.textContent = token.val;
-                    paraDiv.appendChild(span);
+                    wordBox.appendChild(span);
                 }
             });
 
-            if (wIdx < words.length - 1) {
-                const space = document.createElement('span');
-                space.className = 'text-node';
-                space.innerHTML = '&nbsp;';
-                paraDiv.appendChild(space);
-            }
+            paraDiv.appendChild(wordBox);
         });
 
         outputArea.appendChild(paraDiv);
     });
 }
 
-// 3. Slider Ukuran Gambar
+// 3. Control Slider Ukuran Gambar
 imgSizeSlider.addEventListener('input', (e) => {
     const size = e.target.value;
     sizeValue.textContent = `${size}px`;
@@ -157,18 +149,17 @@ darkModeToggle.addEventListener('click', () => {
     darkModeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
 });
 
-// 5. Simpan Hasil sebagai Gambar (PNG)
+// 5. Simpan Hasil sebagai Gambar (Selalu Background Putih)
 saveImgBtn.addEventListener('click', () => {
     if (!outputArea.hasChildNodes()) {
         alert('Tidak ada teks untuk disimpan!');
         return;
     }
 
-    // Menggunakan html2canvas untuk mengonversi kontainer ke gambar
     html2canvas(outputArea, {
-        useCORS: true, // Mengizinkan pengambilan gambar dari domain GitHub Pages
-        scale: 2,      // Meningkatkan kualitas hasil ekspor gambar
-        backgroundColor: getComputedStyle(document.body).getPropertyValue('--bg-color')
+        useCORS: true,
+        scale: 2,
+        backgroundColor: '#ffffff' // Hasil ekspor gambar selalu latar putih
     }).then(canvas => {
         const link = document.createElement('a');
         link.download = 'aksara-transliteration.png';
@@ -176,7 +167,7 @@ saveImgBtn.addEventListener('click', () => {
         link.click();
     }).catch(err => {
         console.error('Gagal mengunduh gambar:', err);
-        alert('Gagal mengunduh gambar. Pastikan koneksi internet stabil untuk memuat gambar.');
+        alert('Gagal mengunduh gambar.');
     });
 });
 
