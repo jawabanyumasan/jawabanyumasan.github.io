@@ -26,7 +26,7 @@ daftarAksara.forEach(aksara => {
         database.push({
             aksara: aksara,
             nama: nama,
-            file: `img/${nama}.png` // Sesuaikan ekstensi (.png / .jpg)
+            file: `img/${nama}.jpgg` // Sesuaikan ekstensi (.png / .jpg)
         });
     });
 });
